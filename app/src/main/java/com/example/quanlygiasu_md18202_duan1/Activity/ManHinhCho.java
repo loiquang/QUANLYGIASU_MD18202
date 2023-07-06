@@ -47,17 +47,18 @@ public class ManHinhCho extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Fragment fragment1 = null;
                 flag++;
                 Toast.makeText(ManHinhCho.this, "" + flag, Toast.LENGTH_SHORT).show();
                 switch (flag) {
                     case 1:
-                        fragment2 = new fragment_hoctainhavui();
+                        fragment1 = new fragment_hoctainhavui();
                         break;
                     case 2:
-                        fragment2 = new fragment_timkiemgiasu();
+                        fragment1 = new fragment_timkiemgiasu();
                         break;
                     case 3:
-                        fragment2 = new fragment_chatluonghoctap();
+                        fragment1 = new fragment_chatluonghoctap();
                         btnNext.setText("Bắt Đầu");
                         break;
                     case 4:
@@ -68,9 +69,9 @@ public class ManHinhCho extends AppCompatActivity {
                         break;
 
                 }
-                if (fragment2 != null)
+                if (fragment1 != null)
                     fragment.beginTransaction()
-                            .replace(R.id.frameLayout, fragment2)
+                            .replace(R.id.frameLayout, fragment1)
                             .commit();
             }
         });

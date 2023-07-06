@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/giaSu" android:title="Gia Sư" android:icon="@drawable/baseline_book_24"/>
+<item android:id="@+id/combo" android:title="Combo" android:icon="@drawable/baseline_calculate_24"/>
+<item android:id="@+id/profile" android:title="Gia Sư" android:icon="@drawable/baseline_person_24"/>
+
+</menu>

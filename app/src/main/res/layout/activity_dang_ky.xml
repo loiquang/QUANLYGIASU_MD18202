@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imgPreView"
+            android:id="@+id/imgBack"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="start"
@@ -127,7 +127,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnDangNhap"
+            android:id="@+id/btnDangKy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -137,6 +137,7 @@
             android:textStyle="normal" />
 
         <TextView
+            android:id="@+id/txtBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
