@@ -73,6 +73,7 @@ public class ManHinhCho extends AppCompatActivity {
                     fragment.beginTransaction()
                             .replace(R.id.frameLayout, fragment1)
                             .commit();
+
             }
         });
         txtSkip.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +81,7 @@ public class ManHinhCho extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(ManHinhCho.this, MainActivity.class));
                 finish();
+
             }
         });
 

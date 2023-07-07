@@ -6,12 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
@@ -32,6 +34,7 @@ public class ManHinhUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_man_hinh_user);
         TextView txtTitle = findViewById(R.id.txtTitle);
+        ImageView imgBack = findViewById(R.id.imgBack);
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -129,7 +132,13 @@ public class ManHinhUser extends AppCompatActivity {
                     frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
             }
         });
-
+//set nút back
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ManHinhUser.this, MainActivity.class));
+            }
+        });
     }
 
 }
