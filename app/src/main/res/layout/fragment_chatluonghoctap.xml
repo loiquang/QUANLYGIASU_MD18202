@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragMent.fragment_chatluonghoctap">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/course"
+            android:text="@string/hello_blank_fragment" />
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nâng Cao Chất Lượng Học Tập"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:paddingBottom="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Với đội ngũ giáo viên, giảng viên có kinh nghiệm trong giảng dạy và sự nhiệt huyết
+chúng tôi cam kết nâng cao kết quả học tập của học sinh"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textStyle="italic"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

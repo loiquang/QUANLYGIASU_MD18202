@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment2.profile_fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4">
+
+            <ImageView
+                android:id="@+id/imgUser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/logo" />
+
+            <ImageView
+                android:id="@+id/imgSetting"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/gear" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnGiaSu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gia Sư Của Bạn"
+                android:padding="15dp"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:background="@drawable/layout_button"/>
+
+            <Button
+                android:id="@+id/btnLichHoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lịch Học"
+                android:layout_marginTop="20dp"
+                android:padding="15dp"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:background="@drawable/layout_button"/>
+
+            <Button
+                android:id="@+id/btnThongTin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="Thông Tin"
+                android:fontFamily="casual"
+                android:padding="15dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/layout_button"/>
+
+            <Button
+                android:id="@+id/btnTienTrinh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tiến Trình"
+                android:padding="15dp"
+                android:textSize="20sp"
+                android:fontFamily="casual"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/layout_button"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

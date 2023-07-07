@@ -20,6 +20,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Activity.DangKy"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ManHinhCho"
+            android:exported="false">
+
+        </activity>
     </application>
 
 </manifest>
