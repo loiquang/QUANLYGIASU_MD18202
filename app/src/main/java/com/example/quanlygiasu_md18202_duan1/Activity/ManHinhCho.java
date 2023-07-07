@@ -62,7 +62,7 @@ public class ManHinhCho extends AppCompatActivity {
                         btnNext.setText("Bắt Đầu");
                         break;
                     case 4:
-                        startActivity(new Intent(ManHinhCho.this, MainActivity.class));
+                        startActivity(new Intent(ManHinhCho.this, DangNhap.class));
                         finish();
                         break;
                     default:
@@ -79,7 +79,7 @@ public class ManHinhCho extends AppCompatActivity {
         txtSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ManHinhCho.this, MainActivity.class));
+                startActivity(new Intent(ManHinhCho.this, DangNhap.class));
                 finish();
 
             }

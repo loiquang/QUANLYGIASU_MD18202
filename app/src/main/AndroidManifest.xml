@@ -26,7 +26,7 @@
             android:name=".Activity.DangKy"
             android:exported="false" />
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".Activity.DangNhap"
             android:exported="false" />
         <activity
             android:name=".Activity.ManHinhCho"
