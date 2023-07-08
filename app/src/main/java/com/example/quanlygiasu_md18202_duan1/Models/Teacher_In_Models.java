@@ -1,11 +1,11 @@
 package com.example.quanlygiasu_md18202_duan1.Models;
 
-public class Teacher_In {
+public class Teacher_In_Models {
     private int image;
     private String name;
     private String job;
 
-    public Teacher_In(int image, String name, String job) {
+    public Teacher_In_Models(int image, String name, String job) {
         this.image = image;
         this.name = name;
         this.job = job;

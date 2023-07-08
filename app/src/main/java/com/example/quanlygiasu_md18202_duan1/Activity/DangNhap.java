@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.quanlygiasu_md18202_duan1.R;
 
-public class MainActivity extends AppCompatActivity {
+public class DangNhap extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         txtDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, DangKy.class));
+                startActivity(new Intent(DangNhap.this, DangKy.class));
             }
         });
     }

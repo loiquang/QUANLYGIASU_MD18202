@@ -1,11 +1,11 @@
 package com.example.quanlygiasu_md18202_duan1.Models;
 
-public class MonHoc_User {
+public class MonHoc_User_Models {
     private int image;
     private String name;
     private String job;
 
-    public MonHoc_User(int image, String name, String job) {
+    public MonHoc_User_Models(int image, String name, String job) {
         this.image = image;
         this.name = name;
         this.job = job;

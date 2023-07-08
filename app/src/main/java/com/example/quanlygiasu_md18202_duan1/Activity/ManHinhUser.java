@@ -9,28 +9,21 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.example.quanlygiasu_md18202_duan1.Adapter.UserAdapter;
+import com.example.quanlygiasu_md18202_duan1.Adapter.MonHoc_User;
+import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_quenmatkhau;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.combo_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.profile_fragment;
 import com.example.quanlygiasu_md18202_duan1.R;
 
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
-
 public class ManHinhUser extends AppCompatActivity {
     private MeowBottomNavigation bottomNavigation;
     private Fragment fragment;
-    private UserAdapter userAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +32,13 @@ public class ManHinhUser extends AppCompatActivity {
         TextView txtTitle = findViewById(R.id.txtTitle);
         ImageView imgBack = findViewById(R.id.imgBack);
         Toolbar toolbar = findViewById(R.id.toolBar);
-
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
         txtTitle.setText("Gia Sư");
         bottomNavigation = findViewById(R.id.bottomNavigation);
         FragmentManager frameLayout = getSupportFragmentManager();
-        fragment = new giasu_fragment();
+        fragment = new fragment_quenmatkhau();
         frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
         //Sử dụng meowbottomnavigation
         //đặt mặc định vị trí xuất hiện khi mở lên đầu tiên
@@ -140,7 +132,7 @@ public class ManHinhUser extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ManHinhUser.this, MainActivity.class));
+                startActivity(new Intent(ManHinhUser.this, DangNhap.class));
             }
         });
 

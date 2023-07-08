@@ -28,14 +28,14 @@ public class DangKy extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DangKy.this, MainActivity.class));
+                startActivity(new Intent(DangKy.this, DangNhap.class));
                 finish();
             }
         });
         txtBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DangKy.this, MainActivity.class));
+                startActivity(new Intent(DangKy.this, DangNhap.class));
                 finish();
             }
         });

@@ -13,19 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlygiasu_md18202_duan1.Models.MonHoc_User;
+import com.example.quanlygiasu_md18202_duan1.Models.MonHoc_User_Models;
+import com.example.quanlygiasu_md18202_duan1.Models.Teacher_In_Models;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 import java.util.ArrayList;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> implements Filterable {
-    private ArrayList<MonHoc_User> list;
-    private ArrayList<MonHoc_User> listOld;
-    private ArrayList<com.example.quanlygiasu_md18202_duan1.Models.Teacher_In> list2;
+public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> implements Filterable {
+    private ArrayList<MonHoc_User_Models> list;
+    private ArrayList<MonHoc_User_Models> listOld;
+    private ArrayList<Teacher_In_Models> list2;
     private Teacher_In teacherAdapter;
     int flag = 1;
 
-    public UserAdapter(ArrayList<MonHoc_User> list) {
+    public MonHoc_User(ArrayList<MonHoc_User_Models> list) {
         this.list = list;
         this.listOld = list;
     }
@@ -49,10 +50,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> im
                 if (flag == 1) {
                     holder.recyclerView.setVisibility(View.VISIBLE);
                     list2 = new ArrayList<>();
-                    list2.add(new com.example.quanlygiasu_md18202_duan1.Models.Teacher_In(R.drawable.inta, "Đỗ Quang Lơi", "Bốc Vác"));
-                    list2.add(new com.example.quanlygiasu_md18202_duan1.Models.Teacher_In(R.drawable.faceb, "Đỗ Quang Lơi22", "Bốc Vác"));
-                    list2.add(new com.example.quanlygiasu_md18202_duan1.Models.Teacher_In(R.drawable.gg, "Đỗ Quang Lơi33", "Bốc Vác"));
-                    list2.add(new com.example.quanlygiasu_md18202_duan1.Models.Teacher_In(R.drawable.inta, "Đỗ Quang Lơi44", "Bốc Vác"));
+                    list2.add(new Teacher_In_Models(R.drawable.inta, "Đỗ Quang Lơi", "Bốc Vác"));
+                    list2.add(new Teacher_In_Models(R.drawable.faceb, "Đỗ Quang Lơi22", "Bốc Vác"));
+                    list2.add(new Teacher_In_Models(R.drawable.gg, "Đỗ Quang Lơi33", "Bốc Vác"));
+                    list2.add(new Teacher_In_Models(R.drawable.inta, "Đỗ Quang Lơi44", "Bốc Vác"));
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(v.getContext());
                     teacherAdapter = new Teacher_In(list2);
                     holder.recyclerView.setLayoutManager(linearLayoutManager);
@@ -85,14 +86,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> im
                 if (search.isEmpty()) {
                     list = listOld;
                 } else {
-                    ArrayList<MonHoc_User> listNew = new ArrayList<>();
-                    for (MonHoc_User item : listOld) {
+                    ArrayList<MonHoc_User_Models> listNew = new ArrayList<>();
+                    for (MonHoc_User_Models item : listOld) {
                         if (item.getName().toLowerCase().contains(search.toLowerCase())) {
                             listNew.add(item);
                         }
                     }
                     list = listNew;
-                    notifyDataSetChanged();
                 }
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = list;
@@ -102,7 +102,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> im
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                list = (ArrayList<MonHoc_User>) results.values;
+                list = (ArrayList<MonHoc_User_Models>) results.values;
                 notifyDataSetChanged();
             }
         };
