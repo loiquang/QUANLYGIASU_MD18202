@@ -11,19 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlygiasu_md18202_duan1.Models.teacher;
-import com.example.quanlygiasu_md18202_duan1.Models.teacher2;
+import com.example.quanlygiasu_md18202_duan1.Models.MonHoc_User;
+import com.example.quanlygiasu_md18202_duan1.Models.Teacher_In;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 import java.util.ArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-    private ArrayList<teacher> list;
-    private ArrayList<teacher2> list2;
+    private ArrayList<MonHoc_User> list;
+    private ArrayList<Teacher_In> list2;
     private TeacherAdapter teacherAdapter;
     int flag = 1;
 
-    public UserAdapter(ArrayList<teacher> list) {
+    public UserAdapter(ArrayList<MonHoc_User> list) {
         this.list = list;
     }
 
@@ -46,10 +46,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 if (flag == 1) {
                     holder.recyclerView.setVisibility(View.VISIBLE);
                     list2 = new ArrayList<>();
-                    list2.add(new teacher2(R.drawable.inta, "Đỗ Quang Lơi", "Bốc Vác"));
-                    list2.add(new teacher2(R.drawable.faceb, "Đỗ Quang Lơi22", "Bốc Vác"));
-                    list2.add(new teacher2(R.drawable.gg, "Đỗ Quang Lơi33", "Bốc Vác"));
-                    list2.add(new teacher2(R.drawable.inta, "Đỗ Quang Lơi44", "Bốc Vác"));
+                    list2.add(new Teacher_In(R.drawable.inta, "Đỗ Quang Lơi", "Bốc Vác"));
+                    list2.add(new Teacher_In(R.drawable.faceb, "Đỗ Quang Lơi22", "Bốc Vác"));
+                    list2.add(new Teacher_In(R.drawable.gg, "Đỗ Quang Lơi33", "Bốc Vác"));
+                    list2.add(new Teacher_In(R.drawable.inta, "Đỗ Quang Lơi44", "Bốc Vác"));
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(v.getContext());
                     teacherAdapter = new TeacherAdapter(list2);
                     holder.recyclerView.setLayoutManager(linearLayoutManager);

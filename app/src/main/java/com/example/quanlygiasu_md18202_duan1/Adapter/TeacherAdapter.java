@@ -9,16 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlygiasu_md18202_duan1.Models.teacher;
-import com.example.quanlygiasu_md18202_duan1.Models.teacher2;
+import com.example.quanlygiasu_md18202_duan1.Models.Teacher_In;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 import java.util.ArrayList;
 
 public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHolder> {
-    private ArrayList<teacher2> list;
+    private ArrayList<Teacher_In> list;
 
-    public TeacherAdapter(ArrayList<teacher2> list) {
+    public TeacherAdapter(ArrayList<Teacher_In> list) {
         this.list = list;
     }
 

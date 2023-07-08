@@ -1,66 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="20dp"
-    app:cardElevation="20dp"
-    app:cardCornerRadius="16dp">
+    android:layout_margin="10dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="20dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <RelativeLayout
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/relaTive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgTeacher"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:padding="10dp"
-                android:src="@drawable/inta"/>
-            <LinearLayout
-                android:id="@+id/linearLayout"
+
+            <RelativeLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imgTeacher"
-                android:orientation="vertical"
-                android:layout_centerVertical="true">
-                <TextView
-                    android:id="@+id/txtName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nguyễn Văn A"
-                    android:textSize="20sp"/>
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txtMon"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgTeacher"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    android:src="@drawable/inta" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_centerVertical="true"
-                    android:layout_below="@+id/txtName"
                     android:layout_toRightOf="@+id/imgTeacher"
-                    android:text="Nguyễn Văn A"
-                    android:textSize="20sp"/>
+                    android:orientation="vertical">
 
-            </LinearLayout>
-            <ImageView
-                android:id="@+id/imgDown"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/downbottom"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"/>
-        </RelativeLayout>
+                    <TextView
+                        android:id="@+id/txtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nguyễn Văn A"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txtMon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtName"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/imgTeacher"
+                        android:text="Nguyễn Văn A"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imgDown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/downbottom" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/relaTive"
             android:layout_alignParentBottom="true"
-            android:visibility="gone"
-           />
+            android:visibility="gone" />
     </RelativeLayout>
 
 
