@@ -2,6 +2,7 @@ package com.example.quanlygiasu_md18202_duan1.Activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.quanlygiasu_md18202_duan1.Adapter.UserAdapter;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.combo_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.profile_fragment;
@@ -28,6 +30,7 @@ import kotlin.jvm.functions.Function1;
 public class ManHinhUser extends AppCompatActivity {
     private MeowBottomNavigation bottomNavigation;
     private Fragment fragment;
+    private UserAdapter userAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class ManHinhUser extends AppCompatActivity {
         TextView txtTitle = findViewById(R.id.txtTitle);
         ImageView imgBack = findViewById(R.id.imgBack);
         Toolbar toolbar = findViewById(R.id.toolBar);
+
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
@@ -139,6 +143,7 @@ public class ManHinhUser extends AppCompatActivity {
                 startActivity(new Intent(ManHinhUser.this, MainActivity.class));
             }
         });
+
     }
 
 }

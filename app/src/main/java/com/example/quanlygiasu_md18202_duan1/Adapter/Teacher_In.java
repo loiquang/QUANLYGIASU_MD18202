@@ -3,22 +3,27 @@ package com.example.quanlygiasu_md18202_duan1.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlygiasu_md18202_duan1.Models.Teacher_In;
+import com.example.quanlygiasu_md18202_duan1.Models.MonHoc_User;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 import java.util.ArrayList;
 
-public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHolder> {
-    private ArrayList<Teacher_In> list;
+public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder>  {
+    private ArrayList<com.example.quanlygiasu_md18202_duan1.Models.Teacher_In> list;
 
-    public TeacherAdapter(ArrayList<Teacher_In> list) {
+    private MonHoc_User monHoc_user;
+
+    public Teacher_In(ArrayList<com.example.quanlygiasu_md18202_duan1.Models.Teacher_In> list) {
         this.list = list;
+
     }
 
     @NonNull
@@ -37,12 +42,18 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if (list != null)
+            return list.size();
+        return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtMon;
         ImageView imgTeacher;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);

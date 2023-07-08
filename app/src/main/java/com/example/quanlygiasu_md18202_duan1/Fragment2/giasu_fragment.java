@@ -23,12 +23,12 @@ public class giasu_fragment extends Fragment {
     private ArrayList<MonHoc_User> list;
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
-
+private SearchView searchView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.giasu_fragment, container, false);
-        SearchView searchView = view.findViewById(R.id.searchView);
+        searchView = view.findViewById(R.id.searchView);
         list = new ArrayList<>();
         list.add(new MonHoc_User(R.drawable.inta, "Đỗ Quang Lơi", "Bốc Vác"));
         list.add(new MonHoc_User(R.drawable.faceb, "Đỗ Quang Lơi22", "Bốc Vác"));
@@ -39,6 +39,20 @@ public class giasu_fragment extends Fragment {
         userAdapter = new UserAdapter(list);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(userAdapter);
-        return view;
+       searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+           @Override
+           public boolean onQueryTextSubmit(String query) {
+               userAdapter.getFilter().filter(query);
+               return false;
+           }
+
+           @Override
+           public boolean onQueryTextChange(String newText) {
+               userAdapter.getFilter().filter(newText);
+               return false;
+           }
+       });
+    return view;
     }
+
 }

@@ -3,6 +3,8 @@ package com.example.quanlygiasu_md18202_duan1.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,19 +14,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlygiasu_md18202_duan1.Models.MonHoc_User;
-import com.example.quanlygiasu_md18202_duan1.Models.Teacher_In;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 import java.util.ArrayList;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> implements Filterable {
     private ArrayList<MonHoc_User> list;
-    private ArrayList<Teacher_In> list2;
-    private TeacherAdapter teacherAdapter;
+    private ArrayList<MonHoc_User> listOld;
+    private ArrayList<com.example.quanlygiasu_md18202_duan1.Models.Teacher_In> list2;
+    private Teacher_In teacherAdapter;
     int flag = 1;
 
     public UserAdapter(ArrayList<MonHoc_User> list) {
         this.list = list;
+        this.listOld = list;
     }
 
     @NonNull
@@ -46,12 +49,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 if (flag == 1) {
                     holder.recyclerView.setVisibility(View.VISIBLE);
                     list2 = new ArrayList<>();
-                    list2.add(new Teacher_In(R.drawable.inta, "Đỗ Quang Lơi", "Bốc Vác"));
-                    list2.add(new Teacher_In(R.drawable.faceb, "Đỗ Quang Lơi22", "Bốc Vác"));
-                    list2.add(new Teacher_In(R.drawable.gg, "Đỗ Quang Lơi33", "Bốc Vác"));
-                    list2.add(new Teacher_In(R.drawable.inta, "Đỗ Quang Lơi44", "Bốc Vác"));
+                    list2.add(new com.example.quanlygiasu_md18202_duan1.Models.Teacher_In(R.drawable.inta, "Đỗ Quang Lơi", "Bốc Vác"));
+                    list2.add(new com.example.quanlygiasu_md18202_duan1.Models.Teacher_In(R.drawable.faceb, "Đỗ Quang Lơi22", "Bốc Vác"));
+                    list2.add(new com.example.quanlygiasu_md18202_duan1.Models.Teacher_In(R.drawable.gg, "Đỗ Quang Lơi33", "Bốc Vác"));
+                    list2.add(new com.example.quanlygiasu_md18202_duan1.Models.Teacher_In(R.drawable.inta, "Đỗ Quang Lơi44", "Bốc Vác"));
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(v.getContext());
-                    teacherAdapter = new TeacherAdapter(list2);
+                    teacherAdapter = new Teacher_In(list2);
                     holder.recyclerView.setLayoutManager(linearLayoutManager);
                     holder.recyclerView.setAdapter(teacherAdapter);
                     Toast.makeText(v.getContext(), "chưa có gì", Toast.LENGTH_SHORT).show();
@@ -68,7 +71,41 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if (list != null)
+            return list.size();
+        return 0;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String search = constraint.toString();
+                if (search.isEmpty()) {
+                    list = listOld;
+                } else {
+                    ArrayList<MonHoc_User> listNew = new ArrayList<>();
+                    for (MonHoc_User item : listOld) {
+                        if (item.getName().toLowerCase().contains(search.toLowerCase())) {
+                            listNew.add(item);
+                        }
+                    }
+                    list = listNew;
+                    notifyDataSetChanged();
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = list;
+                return filterResults;
+
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                list = (ArrayList<MonHoc_User>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
