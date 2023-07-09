@@ -21,28 +21,30 @@ import com.example.quanlygiasu_md18202_duan1.R;
 import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_hoctainhavui;
 
 public class ManHinhCho extends AppCompatActivity {
-    int flag = 0;
-    Fragment fragment2 = null;
+    private int flag = 0;
+    private Fragment fragment2 = null;
+    private Toolbar toolbar;
+    private TextView txtSkip;
+    private Button btnNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_man_hinh_cho);
         //setToolBar
-        Toolbar toolbar = findViewById(R.id.toolBar);
+        toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
         //màn hình fragment
-        FrameLayout frameLayout = findViewById(R.id.frameLayout);
         FragmentManager fragment = getSupportFragmentManager();
         fragment2 = new fragment_icon();
         fragment.beginTransaction()
                 .replace(R.id.frameLayout, fragment2)
                 .commit();
         //ánh xạ nút button and skip
-        TextView txtSkip = findViewById(R.id.txtSkip);
-        Button btnNext = findViewById(R.id.btnNext);
+        txtSkip = findViewById(R.id.txtSkip);
+        btnNext = findViewById(R.id.btnNext);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

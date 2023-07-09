@@ -14,20 +14,25 @@ import android.widget.TextView;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 public class DangNhap extends AppCompatActivity {
+private EditText edtUserName, edtPassWord;
+private TextView txtDangKy,txtQuenMK;
+private Button btnDangNhap;
+private CheckBox checkRMB;
+private ImageView imgFace, imgInsta, imgGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText edtUserName = findViewById(R.id.edtUserName);
-        EditText edtPassWord = findViewById(R.id.edtPassWord);
-        TextView txtDangKy = findViewById(R.id.txtDangKy);
-        TextView txtQuenMK = findViewById(R.id.txtQuenMK);
-        Button btnDangNhap = findViewById(R.id.btnDangNhap);
-        CheckBox checkRMB = findViewById(R.id.checkRMB);
-        ImageView imgFace = findViewById(R.id.imgFace);
-        ImageView imgInsta = findViewById(R.id.imgInsta);
-        ImageView imgGoogle = findViewById(R.id.imgGoogle);
+        edtUserName = findViewById(R.id.edtUserName);
+        edtPassWord = findViewById(R.id.edtPassWord);
+        txtDangKy = findViewById(R.id.txtDangKy);
+        txtQuenMK = findViewById(R.id.txtQuenMK);
+        btnDangNhap = findViewById(R.id.btnDangNhap);
+        checkRMB = findViewById(R.id.checkRMB);
+        imgFace = findViewById(R.id.imgFace);
+        imgInsta = findViewById(R.id.imgInsta);
+        imgGoogle = findViewById(R.id.imgGoogle);
 
         txtDangKy.setOnClickListener(new View.OnClickListener() {
             @Override

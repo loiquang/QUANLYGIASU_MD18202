@@ -13,17 +13,19 @@ import android.widget.TextView;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 public class DangKy extends AppCompatActivity {
-
+private EditText edtUserName,edtPassWord,edtRePassWord;
+private Button btnDangKy;
+private TextView txtBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ky);
         ImageView imgBack = findViewById(R.id.imgBack);
-        EditText edtUserName = findViewById(R.id.edtUserName);
-        EditText edtPassWord = findViewById(R.id.edtPassWord);
-        EditText edtRePassWord = findViewById(R.id.edtRePassWord);
-        Button btnDangKy = findViewById(R.id.btnDangKy);
-        TextView txtBack = findViewById(R.id.txtBack);
+        edtUserName = findViewById(R.id.edtUserName);
+        edtPassWord = findViewById(R.id.edtPassWord);
+        edtRePassWord = findViewById(R.id.edtRePassWord);
+        btnDangKy = findViewById(R.id.btnDangKy);
+        txtBack = findViewById(R.id.txtBack);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
