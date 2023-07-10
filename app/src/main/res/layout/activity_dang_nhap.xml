@@ -6,143 +6,144 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".Activity.DangKy">
-
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imgBack"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="start"
-            android:src="@drawable/preview" />
-    </androidx.appcompat.widget.Toolbar>
+    tools:context=".Activity.DangNhap">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
-        android:src="@drawable/readbook" />
+        android:src="@drawable/login" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Đăng Ký"
-        android:textColor="@color/black"
-        android:textSize="30sp"
+        android:text="Đăng Nhập"
+        android:textColor="#0B0A0A"
+        android:textSize="25sp"
         android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Tạo hồ sơ đăng nhập của bạn"
-        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center"
         android:layout_weight="6"
-        android:orientation="vertical"
-        android:paddingTop="10dp">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tên Đăng Nhập"
+            android:hint="Username"
+            app:boxBackgroundColor="#ffff"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
+            app:boxStrokeColor="@color/black"
             app:endIconMode="clear_text"
             app:endIconTint="#FF5722"
-            app:boxBackgroundColor="#ffff"
-            app:boxStrokeColor="@color/black"
             app:startIconDrawable="@drawable/baseline_person_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="49dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp" />
+                android:textSize="15sp"
+                app:boxStrokeColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mật Khẩu"
-            android:layout_marginTop="10dp"
+            android:hint="Password"
+            android:paddingTop="20dp"
+            app:boxBackgroundColor="#ffff"
             app:boxBackgroundMode="outline"
-            app:boxStrokeColor="@color/black"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:boxCornerRadiusTopStart="16dp"
-            app:boxBackgroundColor="#ffff"
+            app:boxStrokeColor="@color/black"
             app:endIconMode="password_toggle"
             app:endIconTint="#FF5722"
             app:startIconDrawable="@drawable/baseline_lock_open_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="49dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+
                 android:inputType="textPassword"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp" />
+                android:paddingTop="5dp"
+                android:textSize="15sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilRePassword"
+        <CheckBox
+            android:id="@+id/checkRMB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nhập Lại Mật Khẩu"
-            android:layout_marginTop="10dp"
-            app:boxBackgroundMode="outline"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusTopStart="16dp"
-            app:endIconMode="password_toggle"
-            app:endIconTint="#FF5722"
-            app:boxStrokeColor="@color/black"
-            app:boxBackgroundColor="#ffff"
-            app:startIconDrawable="@drawable/baseline_lock_open_24">
+            android:text="Remember Me"
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="49dp"
-                android:layout_gravity="center"
-                android:inputType="textPassword"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+            />
 
         <Button
-            android:id="@+id/btnDangKy"
+            android:id="@+id/btnDangNhap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:background="@drawable/layout_button"
-            android:text="Đăng ký"
+            android:text="Đăng nhập"
             android:textAllCaps="false"
             android:textStyle="normal" />
 
         <TextView
-            android:id="@+id/txtBack"
+            android:id="@+id/txtDangKy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="10dp"
-            android:text="Trở lại"
-            android:textSize="18sp" />
+            android:text="Đăng ký nếu chưa có tài khoản"
+            android:textSize="15dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/imgFace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/faceb" />
+
+            <ImageView
+                android:id="@+id/imgInsta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:src="@drawable/inta" />
+
+            <ImageView
+                android:id="@+id/imgGoogle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/gg" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtQuenMK"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="Quên mật khẩu"
+            android:textSize="15dp" />
     </LinearLayout>
+
 </LinearLayout>
