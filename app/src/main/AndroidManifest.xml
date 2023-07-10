@@ -18,6 +18,11 @@
 
         </activity>
         <activity
+            android:name=".Activity.ManHinhUser"
+            android:exported="false">
+
+        </activity>
+        <activity
             android:name=".Activity.DangNhap"
             android:exported="false" />
         <activity

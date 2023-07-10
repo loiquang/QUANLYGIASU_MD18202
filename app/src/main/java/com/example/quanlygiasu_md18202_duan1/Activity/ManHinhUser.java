@@ -15,7 +15,6 @@ import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.combo_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.profile_fragment;
 import com.example.quanlygiasu_md18202_duan1.R;
-
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 

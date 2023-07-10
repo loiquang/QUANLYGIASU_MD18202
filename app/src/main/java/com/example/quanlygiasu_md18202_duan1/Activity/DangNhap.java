@@ -54,7 +54,7 @@ public class DangNhap extends AppCompatActivity {
             tilUsername.getEditText().setText(user);
             tilPassword.getEditText().setText(pass);
             checkRMB.setChecked(isRemember);
-            startActivity(new Intent(DangNhap.this, ManHinhUser.class));
+//            startActivity(new Intent(DangNhap.this, ManHinhUser.class));
         }
 
         txtDangKy.setOnClickListener(new View.OnClickListener() {

@@ -39,7 +39,7 @@ public class DangKy extends AppCompatActivity {
         imgBack = findViewById(R.id.imgBack);
         tilUsername = findViewById(R.id.tilUsername);
         tilPassword = findViewById(R.id.tilPassword);
-        tilRePassword = findViewById(R.id.tilRePassword);
+        tilRePassword = findViewById(R.id.tilRePassWord);
         btnDangKy = findViewById(R.id.btnDangKy);
         txtBack = findViewById(R.id.txtBack);
 
