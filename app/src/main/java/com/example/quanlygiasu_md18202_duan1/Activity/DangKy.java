@@ -11,9 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.quanlygiasu_md18202_duan1.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class DangKy extends AppCompatActivity {
-private EditText edtUserName,edtPassWord,edtRePassWord;
+private TextInputLayout tilUserName,tilPassWord,tilRePassWord;
 private Button btnDangKy;
 private TextView txtBack;
     @Override
@@ -21,9 +22,9 @@ private TextView txtBack;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ky);
         ImageView imgBack = findViewById(R.id.imgBack);
-        edtUserName = findViewById(R.id.edtUserName);
-        edtPassWord = findViewById(R.id.edtPassWord);
-        edtRePassWord = findViewById(R.id.edtRePassWord);
+        tilUserName = findViewById(R.id.tilUserName);
+        tilPassWord = findViewById(R.id.tilPassWord);
+        tilRePassWord = findViewById(R.id.tilRePassWord);
         btnDangKy = findViewById(R.id.btnDangKy);
         txtBack = findViewById(R.id.txtBack);
 

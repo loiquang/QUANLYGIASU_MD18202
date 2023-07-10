@@ -51,6 +51,7 @@
         android:paddingTop="10dp">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxBackgroundMode="outline"
@@ -65,7 +66,6 @@
             app:startIconDrawable="@drawable/baseline_person_24">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtUserName"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_gravity="center"
@@ -75,6 +75,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassWord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -90,7 +91,6 @@
             app:startIconDrawable="@drawable/baseline_lock_open_24">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtPassWord"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_gravity="center"
@@ -101,6 +101,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilRePassWord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -116,7 +117,6 @@
             app:startIconDrawable="@drawable/baseline_lock_open_24">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtRePassWord"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_gravity="center"
