@@ -1,6 +1,8 @@
 package com.example.quanlygiasu_md18202_duan1.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,6 +47,13 @@ private ImageView imgFace, imgInsta, imgGoogle;
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DangNhap.this, ManHinhUser.class));
+            }
+        });
+        txtQuenMK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            startActivity(new Intent(DangNhap.this, QuenMK.class));
+
             }
         });
     }

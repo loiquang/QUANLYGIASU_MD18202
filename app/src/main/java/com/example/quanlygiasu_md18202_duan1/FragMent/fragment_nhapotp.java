@@ -16,7 +16,8 @@ public class fragment_nhapotp extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_nhapotp, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_nhapotp, container, false);
+        return view;
     }
 }

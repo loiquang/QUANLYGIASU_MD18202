@@ -12,20 +12,18 @@
         android:theme="@style/Theme.QuanLyGiaSu_MD18202_DuAn1"
         tools:targetApi="31">
         <activity
+            android:name=".DoiMK_QuenMK_OTP"
+            android:exported="false" />
+        <activity
             android:name=".Activity.DangNhap"
-            android:exported="false">
-
-        </activity>
-
+            android:exported="false"></activity>
         <activity
             android:name=".Activity.DangKy"
             android:exported="false" />
         <activity
             android:name=".Activity.ManHinhUser"
             android:exported="false"
-            android:windowSoftInputMode="adjustNothing">
-
-        </activity>
+            android:windowSoftInputMode="adjustNothing"></activity>
         <activity
             android:name=".Activity.ManHinhCho"
             android:exported="true">

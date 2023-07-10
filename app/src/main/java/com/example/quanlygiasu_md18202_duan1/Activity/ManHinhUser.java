@@ -2,7 +2,6 @@ package com.example.quanlygiasu_md18202_duan1.Activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,8 +14,6 @@ import android.widget.TextView;
 
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.example.quanlygiasu_md18202_duan1.Adapter.MonHoc_User;
-import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_quenmatkhau;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.combo_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.profile_fragment;
@@ -57,20 +54,20 @@ public class ManHinhUser extends AppCompatActivity {
         bottomNavigation.setCount(2, "Combo");
         bottomNavigation.setCount(3, "Profile");
         //gọi onReselect để tránh lỗi null khi bấm lần đầu tiên vào icon mặc định
-//        bottomNavigation.setOnReselectListener(new Function1<MeowBottomNavigation.Model, Unit>() {
-//            @Override
-//            public Unit invoke(MeowBottomNavigation.Model model) {
-//                switch (model.getId()) {
-//                    case 1:
-//                        fragment = new giasu_fragment();
-//                        break;
-//                }
-//                if (fragment != null)
-//                    frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
-//
-//                return null;
-//            }
-//        });
+        bottomNavigation.setOnReselectListener(new Function1<MeowBottomNavigation.Model, Unit>() {
+            @Override
+            public Unit invoke(MeowBottomNavigation.Model model) {
+                switch (model.getId()) {
+                    case 1:
+                        fragment = new giasu_fragment();
+                        break;
+                }
+                if (fragment != null)
+                    frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
+
+                return null;
+            }
+        });
         //lệnh lắng nghe click
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
@@ -128,7 +125,7 @@ public class ManHinhUser extends AppCompatActivity {
             public Unit invoke(MeowBottomNavigation.Model model) {
                 switch (model.getId()) {
                     case 3:
-                        fragment = new giasu_fragment();
+                        fragment = new profile_fragment();
                         break;
                 }
                 if (fragment != null)
