@@ -5,14 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.combo_fragment;
@@ -21,6 +18,7 @@ import com.example.quanlygiasu_md18202_duan1.R;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+
 
 
 public class ManHinhUser extends AppCompatActivity {
