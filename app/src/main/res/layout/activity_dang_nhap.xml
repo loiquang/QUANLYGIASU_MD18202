@@ -84,10 +84,10 @@
 
         <CheckBox
             android:id="@+id/checkRMB"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remember Me"
-
+android:layout_gravity="left"
             />
 
         <Button
@@ -101,10 +101,10 @@
 
         <TextView
             android:id="@+id/txtDangKy"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
             android:text="Đăng ký nếu chưa có tài khoản"
             android:textSize="15dp" />
 
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:paddingTop="10dp">
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/imgFace"
@@ -138,10 +138,10 @@
 
         <TextView
             android:id="@+id/txtQuenMK"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
             android:text="Quên mật khẩu"
             android:textSize="15dp" />
     </LinearLayout>
