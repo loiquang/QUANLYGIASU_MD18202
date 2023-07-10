@@ -53,6 +53,7 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/imgRing"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="-2dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
                 android:foreground="@drawable/out_line_search"

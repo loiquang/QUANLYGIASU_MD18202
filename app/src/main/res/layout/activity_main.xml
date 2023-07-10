@@ -75,10 +75,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 <CheckBox
     android:id="@+id/checkRMB"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Remember Me"
-
+    android:layout_gravity="left"
     />
   <Button
       android:id="@+id/btnDangNhap"
@@ -91,7 +91,7 @@
       />
     <TextView
         android:id="@+id/txtDangKy"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Đăng ký nếu chưa có tài khoản"
         android:gravity="center"
@@ -123,7 +123,7 @@
     </LinearLayout>
     <TextView
         android:id="@+id/txtQuenMK"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Quên mật khẩu"
         android:gravity="center"

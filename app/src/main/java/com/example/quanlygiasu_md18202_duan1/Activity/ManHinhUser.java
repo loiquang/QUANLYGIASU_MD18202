@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.quanlygiasu_md18202_duan1.Adapter.MonHoc_User;
 import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_quenmatkhau;
@@ -20,6 +21,10 @@ import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.combo_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.profile_fragment;
 import com.example.quanlygiasu_md18202_duan1.R;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+
 
 public class ManHinhUser extends AppCompatActivity {
     private MeowBottomNavigation bottomNavigation;
@@ -38,13 +43,13 @@ public class ManHinhUser extends AppCompatActivity {
         txtTitle.setText("Gia Sư");
         bottomNavigation = findViewById(R.id.bottomNavigation);
         FragmentManager frameLayout = getSupportFragmentManager();
-        fragment = new fragment_quenmatkhau();
+        fragment = new giasu_fragment();
         frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
-        //Sử dụng meowbottomnavigation
+//        Sử dụng meowbottomnavigation
         //đặt mặc định vị trí xuất hiện khi mở lên đầu tiên
         bottomNavigation.show(1, true);
         //đặt id và icon cho từng item
-        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.baseline_book_24));
+        bottomNavigation.add(new MeowBottomNavigation.Model(1,R.drawable.baseline_book_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.baseline_calculate_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.baseline_person_24));
         //đặt tên cho từng item
@@ -52,25 +57,25 @@ public class ManHinhUser extends AppCompatActivity {
         bottomNavigation.setCount(2, "Combo");
         bottomNavigation.setCount(3, "Profile");
         //gọi onReselect để tránh lỗi null khi bấm lần đầu tiên vào icon mặc định
-        bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
-            @Override
-            public void onReselectItem(MeowBottomNavigation.Model item) {
-                switch (item.getId()) {
-                    case 1:
-                        fragment = new giasu_fragment();
-                        break;
-                }
-                if (fragment != null)
-                    frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
-            }
-
-        });
+//        bottomNavigation.setOnReselectListener(new Function1<MeowBottomNavigation.Model, Unit>() {
+//            @Override
+//            public Unit invoke(MeowBottomNavigation.Model model) {
+//                switch (model.getId()) {
+//                    case 1:
+//                        fragment = new giasu_fragment();
+//                        break;
+//                }
+//                if (fragment != null)
+//                    frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
+//
+//                return null;
+//            }
+//        });
         //lệnh lắng nghe click
-        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
+        bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
-            public void onClickItem(MeowBottomNavigation.Model item) {
-
-                switch (item.getId()) {
+            public Unit invoke(MeowBottomNavigation.Model model) {
+                switch (model.getId()) {
                     case 1:
                         fragment = new giasu_fragment();
                         txtTitle.setText("Gia Sư");
@@ -86,46 +91,49 @@ public class ManHinhUser extends AppCompatActivity {
                 }
                 if (fragment != null)
                     frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
+
+                return null;
             }
         });
         //lệnh show ra sau khi lắng nghe click
-        bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
+        bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
-            public void onShowItem(MeowBottomNavigation.Model item) {
-
-                switch (item.getId()) {
+            public Unit invoke(MeowBottomNavigation.Model model) {
+                switch (model.getId()) {
                     case 2:
                         fragment = new combo_fragment();
                         break;
                 }
                 if (fragment != null)
                     frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
+                return null;
             }
         });
-        bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
+        bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
-            public void onShowItem(MeowBottomNavigation.Model item) {
-
-                switch (item.getId()) {
+            public Unit invoke(MeowBottomNavigation.Model model) {
+                switch (model.getId()) {
                     case 1:
                         fragment = new giasu_fragment();
                         break;
                 }
                 if (fragment != null)
                     frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
+                return null;
             }
         });
-        bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
-            @Override
-            public void onShowItem(MeowBottomNavigation.Model item) {
 
-                switch (item.getId()) {
+        bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
+            @Override
+            public Unit invoke(MeowBottomNavigation.Model model) {
+                switch (model.getId()) {
                     case 3:
                         fragment = new giasu_fragment();
                         break;
                 }
                 if (fragment != null)
                     frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
+                return null;
             }
         });
 //set nút back

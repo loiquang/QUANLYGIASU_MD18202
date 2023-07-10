@@ -41,5 +41,11 @@ private ImageView imgFace, imgInsta, imgGoogle;
                 startActivity(new Intent(DangNhap.this, DangKy.class));
             }
         });
+        btnDangNhap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DangNhap.this, ManHinhUser.class));
+            }
+        });
     }
 }
