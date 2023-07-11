@@ -37,8 +37,8 @@ public class DangKy extends AppCompatActivity {
         setContentView(R.layout.activity_dang_ky);
 
         imgBack = findViewById(R.id.imgBack);
-        tilUsername = findViewById(R.id.tilUsername);
-        tilPassword = findViewById(R.id.tilPassword);
+        tilUsername = findViewById(R.id.tilUserName);
+        tilPassword = findViewById(R.id.tilPassWord);
         tilRePassword = findViewById(R.id.tilRePassWord);
         btnDangKy = findViewById(R.id.btnDangKy);
         txtBack = findViewById(R.id.txtBack);
@@ -62,9 +62,7 @@ public class DangKy extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!validateUsername() | !validatePassword()) {
-                    return;
-                }
+
 
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 userRef = firebaseDatabase.getReference("user");
@@ -72,7 +70,9 @@ public class DangKy extends AppCompatActivity {
                 String userName = tilUsername.getEditText().getText().toString();
                 String passWord = tilPassword.getEditText().getText().toString();
                 String rePassWord = tilRePassword.getEditText().getText().toString();
-
+                if (!validateUsername(userName) | !validatePassword(passWord)) {
+                    return;
+                }
                 if (!passWord.equals(rePassWord)) {
                     Toast.makeText(DangKy.this, "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
                 } else {
@@ -100,8 +100,8 @@ public class DangKy extends AppCompatActivity {
 
     }
 
-    public boolean validateUsername() {
-        String val = tilUsername.getEditText().getText().toString();
+    public boolean validateUsername(String val) {
+//        String val = tilUsername.getEditText().getText().toString();
         String noWhiteSpace = "\\A\\w{4,20}\\z";
         if (val.isEmpty()) {
             tilUsername.setError("Tên tài khoản không được để trống");
@@ -118,8 +118,8 @@ public class DangKy extends AppCompatActivity {
         }
     }
 
-    public boolean validatePassword() {
-        String val = tilPassword.getEditText().getText().toString();
+    public boolean validatePassword(String val) {
+//        String val = tilPassword.getEditText().getText().toString();
         String passWordVal = "^"
                 + "(?=.*[0-9])"     // at least 1 digit
                 + "(?=.*[a-zA-Z])"  // any letter
