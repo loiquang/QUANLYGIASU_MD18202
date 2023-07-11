@@ -39,6 +39,31 @@
             android:exported="false">
 
         </activity>
+        <activity
+            android:name=".AdminActivity.AdminActivity.AdminActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".AdminActivity.AdminActivity.ManagerCoachActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".AdminActivity.AdminActivity.ManagerComplainActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".AdminActivity.AdminActivity.ManagerDocumentActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".AdminActivity.AdminActivity.ManagerUserActivity"
+            android:exported="false">
+
+        </activity>
     </application>
 
 </manifest>
