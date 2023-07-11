@@ -37,6 +37,12 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder>  {
         holder.imgTeacher.setImageResource(list.get(position).getImage());
         holder.txtName.setText(list.get(position).getName());
         holder.txtMon.setText(list.get(position).getJob());
+        holder.imgRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
@@ -51,13 +57,14 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder>  {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtMon;
-        ImageView imgTeacher;
+        ImageView imgTeacher, imgRight;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
             txtMon = itemView.findViewById(R.id.txtMon);
             imgTeacher = itemView.findViewById(R.id.imgTeacher);
+            imgRight = itemView.findViewById(R.id.imgRight);
         }
     }
 }

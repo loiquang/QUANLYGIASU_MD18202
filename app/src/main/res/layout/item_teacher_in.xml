@@ -47,6 +47,14 @@
                 android:textSize="20sp" />
 
         </LinearLayout>
+        <ImageView
+            android:id="@+id/imgRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/right"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

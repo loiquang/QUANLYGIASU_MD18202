@@ -16,13 +16,9 @@
             android:exported="false" />
         <activity
             android:name=".Activity.QuenMK"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.DangNhap"
@@ -36,8 +32,12 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Activity.ManHinhCho"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".AdminActivity.AdminActivity.AdminActivity"
