@@ -1,4 +1,4 @@
-package com.example.quanlygiasu_md18202_duan1.AdminActivity;
+package com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

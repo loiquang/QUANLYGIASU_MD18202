@@ -1,4 +1,4 @@
-package com.example.quanlygiasu_md18202_duan1.AdminActivity;
+package com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.quanlygiasu_md18202_duan1.R;
 
-public class ManagerDocumentActivity extends AppCompatActivity {
+public class ManagerComplainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager_document);
+        setContentView(R.layout.activity_manager_complain);
     }
 }
