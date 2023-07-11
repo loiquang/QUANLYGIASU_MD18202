@@ -23,11 +23,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DangNhap extends AppCompatActivity {
 
-    TextInputLayout tilUsername, tilPassword;
-    TextView txtDangKy, txtQuenMK;
-    Button btnDangNhap;
-    CheckBox checkRMB;
-    ImageView imgFace, imgInsta, imgGoogle;
+    private TextInputLayout tilUsername, tilPassword;
+    private TextView txtDangKy, txtQuenMK;
+    private Button btnDangNhap;
+    private CheckBox checkRMB;
+    private ImageView imgFace, imgInsta, imgGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
