@@ -10,13 +10,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingTop="20dp"
            >
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5"
+                android:layout_weight="4"
                 android:src="@drawable/otp"
 
                 android:text="@string/hello_blank_fragment" />
@@ -26,7 +25,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="5"
                 android:orientation="vertical"
-                android:gravity="center"
                 android:padding="10dp">
 
                 <TextView
@@ -50,7 +48,7 @@
     android:orientation="horizontal"
     android:weightSum="10"
     android:gravity="center"
-    android:layout_marginTop="15dp">
+    android:layout_marginTop="25dp">
 
     <EditText
         android:id="@+id/edtNum1"
@@ -59,9 +57,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/edittext_design"
         android:maxLength="1"
+        android:inputType="number"
        android:layout_marginRight="10dp"
         android:gravity="center"
-        android:textSize="30sp" />
+        android:textSize="35sp" />
     <EditText
         android:id="@+id/edtNum2"
         android:layout_weight="1.2"
@@ -72,7 +71,7 @@
         android:inputType="number"
         android:gravity="center"
         android:layout_marginRight="10dp"
-        android:textSize="30sp" />
+        android:textSize="35sp" />
     <EditText
         android:id="@+id/edtNum3"
         android:layout_weight="1.2"
@@ -80,9 +79,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/edittext_design"
         android:maxLength="1"
+        android:inputType="number"
         android:layout_marginRight="10dp"
         android:gravity="center"
-        android:textSize="30sp" />
+        android:textSize="35sp" />
     <EditText
         android:id="@+id/edtNum4"
         android:layout_weight="1.2"
@@ -91,8 +91,9 @@
         android:background="@drawable/edittext_design"
         android:maxLength="1"
         android:gravity="center"
+        android:inputType="number"
         android:layout_marginRight="10dp"
-        android:textSize="30sp" />
+        android:textSize="35sp" />
     <EditText
         android:id="@+id/edtNum5"
         android:layout_weight="1.2"
@@ -101,8 +102,9 @@
         android:background="@drawable/edittext_design"
         android:maxLength="1"
         android:gravity="center"
+        android:inputType="number"
         android:layout_marginRight="10dp"
-        android:textSize="30sp" />
+        android:textSize="35sp" />
     <EditText
         android:id="@+id/edtNum6"
         android:layout_weight="1.2"
@@ -111,7 +113,8 @@
         android:background="@drawable/edittext_design"
         android:maxLength="1"
         android:gravity="center"
-        android:textSize="30sp" />
+        android:inputType="number"
+        android:textSize="35sp" />
 </LinearLayout>
                 <Button
                     android:id="@+id/btnGuiMa"
@@ -120,14 +123,14 @@
                     android:text="Gửi mã"
                     android:background="@drawable/layout_button"
                     android:textAllCaps="false"
-                    android:layout_marginTop="35dp"
+                    android:layout_marginTop="60dp"
                     android:textStyle="normal"
                     />
                 <TextView
                     android:id="@+id/txtBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:text="Trở lại"
                     android:textSize="15sp" />

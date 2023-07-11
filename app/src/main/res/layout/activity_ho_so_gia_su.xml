@@ -34,6 +34,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/imgGV"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4"
@@ -119,12 +120,30 @@
                    android:textSize="18sp"
                    android:textColor="#131313"/>
                <TextView
+                   android:id="@+id/txtDayTD"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Dạy tối đa"
+                   android:layout_marginLeft="10dp"
+                   android:layout_toRightOf="@id/txtHS"
+                   android:textSize="18sp"
+                   android:textColor="#131313"/>
+               <TextView
                    android:id="@+id/txtSoHS"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="Dạy từ 1 - 2 học sinh"
+                   android:text="2"
                    android:layout_marginLeft="10dp"
-                   android:layout_toRightOf="@id/txtHS"
+                   android:layout_toRightOf="@id/txtDayTD"
+                   android:textSize="18sp"
+                   android:textColor="#131313"/>
+               <TextView
+                   android:id="@+id/txtDonvi"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="học sinh"
+                   android:layout_marginLeft="10dp"
+                   android:layout_toRightOf="@id/txtSoHS"
                    android:textSize="18sp"
                    android:textColor="#131313"/>
                <TextView
@@ -152,6 +171,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnDangKyGV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="16dp"
