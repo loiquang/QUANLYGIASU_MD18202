@@ -70,7 +70,7 @@ public class DangKy extends AppCompatActivity {
                 String userName = tilUsername.getEditText().getText().toString();
                 String passWord = tilPassword.getEditText().getText().toString();
                 String rePassWord = tilRePassword.getEditText().getText().toString();
-                if (!validateUsername(userName) | !validatePassword(passWord)) {
+                if (!validateUsername() | !validatePassword()) {
                     return;
                 }
                 if (!passWord.equals(rePassWord)) {
@@ -100,8 +100,8 @@ public class DangKy extends AppCompatActivity {
 
     }
 
-    public boolean validateUsername(String val) {
-//        String val = tilUsername.getEditText().getText().toString();
+    public boolean validateUsername() {
+        String val = tilUsername.getEditText().getText().toString();
         String noWhiteSpace = "\\A\\w{4,20}\\z";
         if (val.isEmpty()) {
             tilUsername.setError("Tên tài khoản không được để trống");
@@ -118,8 +118,8 @@ public class DangKy extends AppCompatActivity {
         }
     }
 
-    public boolean validatePassword(String val) {
-//        String val = tilPassword.getEditText().getText().toString();
+    public boolean validatePassword() {
+        String val = tilPassword.getEditText().getText().toString();
         String passWordVal = "^"
                 + "(?=.*[0-9])"     // at least 1 digit
                 + "(?=.*[a-zA-Z])"  // any letter
