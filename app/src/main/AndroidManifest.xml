@@ -25,7 +25,9 @@
             android:exported="false" />
         <activity
             android:name=".Activity.DangKy"
-            android:exported="false" />
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".Activity.ManHinhUser"
             android:exported="false"
@@ -33,11 +35,13 @@
         <activity
             android:name=".Activity.ManHinhCho"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".AdminActivity.AdminActivity.AdminActivity"
