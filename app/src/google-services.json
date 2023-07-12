@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "978874435125",
+    "firebase_url": "https://duan1-6c728-default-rtdb.firebaseio.com",
+    "project_id": "duan1-6c728",
+    "storage_bucket": "duan1-6c728.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978874435125:android:9b44654956e7f580bc137c",
+        "android_client_info": {
+          "package_name": "com.example.quanlygiasu_md18202_duan1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978874435125-ktv9o6c7hrgr4l448tg3jobvb9r3cr2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR1Y7KsPTiBJ1U_lsEJmpdh6H-_b9nSiY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978874435125-ktv9o6c7hrgr4l448tg3jobvb9r3cr2c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
