@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment2.giasu_fragment"
-    android:windowSoftInputMode="adjustNothing">
+    android:windowSoftInputMode="adjustNothing"
+    tools:context=".Fragment2.giasu_fragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -17,8 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2.5"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/txtXinchao"
@@ -26,7 +25,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Xin chào,"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="casual"/>
 
             <TextView
                 android:id="@+id/txtName"
@@ -36,7 +36,8 @@
                 android:text="Meo Meo"
                 android:textColor="@color/black"
                 android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="casual"/>
 
             <ImageView
                 android:id="@+id/imgRing"
@@ -46,19 +47,37 @@
                 android:padding="10dp"
                 android:src="@drawable/gear" />
 
-
-            <SearchView
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/imgRing"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="-2dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                android:foreground="@drawable/out_line_search"
-                android:outlineProvider="bounds"
-                android:searchIcon="@drawable/search" />
+                android:background="@drawable/outline_searchview"
+                android:padding="8dp"
+                >
+
+                <TextView
+                    android:id="@+id/txtTimKiem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tìm kiếm môn học"
+                    android:textSize="20sp"
+                    android:fontFamily="casual"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="visible"
+                    android:layout_toLeftOf="@id/searchView"/>
+
+                <SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:outlineProvider="bounds"
+                    android:queryHint="Tìm kiếm môn học"
+                    android:searchIcon="@drawable/search">
+
+                </SearchView>
+            </RelativeLayout>
 
 
         </RelativeLayout>
@@ -68,10 +87,11 @@
             android:layout_height="0dp"
             android:layout_weight="7.5"
             android:orientation="vertical">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </LinearLayout>

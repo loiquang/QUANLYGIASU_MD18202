@@ -1,5 +1,8 @@
 package com.example.quanlygiasu_md18202_duan1.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quanlygiasu_md18202_duan1.Activity.HoSoGiaSu;
 import com.example.quanlygiasu_md18202_duan1.Models.MonHoc_User_Models;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_In_Models;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 import java.util.ArrayList;
 
-public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder>  {
+public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
     private ArrayList<Teacher_In_Models> list;
 
     private MonHoc_User_Models monHoc_user;
+    private Context context;
 
     public Teacher_In(ArrayList<Teacher_In_Models> list) {
         this.list = list;
@@ -40,7 +45,12 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder>  {
         holder.imgRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                context = v.getContext();
+                Intent intent = new Intent(context, HoSoGiaSu.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("tenGV", list.get(holder.getAdapterPosition()).getName());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }
@@ -51,8 +61,6 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder>  {
             return list.size();
         return 0;
     }
-
-
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {

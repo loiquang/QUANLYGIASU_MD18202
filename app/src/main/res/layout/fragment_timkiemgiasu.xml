@@ -29,6 +29,7 @@
                 android:gravity="center"
                 android:paddingBottom="10dp"
                 android:text="Tìm Kiếm Gia Sư Thật Dễ Dàng"
+                android:fontFamily="casual"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -41,6 +42,7 @@
                 android:paddingRight="10dp"
                 android:text="Tìm kiếm gia sư thật dễ dàng, nhanh chóng
 Bạn chỉ cần chạn gia sư phù hợp, mọi việc còn lại A Gia Sư giải quyết cho nha"
+                android:fontFamily="casual"
                 android:textSize="20sp"
                 android:textStyle="italic" />
         </LinearLayout>

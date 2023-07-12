@@ -1,5 +1,6 @@
 package com.example.quanlygiasu_md18202_duan1.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,14 @@ import com.example.quanlygiasu_md18202_duan1.Models.Teacher_In_Models;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> implements Filterable {
     private ArrayList<MonHoc_User_Models> list;
     private ArrayList<MonHoc_User_Models> listOld;
     private ArrayList<Teacher_In_Models> list2;
     private Teacher_In teacherAdapter;
-    int flag = 1;
+   private int flag = 1;
 
     public MonHoc_User(ArrayList<MonHoc_User_Models> list) {
         this.list = list;

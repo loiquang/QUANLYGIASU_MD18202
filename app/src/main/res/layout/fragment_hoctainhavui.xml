@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Học Tại Nhà Thật Vui"
+                android:fontFamily="casual"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -37,7 +38,8 @@
                 android:paddingRight="30dp"
                 android:paddingLeft="30dp"
                 android:text="Ứng dụng tìm kiếm gia sư tại nhà một cách dễ dàng, tiện ích cho mọi người dùng"
-               android:textSize="20sp"
+                android:fontFamily="casual"
+                android:textSize="20sp"
                 android:gravity="center"
                 android:textStyle="italic"
                 />

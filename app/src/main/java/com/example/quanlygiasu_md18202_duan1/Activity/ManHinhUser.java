@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,12 +25,14 @@ import kotlin.jvm.functions.Function1;
 public class ManHinhUser extends AppCompatActivity {
     private MeowBottomNavigation bottomNavigation;
     private Fragment fragment;
+    private TextView txtTitle;
+    private FragmentManager frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_man_hinh_user);
-        TextView txtTitle = findViewById(R.id.txtTitle);
+        txtTitle = findViewById(R.id.txtTitle);
         ImageView imgBack = findViewById(R.id.imgBack);
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
@@ -37,14 +40,26 @@ public class ManHinhUser extends AppCompatActivity {
         actionBar.setTitle("");
         txtTitle.setText("Gia Sư");
         bottomNavigation = findViewById(R.id.bottomNavigation);
-        FragmentManager frameLayout = getSupportFragmentManager();
+        frameLayout = getSupportFragmentManager();
         fragment = new giasu_fragment();
         frameLayout.beginTransaction().replace(R.id.frameLayout, fragment).commit();
-//        Sử dụng meowbottomnavigation
+        bottomNavi(bottomNavigation);
+//set nút back
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ManHinhUser.this, DangNhap.class));
+            }
+        });
+
+    }
+
+    public void bottomNavi(MeowBottomNavigation bottomNavigation) {
+        //        Sử dụng meowbottomnavigation
         //đặt mặc định vị trí xuất hiện khi mở lên đầu tiên
         bottomNavigation.show(1, true);
         //đặt id và icon cho từng item
-        bottomNavigation.add(new MeowBottomNavigation.Model(1,R.drawable.baseline_book_24));
+        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.baseline_book_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.baseline_calculate_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.baseline_person_24));
         //đặt tên cho từng item
@@ -131,14 +146,6 @@ public class ManHinhUser extends AppCompatActivity {
                 return null;
             }
         });
-//set nút back
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ManHinhUser.this, DangNhap.class));
-            }
-        });
-
     }
 
 }

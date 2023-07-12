@@ -33,6 +33,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Nhập OTP"
+                    android:fontFamily="casual"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -40,6 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nhập mã xác nhận của bạn"
+                    android:fontFamily="casual"
                    android:layout_marginTop="10dp"
                     android:textSize="15sp"
                     />
@@ -59,6 +61,7 @@
         android:background="@drawable/edittext_design"
         android:maxLength="1"
         android:inputType="number"
+        android:fontFamily="casual"
        android:layout_marginRight="10dp"
         android:gravity="center"
         android:textSize="35sp" />
@@ -71,6 +74,7 @@
         android:maxLength="1"
         android:inputType="number"
         android:gravity="center"
+        android:fontFamily="casual"
         android:layout_marginRight="10dp"
         android:textSize="35sp" />
     <EditText
@@ -83,6 +87,7 @@
         android:inputType="number"
         android:layout_marginRight="10dp"
         android:gravity="center"
+        android:fontFamily="casual"
         android:textSize="35sp" />
     <EditText
         android:id="@+id/edtNum4"
@@ -94,6 +99,7 @@
         android:gravity="center"
         android:inputType="number"
         android:layout_marginRight="10dp"
+        android:fontFamily="casual"
         android:textSize="35sp" />
     <EditText
         android:id="@+id/edtNum5"
@@ -105,6 +111,7 @@
         android:gravity="center"
         android:inputType="number"
         android:layout_marginRight="10dp"
+        android:fontFamily="casual"
         android:textSize="35sp" />
     <EditText
         android:id="@+id/edtNum6"
@@ -114,6 +121,7 @@
         android:background="@drawable/edittext_design"
         android:maxLength="1"
         android:gravity="center"
+        android:fontFamily="casual"
         android:inputType="number"
         android:textSize="35sp" />
 </LinearLayout>
@@ -122,6 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Gửi mã"
+                    android:fontFamily="casual"
                     android:background="@drawable/layout_button"
                     android:textAllCaps="false"
                     android:layout_marginTop="60dp"
@@ -134,6 +143,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:text="Trở lại"
+                    android:fontFamily="casual"
                     android:textSize="15sp" />
             </LinearLayout>
 
