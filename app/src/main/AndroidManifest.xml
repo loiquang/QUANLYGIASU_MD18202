@@ -12,18 +12,33 @@
         android:theme="@style/Theme.QuanLyGiaSu_MD18202_DuAn1"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.HoSoGiaSu"
+            android:name=".VerificationActivity1"
             android:exported="false" />
         <activity
-            android:name=".Activity.QuenMK"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing">
+            android:name=".ResultVerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ddoongfContractActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminActivity.AdminActivity.SignatureActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activity.HoSoGiaSu"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.QuenMK"
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Activity.DangNhap"
             android:exported="false" />
@@ -36,34 +51,22 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Activity.ManHinhCho"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".AdminActivity.AdminActivity.AdminActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".AdminActivity.AdminActivity.ManagerCoachActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".AdminActivity.AdminActivity.ManagerComplainActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".AdminActivity.AdminActivity.ManagerDocumentActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".AdminActivity.AdminActivity.ManagerUserActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>
