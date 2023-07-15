@@ -42,12 +42,12 @@ public class giasu_fragment extends Fragment {
         txtTimKiem = view.findViewById(R.id.txtTimKiem);
         list = new ArrayList<>();
         getListFireBase = new GetListFireBase();
-        list.add(new MonHoc_User_Models(R.drawable.inta, "Toán học"));
-        list.add(new MonHoc_User_Models(R.drawable.inta, "Ngữ văn"));
-        list.add(new MonHoc_User_Models(R.drawable.inta, "Tiếng Anh"));
-        list.add(new MonHoc_User_Models(R.drawable.inta, "Hóa học"));
-        list.add(new MonHoc_User_Models(R.drawable.inta, "Vật lý"));
-        list.add(new MonHoc_User_Models(R.drawable.inta, "Sinh học"));
+        list.add(new MonHoc_User_Models(R.drawable.math, "Toán học"));
+        list.add(new MonHoc_User_Models(R.drawable.book, "Ngữ văn"));
+        list.add(new MonHoc_User_Models(R.drawable.translator, "Tiếng Anh"));
+        list.add(new MonHoc_User_Models(R.drawable.chemistry, "Hóa học"));
+        list.add(new MonHoc_User_Models(R.drawable.atomic, "Vật lý"));
+        list.add(new MonHoc_User_Models(R.drawable.biology, "Sinh học"));
         recyclerView = view.findViewById(R.id.recycleView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         userAdapter = new MonHoc_User(list);
