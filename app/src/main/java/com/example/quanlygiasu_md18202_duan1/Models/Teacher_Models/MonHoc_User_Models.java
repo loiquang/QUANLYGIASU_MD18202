@@ -1,14 +1,12 @@
-package com.example.quanlygiasu_md18202_duan1.Models;
+package com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models;
 
-public class Teacher_In_Models {
+public class MonHoc_User_Models {
     private int image;
     private String name;
-    private String job;
 
-    public Teacher_In_Models(int image, String name, String job) {
+    public MonHoc_User_Models(int image, String name) {
         this.image = image;
         this.name = name;
-        this.job = job;
     }
 
     public int getImage() {
@@ -27,11 +25,4 @@ public class Teacher_In_Models {
         this.name = name;
     }
 
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
-    }
 }

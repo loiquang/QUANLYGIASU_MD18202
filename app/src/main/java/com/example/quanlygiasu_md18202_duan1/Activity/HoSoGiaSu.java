@@ -38,7 +38,7 @@ public class HoSoGiaSu extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
         Bundle bundle = getIntent().getExtras();
-        String tenGV = bundle.getString("tenGV").toString();
+        String tenGV = bundle.getString("name");
         txtTenGV.setText(tenGV);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override

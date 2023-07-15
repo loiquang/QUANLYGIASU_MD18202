@@ -11,13 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.quanlygiasu_md18202_duan1.Adapter.MonHoc_User;
-import com.example.quanlygiasu_md18202_duan1.Models.MonHoc_User_Models;
+import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
+import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
+import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.MonHoc_User_Models;
+import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 
 public class giasu_fragment extends Fragment {
@@ -28,6 +32,7 @@ public class giasu_fragment extends Fragment {
     private SearchView searchView;
     private TextView txtTimKiem;
     private int flag = 1;
+    private GetListFireBase getListFireBase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,16 +41,20 @@ public class giasu_fragment extends Fragment {
         searchView = view.findViewById(R.id.searchView);
         txtTimKiem = view.findViewById(R.id.txtTimKiem);
         list = new ArrayList<>();
-        list.add(new MonHoc_User_Models(R.drawable.inta, "Do Quang Loi", "Bốc Vác"));
-        list.add(new MonHoc_User_Models(R.drawable.faceb, "Do Quang Loi22", "Bốc Vác"));
-        list.add(new MonHoc_User_Models(R.drawable.gg, "Do Quang Loi33", "Bốc Vác"));
-        list.add(new MonHoc_User_Models(R.drawable.inta, "Do Quang Loi44", "Bốc Vác"));
-        list.add(new MonHoc_User_Models(R.drawable.inta, "Dang Trong Tai", "Bốc Vác"));
+        getListFireBase = new GetListFireBase();
+        list.add(new MonHoc_User_Models(R.drawable.inta, "Toán học"));
+        list.add(new MonHoc_User_Models(R.drawable.inta, "Ngữ văn"));
+        list.add(new MonHoc_User_Models(R.drawable.inta, "Tiếng Anh"));
+        list.add(new MonHoc_User_Models(R.drawable.inta, "Hóa học"));
+        list.add(new MonHoc_User_Models(R.drawable.inta, "Vật lý"));
+        list.add(new MonHoc_User_Models(R.drawable.inta, "Sinh học"));
         recyclerView = view.findViewById(R.id.recycleView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         userAdapter = new MonHoc_User(list);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(userAdapter);
+
+
 
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override

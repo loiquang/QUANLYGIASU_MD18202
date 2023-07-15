@@ -14,19 +14,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlygiasu_md18202_duan1.Models.MonHoc_User_Models;
-import com.example.quanlygiasu_md18202_duan1.Models.Teacher_In_Models;
+import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
+import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
+import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.MonHoc_User_Models;
+import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 
 public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> implements Filterable {
     private ArrayList<MonHoc_User_Models> list;
     private ArrayList<MonHoc_User_Models> listOld;
-    private ArrayList<Teacher_In_Models> list2;
+    private ArrayList<Teacher_MD> list2;
     private Teacher_In teacherAdapter;
-   private int flag = 1;
+
+    private Interface_list interface_list;
+    private GetListFireBase getListFireBase;
+    private Context context;
+    int flag = 1;
 
     public MonHoc_User(ArrayList<MonHoc_User_Models> list) {
         this.list = list;
@@ -42,34 +47,60 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.imgTeacher.setImageResource(list.get(position).getImage());
+        getListFireBase = new GetListFireBase();
         holder.txtName.setText(list.get(position).getName());
-        holder.txtMon.setText(list.get(position).getJob());
+
+        ArrayList<Teacher_MD> list1 = new ArrayList<>();
+        getListFireBase.readDatabase(new Interface_list() {
+            @Override
+            public void onListReceived(ArrayList<Teacher_MD> list) {
+                for (Teacher_MD teacher_md : list) {
+                    if (teacher_md.getSubject().equals(holder.txtName.getText()))
+                        list1.add(teacher_md);
+                }
+                holder.txtMon.setText("Số Lượng: " + list1.size());
+            }
+        });
 
         holder.imgDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (flag == 1) {
+                list2 = new ArrayList<>();
+                getListFireBase.readDatabase(new Interface_list() {
+                    @Override
+                    public void onListReceived(ArrayList<Teacher_MD> list) {
+                        for (Teacher_MD teacher_md : list) {
+                            if (teacher_md.getSubject().equals(holder.txtName.getText()))
+                                list2.add(teacher_md);
+                        }
+                        teacherAdapter = new Teacher_In(list2);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(v.getContext());
+                        holder.recyclerView.setLayoutManager(linearLayoutManager);
+                        holder.recyclerView.setAdapter(teacherAdapter);
+
+                    }
+                });
+
+
                     holder.recyclerView.setVisibility(View.VISIBLE);
-                    list2 = new ArrayList<>();
-                    list2.add(new Teacher_In_Models(R.drawable.inta, "Đỗ Quang Lơi", "Bốc Vác"));
-                    list2.add(new Teacher_In_Models(R.drawable.faceb, "Đỗ Quang Lơi22", "Bốc Vác"));
-                    list2.add(new Teacher_In_Models(R.drawable.gg, "Đỗ Quang Lơi33", "Bốc Vác"));
-                    list2.add(new Teacher_In_Models(R.drawable.inta, "Đỗ Quang Lơi44", "Bốc Vác"));
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(v.getContext());
-                    teacherAdapter = new Teacher_In(list2);
-                    holder.recyclerView.setLayoutManager(linearLayoutManager);
-                    holder.recyclerView.setAdapter(teacherAdapter);
-                    Toast.makeText(v.getContext(), "chưa có gì", Toast.LENGTH_SHORT).show();
-                    flag++;
-                } else {
-                    holder.recyclerView.setVisibility(View.GONE);
-                    flag--;
-                }
+
+                    holder.imgDown.setVisibility(View.GONE);
+                    holder.imgUp.setVisibility(View.VISIBLE);
+
+
 
             }
         });
+holder.imgUp.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
 
+        holder.recyclerView.setVisibility(View.GONE);
+        flag--;
+        holder.imgDown.setVisibility(View.VISIBLE);
+        holder.imgUp.setVisibility(View.GONE);
+    }
+});
     }
 
     @Override
@@ -112,7 +143,7 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtMon;
-        ImageView imgTeacher, imgDown;
+        ImageView imgTeacher, imgDown, imgUp;
         RecyclerView recyclerView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -121,6 +152,7 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
             txtMon = itemView.findViewById(R.id.txtMon);
             imgTeacher = itemView.findViewById(R.id.imgTeacher);
             imgDown = itemView.findViewById(R.id.imgDown);
+            imgUp= itemView.findViewById(R.id.imgUp);
             recyclerView = itemView.findViewById(R.id.recycleView);
         }
     }
