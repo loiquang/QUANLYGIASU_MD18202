@@ -48,6 +48,7 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         getListFireBase = new GetListFireBase();
+        holder.imgTeacher.setImageResource(list.get(position).getImage());
         holder.txtName.setText(list.get(position).getName());
 
         ArrayList<Teacher_MD> list1 = new ArrayList<>();
