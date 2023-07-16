@@ -47,7 +47,6 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="Hồ Sơ"
-                   android:fontFamily="casual"
                    android:textSize="25sp"
                    android:textStyle="bold"
                    android:textColor="#131313"/>
@@ -56,14 +55,12 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="Giảng viên có kinh nghiệm dạy 10 năm ở fpt"
-                   android:fontFamily="casual"
                    android:textSize="18sp"
                    android:textColor="#131313"/>
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="Chứng chỉ"
-                   android:fontFamily="casual"
                    android:textSize="18sp"
                    android:textColor="#131313"/>
                <TextView
@@ -71,7 +68,6 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="Thạc sĩ hóa học trường bách khoa"
-                   android:fontFamily="casual"
                    android:textSize="18sp"
                    android:layout_marginLeft="10dp"
                    android:textColor="#131313"/>
@@ -80,7 +76,6 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="Chứng chỉ giảng viên sư phạm"
-                   android:fontFamily="casual"
                    android:textSize="18sp"
                    android:layout_marginLeft="10dp"
                    android:textColor="#131313"/>
@@ -88,14 +83,12 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="Nhiệt tình có trách nhiệm, hướng dẫn và phân tích rõ ràng"
-                   android:fontFamily="casual"
                    android:textSize="18sp"
                    android:textColor="#131313"/>
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="Yêu cầu"
-                   android:fontFamily="casual"
                    android:textSize="25sp"
                    android:textStyle="bold"
                    android:layout_marginTop="20dp"
@@ -108,7 +101,6 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:text="Số học sinh:"
-                       android:fontFamily="casual"
                        android:textSize="18sp"
                        android:textColor="#131313"/>
                    <TextView
@@ -116,7 +108,6 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:text="Dạy tối đa"
-                       android:fontFamily="casual"
                        android:layout_marginLeft="10dp"
                        android:layout_toRightOf="@id/txtHS"
                        android:textSize="18sp"
@@ -126,7 +117,6 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:text="2"
-                       android:fontFamily="casual"
                        android:layout_marginLeft="10dp"
                        android:layout_toRightOf="@id/txtDayTD"
                        android:textSize="18sp"
@@ -136,7 +126,6 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:text="học sinh"
-                       android:fontFamily="casual"
                        android:layout_marginLeft="10dp"
                        android:layout_toRightOf="@id/txtSoHS"
                        android:textSize="18sp"
@@ -146,7 +135,6 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:text="Khu vực:"
-                       android:fontFamily="casual"
                        android:layout_below="@id/txtHS"
                        android:textSize="18sp"
                        android:textColor="#131313"/>
@@ -155,7 +143,6 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:text="Quận 12"
-                       android:fontFamily="casual"
                        android:layout_below="@id/txtSoHS"
                        android:layout_toRightOf="@id/txtKV"
                        android:layout_marginLeft="10dp"
@@ -175,14 +162,11 @@
            android:layout_weight="1"
            android:background="@drawable/layout_button"
            android:hint="Đăng ký gia sư"
-
-           android:fontFamily="casual"
            android:textColorHint="#ffff" />
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="Tìm kiếm gia sư"
-           android:fontFamily="casual"
            android:layout_gravity="center"
            android:layout_marginBottom="20dp"/>
    </LinearLayout>

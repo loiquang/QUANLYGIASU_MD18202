@@ -24,7 +24,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nâng Cao Chất Lượng Học Tập"
-                android:fontFamily="casual"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -36,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:text="Với đội ngũ giáo viên, giảng viên có kinh nghiệm trong giảng dạy và sự nhiệt huyết
 chúng tôi cam kết nâng cao kết quả học tập của học sinh"
-                android:fontFamily="casual"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:textStyle="italic"

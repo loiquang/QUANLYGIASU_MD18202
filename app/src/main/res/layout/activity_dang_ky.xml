@@ -34,7 +34,7 @@
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:fontFamily="casual"/>
+       />
 
     <TextView
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
         android:gravity="center"
         android:text="Tạo hồ sơ đăng nhập của bạn"
         android:textSize="16sp"
-        android:fontFamily="casual"/>
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,7 +74,7 @@
                 android:layout_height="49dp"
                 android:layout_gravity="center"
                 android:hint="Tên Đăng Nhập"
-                android:fontFamily="casual"
+                android:textColorHint="#ffff"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -101,7 +101,7 @@
                 android:layout_height="49dp"
                 android:layout_gravity="center"
                 android:hint="Mật Khẩu"
-                android:fontFamily="casual"
+                android:textColorHint="#ffff"
                 android:inputType="textPassword"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp" />
@@ -131,7 +131,7 @@
                 android:inputType="textPassword"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:fontFamily="casual"/>
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -141,7 +141,6 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/layout_button"
             android:text="Đăng ký"
-            android:fontFamily="casual"
             android:textAllCaps="false"
             android:textStyle="normal" />
 
@@ -152,7 +151,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text="Trở lại"
-            android:fontFamily="casual"
             android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>
