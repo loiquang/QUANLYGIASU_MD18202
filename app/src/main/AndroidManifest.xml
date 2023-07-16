@@ -15,23 +15,13 @@
             android:name=".AdminActivity.AdminActivity.VerificationActivity1"
             android:exported="false" />
 
-        <activity
-<<<<<<<<< Temporary merge branch 1
-            android:name=".ResultVerificationActivity"
-            android:exported="false" />
+
         <activity
             android:name=".AdminActivity.AdminActivity.ContractActivity"
             android:exported="false" />
         <activity
             android:name=".AdminActivity.AdminActivity.SignatureActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-=========
-            android:name=".Activity.QuenMK"
-            android:exported="false"
-            android:windowSoftInputMode="adjustNothing">
->>>>>>>>> Temporary merge branch 2
 
         </activity>
         <activity
@@ -55,9 +45,6 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Activity.ManHinhCho"
-<<<<<<<<< Temporary merge branch 1
-            android:exported="false" />
-=========
             android:exported="true">
 
             <intent-filter>
@@ -67,7 +54,7 @@
             </intent-filter>
 
         </activity>
->>>>>>>>> Temporary merge branch 2
+
         <activity
             android:name=".AdminActivity.AdminActivity.AdminActivity"
             android:exported="false" />
