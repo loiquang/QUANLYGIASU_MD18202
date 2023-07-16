@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AdminActivity.AdminActivity.VerificationActivity"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xác thực CMND/CCCD"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="THÔNG TIN NHẬN DIỆN KHÁCH HÀNG"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:textStyle="bold"/>-->
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="Vui lòng cung cấp thông tin CMND/CCCD để xác thực khách hàng"/>-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ẢNH MẶT TRƯỚC"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hình ảnh chụp trực diện và rõ nét thông tin"
+        android:gravity="center" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_margin="10dp">
+
+        <!-- ImageView -->
+        <ImageView
+            android:id="@+id/ivCMNDtruoc"
+            android:background="@drawable/boder_background_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"/>
+
+        <!-- Button -->
+        <Button
+            android:id="@+id/btnCMNDtruoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/add_image_icon" />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ẢNH MẶT SAU"
+        android:gravity="center"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hình ảnh chụp trực diện và rõ nét thông tin"
+        android:gravity="center" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_margin="10dp">
+
+        <!-- ImageView -->
+        <ImageView
+            android:id="@+id/ivCMNDsau"
+            android:background="@drawable/boder_background_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"/>
+
+        <!-- Button -->
+        <Button
+            android:id="@+id/btnCMNDsau"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/add_image_icon" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tiếp tục"
+        android:layout_margin="10dp"
+        android:layout_centerInParent="true" />
+
+
+
+</LinearLayout>

@@ -17,12 +17,12 @@ import java.util.ArrayList;
 
 public class GetListFireBase {
     ArrayList<Teacher_MD> list = new ArrayList<>();
+    DatabaseReference  databaseReference;
     public GetListFireBase() {
     }
 
-    public ArrayList<Teacher_MD> readDatabase( Interface_list interface_list) {
-        FirebaseDatabase auth = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = auth.getReference("teacher");
+    public ArrayList<Teacher_MD> readDatabase( DatabaseReference databaseReference,Interface_list interface_list) {
+     
         databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override

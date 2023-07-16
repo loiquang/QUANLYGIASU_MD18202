@@ -19,6 +19,8 @@ import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.MonHoc_User_Models;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -52,7 +54,9 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
         holder.txtName.setText(list.get(position).getName());
 
         ArrayList<Teacher_MD> list1 = new ArrayList<>();
-        getListFireBase.readDatabase(new Interface_list() {
+        FirebaseDatabase auth = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = auth.getReference("teacher");
+        getListFireBase.readDatabase(databaseReference,new Interface_list() {
             @Override
             public void onListReceived(ArrayList<Teacher_MD> list) {
                 for (Teacher_MD teacher_md : list) {
@@ -67,7 +71,7 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
             @Override
             public void onClick(View v) {
                 list2 = new ArrayList<>();
-                getListFireBase.readDatabase(new Interface_list() {
+                getListFireBase.readDatabase(databaseReference,new Interface_list() {
                     @Override
                     public void onListReceived(ArrayList<Teacher_MD> list) {
                         for (Teacher_MD teacher_md : list) {
