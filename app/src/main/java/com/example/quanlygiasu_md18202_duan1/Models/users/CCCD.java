@@ -1,37 +1,53 @@
 package com.example.quanlygiasu_md18202_duan1.Models.users;
 
-public class CCCD {
-    private String address;
-    private String dob;
-    private String doe;
-    private String features;
-    private String fullname;
-    private String home;
-    private String issue_date;
-    private String nationality;
+import java.io.Serializable;
+
+public class CCCD implements Serializable {
+    private String id;
+    private String name;
     private String sex;
+    private String dob;
+    private String address;
+    private String issue_date;
+    private String face;
+    private String type;
 
     public CCCD() {
     }
 
-    public CCCD(String address, String dob, String doe, String features, String fullname, String home, String issue_date, String nationality, String sex) {
-        this.address = address;
-        this.dob = dob;
-        this.doe = doe;
-        this.features = features;
-        this.fullname = fullname;
-        this.home = home;
-        this.issue_date = issue_date;
-        this.nationality = nationality;
+    public CCCD(String id, String name, String sex, String dob, String address, String issue_date, String face, String type) {
+        this.id = id;
+        this.name = name;
         this.sex = sex;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
+        this.dob = dob;
         this.address = address;
+        this.issue_date = issue_date;
+        this.face = face;
+        this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getDob() {
@@ -42,36 +58,12 @@ public class CCCD {
         this.dob = dob;
     }
 
-    public String getDoe() {
-        return doe;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDoe(String doe) {
-        this.doe = doe;
-    }
-
-    public String getFeatures() {
-        return features;
-    }
-
-    public void setFeatures(String features) {
-        this.features = features;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getHome() {
-        return home;
-    }
-
-    public void setHome(String home) {
-        this.home = home;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getIssue_date() {
@@ -82,19 +74,33 @@ public class CCCD {
         this.issue_date = issue_date;
     }
 
-    public String getNationality() {
-        return nationality;
+    public String getFace() {
+        return face;
     }
 
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
+    public void setFace(String face) {
+        this.face = face;
     }
 
-    public String getSex() {
-        return sex;
+    public String getType() {
+        return type;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "CCCD{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", dob='" + dob + '\'' +
+                ", address='" + address + '\'' +
+                ", issue_date='" + issue_date + '\'' +
+                ", face='" + face + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

@@ -62,8 +62,6 @@ public class DangKy extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 userRef = firebaseDatabase.getReference("user");
 
