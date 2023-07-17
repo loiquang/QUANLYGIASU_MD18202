@@ -1,5 +1,6 @@
 package com.example.quanlygiasu_md18202_duan1.Fragment2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.quanlygiasu_md18202_duan1.Adapter.MonHoc_User;
+import com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity.ManagerCoachActivity;
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.MonHoc_User_Models;
@@ -40,6 +42,8 @@ public class giasu_fragment extends Fragment {
         View view = inflater.inflate(R.layout.giasu_fragment, container, false);
         searchView = view.findViewById(R.id.searchView);
         txtTimKiem = view.findViewById(R.id.txtTimKiem);
+        TextView txtXinChao = view.findViewById(R.id.txtXinchao);
+        TextView txtName = view.findViewById(R.id.txtName);
         list = new ArrayList<>();
         getListFireBase = new GetListFireBase();
         list.add(new MonHoc_User_Models(R.drawable.math, "Toán học"));
@@ -53,9 +57,12 @@ public class giasu_fragment extends Fragment {
         userAdapter = new MonHoc_User(list);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(userAdapter);
-
-
-
+        //click vào nút search
+//   int flag1 =1;
+//        if(flag1==1){
+//            txtXinChao.setVisibility(View.INVISIBLE);
+//            txtName.setText("Quản Lý Gia Sư");
+//        }
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

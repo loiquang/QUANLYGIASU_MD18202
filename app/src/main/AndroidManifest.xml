@@ -46,18 +46,18 @@
         <activity
             android:name=".Activity.ManHinhCho"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
+     </activity>
 
         <activity
             android:name=".AdminActivity.AdminActivity.AdminActivity"
-            android:exported="false" />
+            android:exported="true" >
+
+        </activity>
         <activity
             android:name=".AdminActivity.AdminActivity.ManagerCoachActivity"
             android:exported="false" />
