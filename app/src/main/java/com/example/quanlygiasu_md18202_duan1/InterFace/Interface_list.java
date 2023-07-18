@@ -7,5 +7,6 @@ import java.util.ArrayList;
 
 public interface Interface_list {
     void onListReceived(ArrayList<Teacher_MD> list);
+    void onListReceived1(ArrayList<User> list);
 
 }

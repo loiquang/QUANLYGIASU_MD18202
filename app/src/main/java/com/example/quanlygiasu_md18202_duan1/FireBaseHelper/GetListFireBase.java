@@ -1,19 +1,13 @@
 package com.example.quanlygiasu_md18202_duan1.FireBaseHelper;
 
-import android.content.Context;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
-import com.example.quanlygiasu_md18202_duan1.Adapter.Teacher_In;
-import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_User;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -52,7 +46,7 @@ public class GetListFireBase {
 
         return list;
     }
-    public ArrayList<User> readDatabase2(DatabaseReference databaseReference, Interface_User interface_list) {
+    public ArrayList<User> readDatabase2(DatabaseReference databaseReference, Interface_list interface_list) {
 
         databaseReference.addValueEventListener(new ValueEventListener() {
 
@@ -66,7 +60,7 @@ public class GetListFireBase {
                     User user = dtSnap.getValue(User.class) ;
                     list1.add(user);
                 }
-                interface_list.onListReceived(list1);
+                interface_list.onListReceived1(list1);
 
             }
 
