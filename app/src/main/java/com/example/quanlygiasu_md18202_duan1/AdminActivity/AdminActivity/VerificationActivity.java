@@ -26,6 +26,7 @@ import java.io.File;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -148,19 +149,27 @@ public class VerificationActivity extends AppCompatActivity {
         eKYCAPIService.ekycApiService.getInforCCCD(imagePart, imagePartAva).enqueue(new Callback<Infor>() {
             @Override
             public void onResponse(Call<Infor> call, Response<Infor> response) {
-                Infor inforMatTruoc = response.body();
-                String type = inforMatTruoc.getData().get(0).getType();
-                if (type.equals("old") || type.equals("new") || type.equals("chip_front")) {
-                    cccd = inforMatTruoc.getData().get(0);
+                ResponseBody inforError = response.errorBody();
+                if (inforError == null) {
+                    Infor inforMatTruoc = response.body();
+                    String type = inforMatTruoc.getData().get(0).getType();
+                    if (type.equals("old") || type.equals("new") || type.equals("chip_front")) {
+                        cccd = inforMatTruoc.getData().get(0);
+                    } else {
+                        Toast.makeText(VerificationActivity.this, "Vui lòng cung cấp ảnh CMND/CCCD mặt trước", Toast.LENGTH_SHORT).show();
+                        ivCMNDtruoc.setImageURI(null);
+                    }
                 } else {
                     Toast.makeText(VerificationActivity.this, "Vui lòng cung cấp ảnh CMND/CCCD mặt trước", Toast.LENGTH_SHORT).show();
                     ivCMNDtruoc.setImageURI(null);
                 }
+
             }
+
             @Override
             public void onFailure(Call<Infor> call, Throwable t) {
                 Log.e("DangTai", String.valueOf(t));
-                Toast.makeText(VerificationActivity.this, "Vui lòng cung cấp đúng ảnh CMND/CCCD rõ nét", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VerificationActivity.this, "Vui lòng cung cấp ảnh CMND/CCCD rõ nét", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -179,23 +188,31 @@ public class VerificationActivity extends AppCompatActivity {
         eKYCAPIService.ekycApiService.getInforCCCD(imagePart, null).enqueue(new Callback<Infor>() {
             @Override
             public void onResponse(Call<Infor> call, Response<Infor> response) {
-                Infor inforMatSau = response.body();
-                String type = inforMatSau.getData().get(0).getType();
-                if (cccd.getType().equals("old") && type.equals("old_back")) {
-                    cccd.setIssue_date(inforMatSau.getData().get(0).getIssue_date());
-                } else if (cccd.getType().equals("new") && type.equals("new_back")) {
-                    cccd.setIssue_date(inforMatSau.getData().get(0).getIssue_date());
-                } else if (cccd.getType().equals("chip_front") && type.equals("chip_back")) {
-                    cccd.setIssue_date(inforMatSau.getData().get(0).getIssue_date());
+                ResponseBody inforError = response.errorBody();
+                if (inforError == null) {
+                    Infor inforMatSau = response.body();
+                    String type = inforMatSau.getData().get(0).getType();
+                    if (cccd.getType().equals("old") && type.equals("old_back")) {
+                        cccd.setIssue_date(inforMatSau.getData().get(0).getIssue_date());
+                    } else if (cccd.getType().equals("new") && type.equals("new_back")) {
+                        cccd.setIssue_date(inforMatSau.getData().get(0).getIssue_date());
+                    } else if (cccd.getType().equals("chip_front") && type.equals("chip_back")) {
+                        cccd.setIssue_date(inforMatSau.getData().get(0).getIssue_date());
+                    } else {
+                        Toast.makeText(VerificationActivity.this, "Vui lòng cung cấp ảnh CMND/CCCD mặt sau", Toast.LENGTH_SHORT).show();
+                        ivCMNDsau.setImageURI(null);
+                    }
                 } else {
-                    Toast.makeText(VerificationActivity.this, "Vui lòng cung cấp đúng ảnh CMND/CCCD mặt sau", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VerificationActivity.this, "Vui lòng cung cấp ảnh CMND/CCCD mặt sau", Toast.LENGTH_SHORT).show();
                     ivCMNDsau.setImageURI(null);
                 }
+
             }
+
             @Override
             public void onFailure(Call<Infor> call, Throwable t) {
                 Log.e("DangTai", String.valueOf(t));
-                Toast.makeText(VerificationActivity.this, "Vui lòng cung cấp đúng ảnh CMND/CCCD rõ nét", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VerificationActivity.this, "Vui lòng cung cấp ảnh CMND/CCCD rõ nét", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -26,7 +26,7 @@ public interface eKYCAPIService {
             .build()
             .create(eKYCAPIService.class);
 
-    @Headers({"api-key: PfIN6Fm2xRXXQN4Z2dRH6ZLOQZrO6NPc"})
+    @Headers({"api-key: Zt0bOgryS6pKROaWSdowkJ37Y1WuG92T"})
     @Multipart
     @POST("vision/idr/vnm")
     Call<Infor> getInforCCCD(@Part MultipartBody.Part image, @Part MultipartBody.Part face);
