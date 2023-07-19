@@ -12,7 +12,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.quanlygiasu_md18202_duan1.Adapter.MonHoc_User;
+import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
+import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class DangNhap extends AppCompatActivity {
 
@@ -47,7 +53,6 @@ public class DangNhap extends AppCompatActivity {
         // Check giá trị trong file isRememberData
         SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
         boolean isRemember = sharedPreferences.getBoolean("isRemember", false);
-
         if (isRemember) {
             String user = sharedPreferences.getString("user", "");
             String pass = sharedPreferences.getString("pass", "");
@@ -70,7 +75,8 @@ public class DangNhap extends AppCompatActivity {
                 if (!validateUsername() | !validatePassword()) {
                     return;
                 }
-                checkUser();
+               checkUser();
+
             }
         });
     }
@@ -110,6 +116,7 @@ public class DangNhap extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(userName)) {
+                    ArrayList<User> list = new ArrayList<>();
                     tilUsername.setError(null);
                     String passWordFromDB = snapshot.child(userName).child("password").getValue(String.class);
                     if (passWord.equals(passWordFromDB)) {
@@ -122,8 +129,10 @@ public class DangNhap extends AppCompatActivity {
                         editor.putString("user", userName);
                         editor.putString("pass", passWord);
                         editor.apply();
-
+                        Toast.makeText(DangNhap.this, "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(DangNhap.this, ManHinhUser.class));
+
+
 
                     } else {
                         tilPassword.setError("Mật khẩu không đúng");

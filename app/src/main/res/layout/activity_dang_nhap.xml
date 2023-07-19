@@ -94,6 +94,7 @@ android:layout_gravity="left"
             android:id="@+id/btnDangNhap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:background="@drawable/layout_button"
             android:text="Đăng nhập"
             android:textAllCaps="false"

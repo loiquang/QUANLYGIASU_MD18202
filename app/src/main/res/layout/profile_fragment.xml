@@ -48,7 +48,6 @@
                 android:textAllCaps="false"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:fontFamily="casual"
                 android:background="@drawable/layout_button"/>
 
             <Button
@@ -61,7 +60,6 @@
                 android:textAllCaps="false"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:fontFamily="casual"
                 android:background="@drawable/layout_button"/>
 
             <Button
@@ -70,7 +68,6 @@
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
                 android:text="Thông Tin"
-                android:fontFamily="casual"
                 android:padding="15dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -84,7 +81,6 @@
                 android:text="Tiến Trình"
                 android:padding="15dp"
                 android:textSize="20sp"
-                android:fontFamily="casual"
                 android:textStyle="bold"
                 android:textAllCaps="false"
                 android:layout_marginTop="20dp"

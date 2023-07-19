@@ -31,7 +31,6 @@ public class GetListFireBase {
                 for (DataSnapshot dtSnap : snapshot.getChildren()) {
 
                     Teacher_MD a = dtSnap.getValue(Teacher_MD.class) ;
-                    User user =dtSnap.getValue(User.class) ;
                     list.add(a);
                 }
                 interface_list.onListReceived(list);

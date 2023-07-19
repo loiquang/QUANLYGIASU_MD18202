@@ -1,6 +1,8 @@
 package com.example.quanlygiasu_md18202_duan1.Models.users;
 
-public class CCCD {
+import java.io.Serializable;
+
+public class CCCD implements Serializable {
     private String address;
     private String dob;
     private String doe;
@@ -10,11 +12,12 @@ public class CCCD {
     private String issue_date;
     private String nationality;
     private String sex;
+    private String face;
 
     public CCCD() {
     }
 
-    public CCCD(String address, String dob, String doe, String features, String fullname, String home, String issue_date, String nationality, String sex) {
+    public CCCD(String address, String dob, String doe,String face, String features, String fullname, String home, String issue_date, String nationality, String sex) {
         this.address = address;
         this.dob = dob;
         this.doe = doe;
@@ -24,6 +27,15 @@ public class CCCD {
         this.issue_date = issue_date;
         this.nationality = nationality;
         this.sex = sex;
+        this.face = face;
+    }
+
+    public String getFace() {
+        return face;
+    }
+
+    public void setFace(String face) {
+        this.face = face;
     }
 
     public String getAddress() {
