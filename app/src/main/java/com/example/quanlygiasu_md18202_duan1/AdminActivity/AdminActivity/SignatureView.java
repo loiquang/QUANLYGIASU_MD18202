@@ -18,6 +18,7 @@ import android.view.View;
 public class SignatureView extends View {
     private Path signaturePath;
     private Paint signaturePaint;
+    public boolean isSignatureDrawn = false;
 
     //khởi tạo các thuộc tính ban đầu, gọi phương thức init()
     public SignatureView(Context context, AttributeSet attrs) {
