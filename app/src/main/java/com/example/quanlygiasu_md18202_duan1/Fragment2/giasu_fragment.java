@@ -128,8 +128,13 @@ public class giasu_fragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String a = snapshot.getValue().toString();
-                txtName.setText(a);
+                try {
+                    String a = snapshot.getValue().toString();
+                    txtName.setText(a);
+                }catch (Exception e){
+                    txtName.setText("Quản Lý Gia Sư");
+                }
+
             }
 
             @Override
