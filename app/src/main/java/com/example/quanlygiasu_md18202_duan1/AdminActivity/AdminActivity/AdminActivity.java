@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.example.quanlygiasu_md18202_duan1.Activity.ManHinhUser;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 public class AdminActivity extends AppCompatActivity {
@@ -18,27 +19,28 @@ public class AdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-        ImageButton btnGiaSu = findViewById(R.id.btnManagerCoach);
-        ImageButton btnNguoiDung = findViewById(R.id.btnManagerUser);
 
-        btnGiaSu.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnTeacher = findViewById(R.id.btnManagerCoach);
+        ImageButton btnUser = findViewById(R.id.btnManagerUser);
+
+        btnTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 int flag = 1;
                 connect(flag);
             }
         });
-        btnNguoiDung.setOnClickListener(new View.OnClickListener() {
+        btnUser.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 int flag = 2;
                 connect(flag);
             }
         });
-    }
 
-    public void connect(int flag) {
-        Intent intent = new Intent(AdminActivity.this, ManagerCoachActivity.class);
+    }
+    public  void connect(int flag){
+        Intent intent = new Intent(AdminActivity.this, AdminContainerActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt("flag", flag);
         intent.putExtras(bundle);
