@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_bando;
 import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_nhapotp;
+import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_thongke;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.profile_fragment;
 import com.example.quanlygiasu_md18202_duan1.R;
@@ -31,7 +33,19 @@ public class AdminContainerActivity extends AppCompatActivity {
                 fragment = new giasu_fragment();
                 break;
             case 2:
-                fragment = new fragment_nhapotp();
+                fragment = new giasu_fragment();
+                break;
+            case 3:
+                fragment = new giasu_fragment();
+                break;
+            case 4:
+                fragment = new fragment_thongke();
+                break;
+            case 5:
+                fragment = new giasu_fragment();
+                break;
+            case 6:
+                fragment = new fragment_bando();
                 break;
         }
         if(fragment!=null){
