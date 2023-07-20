@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.combo_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.profile_fragment;
 import com.example.quanlygiasu_md18202_duan1.R;
+
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
@@ -54,6 +56,8 @@ public class ManHinhUser extends AppCompatActivity {
     }
 
     public void bottomNavi(MeowBottomNavigation bottomNavigation) {
+        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
+        int status = sharedPreferences.getInt("status", -1);
         //        Sử dụng meowbottomnavigation
         //đặt mặc định vị trí xuất hiện khi mở lên đầu tiên
         bottomNavigation.show(1, true);
@@ -94,7 +98,9 @@ public class ManHinhUser extends AppCompatActivity {
                         txtTitle.setText("Combo");
                         break;
                     case 3:
-                        fragment = new profile_fragment();
+
+                            fragment = new profile_fragment();
+
                         txtTitle.setText("Profile");
                         break;
                 }
@@ -137,7 +143,7 @@ public class ManHinhUser extends AppCompatActivity {
             public Unit invoke(MeowBottomNavigation.Model model) {
                 switch (model.getId()) {
                     case 3:
-                        fragment = new profile_fragment();
+                            fragment = new profile_fragment();
                         break;
                 }
                 if (fragment != null)
