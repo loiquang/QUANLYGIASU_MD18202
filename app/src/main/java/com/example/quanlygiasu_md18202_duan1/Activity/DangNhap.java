@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quanlygiasu_md18202_duan1.Adapter.MonHoc_User;
+import com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity.AdminActivity;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.example.quanlygiasu_md18202_duan1.R;
@@ -130,8 +131,11 @@ public class DangNhap extends AppCompatActivity {
                         editor.putString("pass", passWord);
                         editor.apply();
                         Toast.makeText(DangNhap.this, "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(DangNhap.this, ManHinhUser.class));
-
+                        if(userName.equals("admin")){
+                            startActivity(new Intent(DangNhap.this, AdminActivity.class));
+                        }else {
+                            startActivity(new Intent(DangNhap.this, ManHinhUser.class));
+                        }
 
 
                     } else {
