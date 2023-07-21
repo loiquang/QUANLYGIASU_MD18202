@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Teacher_MD implements Serializable {
-    private String fullname, dob, educationlevel, email, phone, sex, subject, id, status, scale;
-    private int  price, rate, acb;
+    private String fullname, dob, educationlevel, email, phone, sex, subject, id, status,  scale;
+    private int  price, rate;
     public Teacher_MD(){
     }
 
 
-    public Teacher_MD(String dob, String educationlevel, String email, String phone, String name, int price, int rate, String scale, String sex, String status, String subject) {
+    public Teacher_MD(String dob, String educationlevel, String email, String phone, String name, int price, int rate,String scale, String sex, String status, String subject) {
         this.fullname = name;
         this.dob = dob;
         this.educationlevel = educationlevel;
@@ -47,6 +47,14 @@ public class Teacher_MD implements Serializable {
 
     public void setEducationlevel(String educationlevel) {
         this.educationlevel = educationlevel;
+    }
+
+    public String getScale() {
+        return scale;
+    }
+
+    public void setScale(String scale) {
+        this.scale = scale;
     }
 
     public String getEmail() {
@@ -97,13 +105,7 @@ public class Teacher_MD implements Serializable {
         this.status = status;
     }
 
-    public String getScale() {
-        return scale;
-    }
 
-    public void setScale(String scale) {
-        this.scale = scale;
-    }
 
     public int getPrice() {
         return price;

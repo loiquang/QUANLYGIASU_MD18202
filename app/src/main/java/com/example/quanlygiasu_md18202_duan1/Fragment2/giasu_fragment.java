@@ -112,7 +112,7 @@ public class giasu_fragment extends Fragment {
         list.add(new MonHoc_User_Models(R.drawable.biology, "Sinh học"));
         recyclerView = view.findViewById(R.id.recycleView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        userAdapter = new MonHoc_User(list);
+        userAdapter = new MonHoc_User(list, getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(userAdapter);
     }
@@ -129,6 +129,10 @@ public class giasu_fragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
                     String a = snapshot.getValue().toString();
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("name", a);
+                    editor.apply();
                     txtName.setText(a);
                 }catch (Exception e){
                     txtName.setText("Quản Lý Gia Sư");

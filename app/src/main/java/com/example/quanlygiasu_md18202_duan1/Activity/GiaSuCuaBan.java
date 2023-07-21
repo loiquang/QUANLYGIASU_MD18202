@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.quanlygiasu_md18202_duan1.Adapter.Giasucuaban;
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
+import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.example.quanlygiasu_md18202_duan1.R;
@@ -33,14 +36,22 @@ public class GiaSuCuaBan extends AppCompatActivity {
         TextView txtNoThing = findViewById(R.id.txtNoThing);
         GetListFireBase getListFireBase = new GetListFireBase();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("teacher");
-        getListFireBase.readDatabase(databaseReference, new Interface_list() {
+        DatabaseReference databaseReference = firebaseDatabase.getReference("request");
+        getListFireBase.readDatabase3(databaseReference, new Interface_list() {
             @Override
             public void onListReceived(ArrayList<Teacher_MD> list) {
-                ArrayList<Teacher_MD> list2 = new ArrayList<>();
-                for (Teacher_MD teacher_md : list) {
-                    if(!teacher_md.getStatus().equals("Hoạt động")){
-                        list2.add(teacher_md);
+
+            }
+            @Override
+            public void onListReceived1(ArrayList<User> list) {}
+            @Override
+            public void onListReceived2(ArrayList<ReQuestGS> list) {
+                ArrayList<ReQuestGS> list2 = new ArrayList<>();
+                SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
+                String name = sharedPreferences.getString("name", "");
+                for (ReQuestGS reQuestGS : list) {
+                    if(reQuestGS.getUser().equals(name)){
+                     list2.add(reQuestGS);
                     }
                 }
                 if(list2.size()==0){
@@ -51,12 +62,6 @@ public class GiaSuCuaBan extends AppCompatActivity {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(GiaSuCuaBan.this);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(giasucuaban);
-            }
-
-            @Override
-            public void onListReceived1(ArrayList<User> list) {
-
-
             }
         });
 

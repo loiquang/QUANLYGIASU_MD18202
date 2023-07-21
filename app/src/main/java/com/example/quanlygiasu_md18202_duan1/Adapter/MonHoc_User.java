@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
+import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.MonHoc_User_Models;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
@@ -34,9 +35,10 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
     private Context context;
     int flag = 1;
 
-    public MonHoc_User(ArrayList<MonHoc_User_Models> list) {
+    public MonHoc_User(ArrayList<MonHoc_User_Models> list, Context context) {
         this.list = list;
         this.listOld = list;
+        this.context = context;
     }
 
     @NonNull
@@ -63,40 +65,23 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
                     if (teacher_md.getSubject().equals(holder.txtName.getText()))
                         list1.add(teacher_md);
                 }
+
+                teacherAdapter = new Teacher_In(list1);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context.getApplicationContext());
+                holder.recyclerView.setLayoutManager(linearLayoutManager);
+                holder.recyclerView.setAdapter(teacherAdapter);
                 holder.txtMon.setText("Số Lượng: " + list1.size());
             }
-
             @Override
-            public void onListReceived1(ArrayList<User> list) {
+            public void onListReceived1(ArrayList<User> list) {}
+            @Override
+            public void onListReceived2(ArrayList<ReQuestGS> list) {}
 
-            }
         });
 
         holder.imgDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list2 = new ArrayList<>();
-                getListFireBase.readDatabase(databaseReference1, new Interface_list() {
-                    @Override
-                    public void onListReceived(ArrayList<Teacher_MD> list) {
-                        for (Teacher_MD teacher_md:list) {
-                            if(teacher_md.getSubject().equals(holder.txtName.getText())){
-                                list2.add(teacher_md);
-                            }
-                        }
-                        teacherAdapter = new Teacher_In(list2);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(v.getContext());
-                        holder.recyclerView.setLayoutManager(linearLayoutManager);
-                        holder.recyclerView.setAdapter(teacherAdapter);
-
-                    }
-
-                    @Override
-                    public void onListReceived1(ArrayList<User> list) {
-
-                    }
-                });
-
                     holder.recyclerView.setVisibility(View.VISIBLE);
                     holder.imgDown.setVisibility(View.GONE);
                     holder.imgUp.setVisibility(View.VISIBLE);

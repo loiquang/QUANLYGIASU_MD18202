@@ -3,6 +3,7 @@ package com.example.quanlygiasu_md18202_duan1.FireBaseHelper;
 import androidx.annotation.NonNull;
 
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
+import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.google.firebase.database.DataSnapshot;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class GetListFireBase {
     ArrayList<Teacher_MD> list = new ArrayList<>();
     ArrayList<User> list1 = new ArrayList<>();
+    ArrayList<ReQuestGS> list2 = new ArrayList<>();
     DatabaseReference  databaseReference;
     public GetListFireBase() {
     }
@@ -70,6 +72,32 @@ public class GetListFireBase {
         });
 
         return list1;
+    }
+    public ArrayList<ReQuestGS> readDatabase3(DatabaseReference databaseReference, Interface_list interface_list) {
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(list2!=null){
+                    list2.clear();
+                }
+                for (DataSnapshot dtSnap : snapshot.getChildren()) {
+
+                   ReQuestGS reQuestGS = dtSnap.getValue(ReQuestGS.class) ;
+                    list2.add(reQuestGS);
+                }
+                interface_list.onListReceived2(list2);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return list2;
     }
 
 }

@@ -37,12 +37,7 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        try {
-//
-//                holder.txtName.setText(list.get(position).getCccd().getFullname());
-//        }catch (Exception e){
-//            holder.txtName.setText("Chưa xác nhận thông tin");
-//        }
+
         holder.txtName.setText(list.get(position).getFullname());
         holder.txtMon.setText(list.get(position).getSubject());
         holder.imgRight.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +47,9 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
                 Intent intent = new Intent(context, HoSoGiaSu.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("name", holder.txtName.getText().toString());
+                bundle.putString("scale", list.get(holder.getAdapterPosition()).getScale());
+                bundle.putInt("price", list.get(holder.getAdapterPosition()).getPrice());
+                bundle.putString("subject", list.get(holder.getAdapterPosition()).getSubject());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
