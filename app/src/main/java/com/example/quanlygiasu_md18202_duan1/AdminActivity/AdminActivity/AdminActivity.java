@@ -22,6 +22,10 @@ public class AdminActivity extends AppCompatActivity {
 
         ImageButton btnTeacher = findViewById(R.id.btnManagerCoach);
         ImageButton btnUser = findViewById(R.id.btnManagerUser);
+        ImageButton btnDocument = findViewById(R.id.btnDocument);
+        ImageButton btnStatistics = findViewById(R.id.btnStatistics);
+        ImageButton btnRecommendation = findViewById(R.id.btnRecommendation);
+        ImageButton btnMap = findViewById(R.id.btnMap);
 
         btnTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +41,36 @@ public class AdminActivity extends AppCompatActivity {
                 connect(flag);
             }
         });
+        btnDocument.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int flag = 3;
+                connect(flag);
+            }
+        });
+        btnStatistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int flag = 4;
+                connect(flag);
+            }
+        });
+        btnRecommendation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int flag = 5;
+                connect(flag);
+            }
+        });
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int flag = 6;
+                connect(flag);
+            }
+        });
+
+
 
     }
     public  void connect(int flag){
