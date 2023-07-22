@@ -2,6 +2,7 @@ package com.example.quanlygiasu_md18202_duan1.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +24,9 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
     private ArrayList<Teacher_MD> list;
     private Context context;
 
-    public Teacher_In(ArrayList<Teacher_MD> list) {
+    public Teacher_In(ArrayList<Teacher_MD> list,Context context ) {
         this.list = list;
+        this.context = context;
 
     }
 
@@ -40,6 +42,13 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
 
         holder.txtName.setText(list.get(position).getFullname());
         holder.txtMon.setText(list.get(position).getSubject());
+        SharedPreferences sharedPreferences = context.getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
+        String user = sharedPreferences.getString("user", "");
+        if(user.equals("admin")){
+            holder.imgRight.setVisibility(View.GONE);
+            holder.imgPencil.setVisibility(View.VISIBLE);
+
+        }
         holder.imgRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +75,7 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtMon;
-        ImageView imgTeacher, imgRight;
+        ImageView imgTeacher, imgRight, imgPencil;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,6 +83,7 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
             txtMon = itemView.findViewById(R.id.txtMon);
             imgTeacher = itemView.findViewById(R.id.imgTeacher);
             imgRight = itemView.findViewById(R.id.imgRight);
+            imgPencil= itemView.findViewById(R.id.imgPencil);
         }
     }
 }

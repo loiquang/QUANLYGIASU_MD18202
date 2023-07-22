@@ -1,10 +1,12 @@
 package com.example.quanlygiasu_md18202_duan1.Models.Request;
 
 public class ReQuestGS {
-    private String enddate, startdate,teacher, user, subject;
-    private int scale, status, totalpayment;
+    private String enddate, startdate,teacher, user, subject, id;
+    private int scale, status ;
+    private long totalpayment;
+    private ReQuestGS reQuestGS;
 
-    public ReQuestGS(String enddate, int scale, String startdate, int status, String subject, String teacher, int totalpayment, String user) {
+    public ReQuestGS(String enddate, int scale, String startdate, int status, String subject, String teacher, long totalpayment, String user) {
         this.enddate = enddate;
         this.startdate = startdate;
         this.teacher = teacher;
@@ -14,7 +16,29 @@ public class ReQuestGS {
         this.totalpayment = totalpayment;
         this.subject = subject;
     }
+
+    public ReQuestGS getReQuestGS() {
+        return reQuestGS;
+    }
+
+    public void setReQuestGS(ReQuestGS reQuestGS) {
+        this.reQuestGS = reQuestGS;
+    }
+
     public ReQuestGS(){}
+
+    public ReQuestGS(String id, ReQuestGS reQuestGS) {
+        this.id = id;
+        this.reQuestGS = reQuestGS;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getSubject() {
         return subject;
@@ -72,11 +96,11 @@ public class ReQuestGS {
         this.status = status;
     }
 
-    public int getTotalpayment() {
+    public long getTotalpayment() {
         return totalpayment;
     }
 
-    public void setTotalpayment(int totalpayment) {
+    public void setTotalpayment(long totalpayment) {
         this.totalpayment = totalpayment;
     }
 }

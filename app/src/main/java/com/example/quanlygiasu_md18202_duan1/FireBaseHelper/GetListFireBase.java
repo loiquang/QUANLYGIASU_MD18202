@@ -17,22 +17,23 @@ public class GetListFireBase {
     ArrayList<Teacher_MD> list = new ArrayList<>();
     ArrayList<User> list1 = new ArrayList<>();
     ArrayList<ReQuestGS> list2 = new ArrayList<>();
-    DatabaseReference  databaseReference;
+    DatabaseReference databaseReference;
+
     public GetListFireBase() {
     }
 
-    public ArrayList<Teacher_MD> readDatabase( DatabaseReference databaseReference,Interface_list interface_list) {
-     
+    public ArrayList<Teacher_MD> readDatabase(DatabaseReference databaseReference, Interface_list interface_list) {
+
         databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(list!=null){
+                if (list != null) {
                     list.clear();
                 }
                 for (DataSnapshot dtSnap : snapshot.getChildren()) {
 
-                    Teacher_MD a = dtSnap.getValue(Teacher_MD.class) ;
+                    Teacher_MD a = dtSnap.getValue(Teacher_MD.class);
                     list.add(a);
                 }
                 interface_list.onListReceived(list);
@@ -47,19 +48,20 @@ public class GetListFireBase {
 
         return list;
     }
+
     public ArrayList<User> readDatabase2(DatabaseReference databaseReference, Interface_list interface_list) {
 
         databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(list1!=null){
+                if (list1 != null) {
                     list1.clear();
                 }
                 for (DataSnapshot dtSnap : snapshot.getChildren()) {
-
-                    User user = dtSnap.getValue(User.class) ;
-                    list1.add(user);
+                    String key = dtSnap.getKey();
+                    User user = dtSnap.getValue(User.class);
+                    list1.add(new User(key, user));
                 }
                 interface_list.onListReceived1(list1);
 
@@ -73,19 +75,20 @@ public class GetListFireBase {
 
         return list1;
     }
+
     public ArrayList<ReQuestGS> readDatabase3(DatabaseReference databaseReference, Interface_list interface_list) {
 
         databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(list2!=null){
+                if (list2 != null) {
                     list2.clear();
                 }
                 for (DataSnapshot dtSnap : snapshot.getChildren()) {
-
-                   ReQuestGS reQuestGS = dtSnap.getValue(ReQuestGS.class) ;
-                    list2.add(reQuestGS);
+                    String key = dtSnap.getKey();
+                    ReQuestGS reQuestGS = dtSnap.getValue(ReQuestGS.class);
+                    list2.add(new ReQuestGS(key, reQuestGS));
                 }
                 interface_list.onListReceived2(list2);
 
@@ -99,5 +102,6 @@ public class GetListFireBase {
 
         return list2;
     }
+
 
 }

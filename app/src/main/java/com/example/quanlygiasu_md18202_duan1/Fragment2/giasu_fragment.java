@@ -49,7 +49,6 @@ public class giasu_fragment extends Fragment {
         View view = inflater.inflate(R.layout.giasu_fragment, container, false);
         searchView = view.findViewById(R.id.searchView);
         txtTimKiem = view.findViewById(R.id.txtTimKiem);
-
         getList(view);
         getName(view);
         //click vào nút search
@@ -136,6 +135,7 @@ public class giasu_fragment extends Fragment {
                     txtName.setText(a);
                 }catch (Exception e){
                     txtName.setText("Quản Lý Gia Sư");
+                    txtXinChao.setVisibility(View.INVISIBLE);
                 }
 
             }

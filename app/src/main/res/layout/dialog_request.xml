@@ -76,7 +76,8 @@
                 android:layout_width="wrap_content"
                 android:background="@drawable/layout_edt"
                 android:layout_height="wrap_content"
-                android:text="Tạm Tính"/>
+                android:text="Tạm Tính"
+                android:textAllCaps="false"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -92,7 +93,8 @@
                 android:layout_marginRight="10dp"
                 android:textColor="#ffff"
                 android:background="@drawable/layout_edt"
-                android:hint="Đăng Ký"/>
+                android:text="Đăng Ký"
+                android:textAllCaps="false"/>
             <Button
                 android:id="@+id/btnHuy"
                 android:layout_width="wrap_content"

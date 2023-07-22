@@ -1,8 +1,5 @@
 package com.example.quanlygiasu_md18202_duan1.Fragment2;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,10 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.example.quanlygiasu_md18202_duan1.Activity.GiaSuCuaBan;
-import com.example.quanlygiasu_md18202_duan1.Adapter.Giasucuaban;
+import com.example.quanlygiasu_md18202_duan1.Adapter.QuanLyDangKy;
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
 import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
@@ -42,27 +37,24 @@ private RecyclerView recyclerView;
         DatabaseReference databaseReference = firebaseDatabase.getReference("request");
         getListFireBase.readDatabase3(databaseReference, new Interface_list() {
             @Override
-            public void onListReceived(ArrayList<Teacher_MD> list) {
-
-            }
+            public void onListReceived(ArrayList<Teacher_MD> list) {}
             @Override
             public void onListReceived1(ArrayList<User> list) {}
             @Override
             public void onListReceived2(ArrayList<ReQuestGS> list) {
                 ArrayList<ReQuestGS> list2 = new ArrayList<>();
-
-
                 for (ReQuestGS reQuestGS : list) {
-                    if(reQuestGS.getStatus()==0){
+                    if(reQuestGS.getReQuestGS().getStatus()==0){
                         list2.add(reQuestGS);
                     }
                 }
-                Giasucuaban giasucuaban = new Giasucuaban(list2);
+                QuanLyDangKy giasucuaban = new QuanLyDangKy(list2);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(giasucuaban);
             }
-        // Inflate the layout for this fragment
+
+            // Inflate the layout for this fragment
 
     });
         return view;

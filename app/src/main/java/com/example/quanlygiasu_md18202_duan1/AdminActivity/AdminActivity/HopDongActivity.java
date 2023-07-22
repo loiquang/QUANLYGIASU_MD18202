@@ -17,33 +17,52 @@ import android.widget.Toast;
 
 import com.example.quanlygiasu_md18202_duan1.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class HopDongActivity extends AppCompatActivity {
     private ImageView signatureImageView;
-    TextView txtSignture;
-    Button btnContinues;
+    private TextView txtSignture, txtUser, txtMoney, txtTime, txtAddres;
+    private Button btnContinues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hop_dong);
-
+        txtUser = findViewById(R.id.txtUser);
+        txtAddres = findViewById(R.id.txtAddres);
+        txtTime = findViewById(R.id.txtTime);
+        txtMoney = findViewById(R.id.txtMoney);
         txtSignture = findViewById(R.id.txtSignture);
         RadioButton rdoAccept = findViewById(R.id.rdoAccept);
         btnContinues = findViewById(R.id.btnContinues);
 
         btnContinues.setVisibility(View.GONE);
+        //lay thong tin hop dong
+        Bundle bundle = getIntent().getExtras();
+       String nameUser= bundle.getString("nameUser");
+       String teacher = bundle.getString("nameTeacher");
+       String startDate = bundle.getString("startDate");
+       String endDate = bundle.getString("endDate");
+       long payment = bundle.getLong("payment");
+        NumberFormat numberFormat = new DecimalFormat("#,###");
+       txtUser.setText(nameUser);
+       txtAddres.setText(teacher);
+       txtTime.setText("Thời gian thuê gia sư được bắt đầu từ ngày "+startDate+" và kéo dài cho đến ngày " +endDate+" hoặc khi hoàn thành các yêu cầu và mục tiêu đã thỏa thuận hoặc cho đến khi bên thuê yêu cầu chấm dứt dịch vụ gia sư này theo quy định tại mục 5 của hợp đồng này.");
+       txtMoney.setText("Bên thuê cam kết trả cho bên cho thuê số tiền được thỏa thuận là "+numberFormat.format(payment)+"VND cho hợp đồng dịch vụ gia sư. Phương thức thanh toán và lịch trình thanh toán sẽ được thỏa thuận trong tài liệu phụ.");
 
         txtSignture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(rdoAccept.isChecked()){
+                if (rdoAccept.isChecked()) {
                     showSignatureDialog();
-                }else{
+                } else {
                     Toast.makeText(HopDongActivity.this, "Bạn phải đồng ý các điều khoản ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
     private void showSignatureDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();

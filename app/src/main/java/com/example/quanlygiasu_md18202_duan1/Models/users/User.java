@@ -8,6 +8,8 @@ public class User implements Serializable {
     private String password;
     private String phone;
     private CCCD cccd;
+    private User user;
+    private String id;
 
     public User() {
     }
@@ -18,6 +20,27 @@ public class User implements Serializable {
         this.password = password;
         this.phone = phone;
         this.cccd = cccd;
+    }
+
+    public User(String id,User user) {
+        this.user = user;
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {

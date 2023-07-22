@@ -11,4 +11,5 @@ public interface Interface_list {
     void onListReceived1(ArrayList<User> list);
     void onListReceived2(ArrayList<ReQuestGS> list);
 
+
 }

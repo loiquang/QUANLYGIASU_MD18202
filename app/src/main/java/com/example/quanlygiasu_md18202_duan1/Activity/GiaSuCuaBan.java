@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.quanlygiasu_md18202_duan1.Adapter.Giasucuaban;
@@ -50,7 +49,7 @@ public class GiaSuCuaBan extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                 String name = sharedPreferences.getString("name", "");
                 for (ReQuestGS reQuestGS : list) {
-                    if(reQuestGS.getUser().equals(name)){
+                    if(reQuestGS.getReQuestGS().getUser().equals(name)){
                      list2.add(reQuestGS);
                     }
                 }
@@ -63,6 +62,9 @@ public class GiaSuCuaBan extends AppCompatActivity {
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(giasucuaban);
             }
+
+
+
         });
 
     }

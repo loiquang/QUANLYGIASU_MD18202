@@ -1,6 +1,7 @@
 package com.example.quanlygiasu_md18202_duan1.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,8 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+
         getListFireBase = new GetListFireBase();
         holder.imgTeacher.setImageResource(list.get(position).getImage());
         holder.txtName.setText(list.get(position).getName());
@@ -58,7 +61,7 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
         FirebaseDatabase auth = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference1 = auth.getReference("teacher");
 
-        getListFireBase.readDatabase(databaseReference1,new Interface_list() {
+        getListFireBase.readDatabase(databaseReference1, new Interface_list() {
             @Override
             public void onListReceived(ArrayList<Teacher_MD> list) {
                 for (Teacher_MD teacher_md : list) {
@@ -66,37 +69,41 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
                         list1.add(teacher_md);
                 }
 
-                teacherAdapter = new Teacher_In(list1);
+                teacherAdapter = new Teacher_In(list1, context);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context.getApplicationContext());
                 holder.recyclerView.setLayoutManager(linearLayoutManager);
                 holder.recyclerView.setAdapter(teacherAdapter);
                 holder.txtMon.setText("Số Lượng: " + list1.size());
             }
+
             @Override
-            public void onListReceived1(ArrayList<User> list) {}
+            public void onListReceived1(ArrayList<User> list) {
+            }
+
             @Override
-            public void onListReceived2(ArrayList<ReQuestGS> list) {}
+            public void onListReceived2(ArrayList<ReQuestGS> list) {
+            }
 
         });
 
         holder.imgDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    holder.recyclerView.setVisibility(View.VISIBLE);
-                    holder.imgDown.setVisibility(View.GONE);
-                    holder.imgUp.setVisibility(View.VISIBLE);
+                holder.recyclerView.setVisibility(View.VISIBLE);
+                holder.imgDown.setVisibility(View.GONE);
+                holder.imgUp.setVisibility(View.VISIBLE);
             }
         });
-holder.imgUp.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
+        holder.imgUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        holder.recyclerView.setVisibility(View.GONE);
-        flag--;
-        holder.imgDown.setVisibility(View.VISIBLE);
-        holder.imgUp.setVisibility(View.GONE);
-    }
-});
+                holder.recyclerView.setVisibility(View.GONE);
+                flag--;
+                holder.imgDown.setVisibility(View.VISIBLE);
+                holder.imgUp.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -138,7 +145,7 @@ holder.imgUp.setOnClickListener(new View.OnClickListener() {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtMon;
+        TextView txtName, txtMon, txtNameUser;
         ImageView imgTeacher, imgDown, imgUp;
         RecyclerView recyclerView;
 
@@ -148,8 +155,10 @@ holder.imgUp.setOnClickListener(new View.OnClickListener() {
             txtMon = itemView.findViewById(R.id.txtMon);
             imgTeacher = itemView.findViewById(R.id.imgTeacher);
             imgDown = itemView.findViewById(R.id.imgDown);
-            imgUp= itemView.findViewById(R.id.imgUp);
+            imgUp = itemView.findViewById(R.id.imgUp);
             recyclerView = itemView.findViewById(R.id.recycleView);
+
+
         }
     }
 }

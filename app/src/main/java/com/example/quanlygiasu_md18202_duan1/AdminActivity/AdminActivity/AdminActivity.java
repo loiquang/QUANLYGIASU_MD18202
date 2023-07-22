@@ -3,15 +3,11 @@ package com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.quanlygiasu_md18202_duan1.Activity.ManHinhUser;
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
 import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
@@ -53,12 +49,13 @@ public class AdminActivity extends AppCompatActivity {
             public void onListReceived2(ArrayList<ReQuestGS> list) {
                 ArrayList<ReQuestGS> list2 = new ArrayList<>();
                 for (ReQuestGS reQuestGS: list) {
-                    if(reQuestGS.getStatus()==0){
+                    if(reQuestGS.getReQuestGS().getStatus()==0){
                         list2.add(reQuestGS);
                     }
                 }
                 txtWarning.setText(""+list2.size());
             }
+
         });
 
         btnTeacher.setOnClickListener(new View.OnClickListener() {
