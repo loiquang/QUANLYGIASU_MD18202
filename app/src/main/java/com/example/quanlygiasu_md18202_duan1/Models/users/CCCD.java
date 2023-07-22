@@ -13,6 +13,10 @@ public class CCCD implements Serializable {
     private String nationality;
     private String sex;
     private String face;
+    private String id;
+    private String name;
+  
+    private String type;
 
     public CCCD() {
     }
@@ -30,20 +34,40 @@ public class CCCD implements Serializable {
         this.face = face;
     }
 
-    public String getFace() {
-        return face;
-    }
-
-    public void setFace(String face) {
-        this.face = face;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
+ 
+    public CCCD(String id, String name, String sex, String dob, String address, String issue_date, String face, String type) {
+        this.id = id;
+        this.name = name;
+        this.sex = sex;
+        this.dob = dob;
         this.address = address;
+        this.issue_date = issue_date;
+        this.face = face;
+        this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getDob() {
@@ -54,36 +78,12 @@ public class CCCD implements Serializable {
         this.dob = dob;
     }
 
-    public String getDoe() {
-        return doe;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDoe(String doe) {
-        this.doe = doe;
-    }
-
-    public String getFeatures() {
-        return features;
-    }
-
-    public void setFeatures(String features) {
-        this.features = features;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getHome() {
-        return home;
-    }
-
-    public void setHome(String home) {
-        this.home = home;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getIssue_date() {
@@ -94,19 +94,33 @@ public class CCCD implements Serializable {
         this.issue_date = issue_date;
     }
 
-    public String getNationality() {
-        return nationality;
+    public String getFace() {
+        return face;
     }
 
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
+    public void setFace(String face) {
+        this.face = face;
     }
 
-    public String getSex() {
-        return sex;
+    public String getType() {
+        return type;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "CCCD{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", dob='" + dob + '\'' +
+                ", address='" + address + '\'' +
+                ", issue_date='" + issue_date + '\'' +
+                ", face='" + face + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

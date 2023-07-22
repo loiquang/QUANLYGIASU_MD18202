@@ -49,7 +49,14 @@ dependencies {
 
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.1.1"))
-
+    // ImagePicker
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+    // Retrofit call API
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    // Gson CONVERTER
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    //Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
 
 
 }
