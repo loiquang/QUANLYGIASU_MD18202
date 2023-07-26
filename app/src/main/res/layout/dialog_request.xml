@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
+            android:inputType="date"
             android:background="@drawable/layout_edt"
             android:hint="Ngày bắt đầu" />
 
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:layout_marginTop="5dp"
+            android:inputType="date"
             android:background="@drawable/layout_edt"
             android:hint="Ngày kết thúc" />
         <LinearLayout
@@ -42,7 +44,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Số học sinh"
+                android:inputType="number"
                 android:background="@drawable/layout_edt"
+                android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25sp"/>
 
@@ -51,6 +55,7 @@
                 android:layout_weight="3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="Tối Đa"
                 android:textSize="25sp"/>
 

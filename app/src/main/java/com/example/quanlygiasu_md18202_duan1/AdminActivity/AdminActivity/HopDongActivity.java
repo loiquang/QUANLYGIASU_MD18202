@@ -103,6 +103,12 @@ public class HopDongActivity extends AppCompatActivity {
         signatureImageView = findViewById(R.id.signatureImageView1);
         signatureImageView.setImageBitmap(signatureBitmap);
 
+        signatureImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSignatureDialog();
+            }
+        });
     }
 
 }
