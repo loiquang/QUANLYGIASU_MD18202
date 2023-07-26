@@ -64,10 +64,12 @@
 
             <TextView
                 android:id="@+id/txtTien"
-                android:layout_weight="8"
-                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thành Tiền"
+                android:layout_marginRight="5dp"
+                android:inputType="number"
                 android:background="@drawable/layout_edt"
                 android:layout_marginTop="5dp"
                 android:textSize="25sp"/>

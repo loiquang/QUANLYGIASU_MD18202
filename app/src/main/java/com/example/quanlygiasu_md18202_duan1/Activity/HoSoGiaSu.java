@@ -95,8 +95,8 @@ public class HoSoGiaSu extends AppCompatActivity {
                         SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                         String nameUser = sharedPreferences.getString("name", "");
                         String user = sharedPreferences.getString("user", "");
-                        if(snapshot.hasChild(user+tenGV)){
-                            Toast.makeText(HoSoGiaSu.this, "ĐÃ Đăng Ký", Toast.LENGTH_SHORT).show();
+                        if (snapshot.hasChild(user + tenGV)) {
+                            Toast.makeText(HoSoGiaSu.this, "Đã Đăng Ký", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         AlertDialog.Builder builder = new AlertDialog.Builder(HoSoGiaSu.this);
@@ -123,7 +123,6 @@ public class HoSoGiaSu extends AppCompatActivity {
                         edtTextB.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
                                 showDatePickerDialog(edtTextB);
                             }
                         });
@@ -176,19 +175,21 @@ public class HoSoGiaSu extends AppCompatActivity {
                                     builder1.show();
                                     return;
                                 } else {
-
                                     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                                     DatabaseReference databaseReference = firebaseDatabase.getReference("request");
+                                    if(checkDate(startDate, endDate)){
+                                        long date = tinhNgay(endDate, startDate);
+                                        long thanhTien = (date * tien) * Long.parseLong(edtSoHS.getText().toString());
+                                        int status = 0;
+                                        ReQuestGS reQuestGS = new ReQuestGS(endDate, scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
+                                        databaseReference.child(user + tenGV).setValue(reQuestGS);
+                                        Toast.makeText(HoSoGiaSu.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                                        alertDialog.dismiss();
+                                    }else{
+                                        Toast.makeText(HoSoGiaSu.this, "Sai Định Dạng Ngày", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
 
-
-                                    long date = tinhNgay(endDate, startDate);
-                                    long thanhTien = (date * tien) * Long.parseLong(edtSoHS.getText().toString());
-
-                                    int status = 0;
-                                    ReQuestGS reQuestGS = new ReQuestGS(endDate, scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
-                                    databaseReference.child(user+tenGV).setValue(reQuestGS);
-                                    Toast.makeText(HoSoGiaSu.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                                    alertDialog.dismiss();
                                 }
                             }
                         });
@@ -236,6 +237,31 @@ public class HoSoGiaSu extends AppCompatActivity {
             }
         }, year, month, day);
         datePickerDialog.show();
+    }
+
+    public boolean checkDate(String stringDay1, String stringDay2) {
+        int day1 = getDayFromDate(stringDay1);
+        int day2 = getDayFromDate(stringDay2);
+        int month1 = getMonthFromDate(stringDay1);
+        int month2 = getMonthFromDate(stringDay2);
+        int year1 = getYearFromDate(stringDay1);
+        int year2 = getYearFromDate(stringDay2);
+        LocalDate currentDate = LocalDate.now();
+        int year = currentDate.getYear();
+        int month = currentDate.getMonthValue();
+        int day = currentDate.getDayOfMonth();
+        if (month1 < month || month2 < month) {
+            return false;
+        } else if (year1 < year || year2 < year || year2 < year1) {
+            return false;
+        } else if (month2 < month1 && year2 < year1) {
+            return false;
+        } else if (day1 < day || day2 < day && month1 == month2) {
+            return false;
+        } else if (month1 > month2 && year1 == year2) {
+            return false;
+        }
+        return true;
     }
 
     public long tinhNgay(String stringDay1, String stringDay2) {
