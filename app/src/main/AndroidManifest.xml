@@ -16,9 +16,32 @@
         android:theme="@style/Theme.QuanLyGiaSu_MD18202_DuAn1"
         tools:targetApi="31">
         <activity
+            android:name=".PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminActivity.AdminActivity.WalletUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminActivity.AdminActivity.TienTrinhActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AdminActivity.AdminActivity.PhanHoiActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AdminActivity.AdminActivity.HopDongActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AdminActivity.AdminActivity.AdminContainerActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminActivity.AdminActivity.VerificationActivity1"
             android:exported="false" />
-
         <activity
             android:name=".AdminActivity.AdminActivity.VerificationActivity"
             android:exported="true" >
@@ -36,8 +59,7 @@
             android:exported="false" />
         <activity
             android:name=".AdminActivity.AdminActivity.SignatureActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".Activity.HoSoGiaSu"
             android:exported="false" />
@@ -53,35 +75,17 @@
         </activity>
         <activity
             android:name=".Activity.DangKy"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".Activity.ManHinhUser"
             android:exported="false"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Activity.ManHinhCho"
-            android:exported="false">
-
-
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".AdminActivity.AdminActivity.AdminActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AdminActivity.AdminActivity.ManagerCoachActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AdminActivity.AdminActivity.ManagerComplainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AdminActivity.AdminActivity.ManagerDocumentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AdminActivity.AdminActivity.ManagerUserActivity"
-            android:exported="false" />
+            android:exported="true" />
     </application>
 
 </manifest>
