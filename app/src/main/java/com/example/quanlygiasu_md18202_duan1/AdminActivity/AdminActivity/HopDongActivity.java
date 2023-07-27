@@ -119,16 +119,22 @@ public class HopDongActivity extends AppCompatActivity {
                 builder.setNegativeButton("Oke", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        captureScreen(nameUser + "-" + teacher);
-                        AlertDialog alertDialog = builder.create();
-                        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
-                        String user = sharedPreferences.getString("user", "");
-                        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(user + teacher);
-                        databaseReference.child("status").setValue(2);
-                        alertDialog.dismiss();
-                        Intent intent = new Intent(HopDongActivity.this, ManHinhUser.class);
+                        Intent intent = new Intent(HopDongActivity.this, PaymentActivity.class);
+                        Bundle bundle1 = new Bundle();
+                        bundle1.getLong("thanhtien", payment);
+                        intent.putExtras(bundle1);
                         startActivity(intent);
+
+//                        captureScreen(nameUser + "-" + teacher);
+//                        AlertDialog alertDialog = builder.create();
+//                        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
+//                        String user = sharedPreferences.getString("user", "");
+//                        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(user + teacher);
+//                        databaseReference.child("status").setValue(2);
+//                        alertDialog.dismiss();
+//                        Intent intent = new Intent(HopDongActivity.this, ManHinhUser.class);
+//                        startActivity(intent);
                     }
                 });
                 builder.setPositiveButton("No", null);

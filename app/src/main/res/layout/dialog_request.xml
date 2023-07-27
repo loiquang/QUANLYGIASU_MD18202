@@ -16,7 +16,7 @@
 
             android:textSize="30sp"
             android:gravity="center"/>
-        <EditText
+        <TextView
             android:id="@+id/edtTextB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:background="@drawable/layout_edt"
             android:hint="Ngày bắt đầu" />
 
-        <EditText
+        <TextView
             android:id="@+id/edtTextN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
