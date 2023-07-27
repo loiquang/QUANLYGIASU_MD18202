@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".AdminActivity.AdminActivity.TienTrinhActivity">
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TIẾN TRÌNH"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_margin="10dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên gia sư : "
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên gia sư"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Môn học: "
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên môn học"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp">
+
+
+
+        <TextView
+            android:id="@+id/buoc1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--- chờ duyệt "
+            android:textColor="#F3EAEA"/>
+        <TextView
+            android:id="@+id/buoc2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--- đã duyệt"
+            android:textColor="#F3EAEA"/>
+
+        <TextView
+            android:id="@+id/buoc3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--- ký hợp đồng "
+            android:textColor="#F3EAEA"/>
+
+        <TextView
+            android:id="@+id/buoc4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--- thanh toán "
+            android:textColor="#F3EAEA"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/edtNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="nhập số"/>
+        <Button
+            android:id="@+id/btnNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ok"
+            android:layout_marginLeft="20dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>
