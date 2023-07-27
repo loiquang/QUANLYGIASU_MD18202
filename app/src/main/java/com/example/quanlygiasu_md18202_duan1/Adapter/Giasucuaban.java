@@ -61,6 +61,10 @@ public class Giasucuaban extends RecyclerView.Adapter<Giasucuaban.ViewHolder> {
                 }
             });
         }
+        if(list.get(position).getReQuestGS().getStatus() == 2){
+            holder.btnTrangThai.setText("Đánh giá");
+            holder.txtTrangThai.setText("Đang học");
+        }
     }
 
     @Override
