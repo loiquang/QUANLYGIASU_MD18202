@@ -55,8 +55,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     // Gson CONVERTER
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    //Gson
+    // Gson
     implementation 'com.google.code.gson:gson:2.10.1'
+    // MoMo Android SDK
+    implementation 'com.github.momo-wallet:mobile-sdk:1.0.7'
 
 
 }

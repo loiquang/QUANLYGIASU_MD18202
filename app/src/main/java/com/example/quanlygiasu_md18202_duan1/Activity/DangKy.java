@@ -81,7 +81,7 @@ public class DangKy extends AppCompatActivity {
                                 tilUsername.setError("Tên tài khoản đã tồn tại");
                             } else {
                                 tilUsername.setError(null);
-                                User user = new User(null, passWord, null, null, null);
+                                User user = new User(null, passWord, null, null, 0, null);
                                 userRef.child(userName).setValue(user);
                                 Toast.makeText(DangKy.this, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
                             }
