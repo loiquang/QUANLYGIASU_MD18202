@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quanlygiasu_md18202_duan1.Activity.ManHinhUser;
+import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,6 +41,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 public class HopDongActivity extends AppCompatActivity {
     private ImageView signatureImageView;
@@ -60,6 +62,7 @@ public class HopDongActivity extends AppCompatActivity {
         btnContinues.setVisibility(View.GONE);
         txtCancle = findViewById(R.id.txtHuy);
         Bundle bundle = getIntent().getExtras();
+        String id = bundle.getString("idHopDong");
         String nameUser = bundle.getString("nameUser");
         String teacher = bundle.getString("nameTeacher");
         String startDate = bundle.getString("startDate");
@@ -88,7 +91,8 @@ public class HopDongActivity extends AppCompatActivity {
                         SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                         String user = sharedPreferences.getString("user", "");
                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(user + teacher);
+                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(user +"-"+id);
+
                         databaseReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
@@ -121,11 +125,20 @@ public class HopDongActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         captureScreen(nameUser + "-" + teacher);
                         AlertDialog alertDialog = builder.create();
-                        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
-                        String user = sharedPreferences.getString("user", "");
+                        Toast.makeText(HopDongActivity.this, ""+id, Toast.LENGTH_SHORT).show();
                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(user + teacher);
-                        databaseReference.child("status").setValue(2);
+                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(id);
+                        databaseReference.child("status").setValue(2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(HopDongActivity.this, "Ký hợp đồng thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(HopDongActivity.this, "Ký hợp đồng thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         alertDialog.dismiss();
                         Intent intent = new Intent(HopDongActivity.this, ManHinhUser.class);
                         startActivity(intent);

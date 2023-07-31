@@ -1,5 +1,7 @@
 package com.example.quanlygiasu_md18202_duan1.Adapter;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity.HopDongActivity;
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
 import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
@@ -41,7 +44,7 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.txtStartDate.setText(list.get(position).getReQuestGS().getStartdate());
-        holder.txtEndDate.setText(list.get(position).getReQuestGS().getEnddate());
+        holder.txtEndDate.setText(list.get(position).getReQuestGS().getDate());
         holder.txtScale.setText("" + list.get(position).getReQuestGS().getScale());
         holder.txtSubject.setText(list.get(position).getReQuestGS().getSubject());
         holder.txtTeacher.setText(list.get(position).getReQuestGS().getTeacher());

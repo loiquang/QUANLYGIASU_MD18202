@@ -65,7 +65,7 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
             @Override
             public void onListReceived(ArrayList<Teacher_MD> list) {
                 for (Teacher_MD teacher_md : list) {
-                    if (teacher_md.getSubject().equals(holder.txtName.getText()))
+                    if (teacher_md.getTeacher_md().getSubject().equals(holder.txtName.getText()))
                         list1.add(teacher_md);
                 }
 

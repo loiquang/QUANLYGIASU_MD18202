@@ -54,8 +54,9 @@ public class Giasucuaban extends RecyclerView.Adapter<Giasucuaban.ViewHolder> {
                     bundle.putString("nameUser", list.get(holder.getAdapterPosition()).getReQuestGS().getUser());
                     bundle.putString("nameTeacher", list.get(holder.getAdapterPosition()).getReQuestGS().getTeacher());
                     bundle.putString("startDate", list.get(holder.getAdapterPosition()).getReQuestGS().getStartdate());
-                    bundle.putString("endDate", list.get(holder.getAdapterPosition()).getReQuestGS().getEnddate());
+                    bundle.putString("endDate", list.get(holder.getAdapterPosition()).getReQuestGS().getDate());
                     bundle.putLong("payment", list.get(holder.getAdapterPosition()).getReQuestGS().getTotalpayment());
+                    bundle.putString("idHopDong", list.get(holder.getAdapterPosition()).getId());
                     intent.putExtras(bundle);
                     v.getContext().startActivity(intent);
                 }

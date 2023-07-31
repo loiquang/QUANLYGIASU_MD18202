@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.number.IntegerWidth;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,9 +70,11 @@ public class HoSoGiaSu extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
+        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
         Bundle bundle = getIntent().getExtras();
         String tenGV = bundle.getString("name");
         String soHS = bundle.getString("scale");
+        String id = sharedPreferences.getString("id", "");
         int tien = bundle.getInt("price");
         String subject = bundle.getString("subject");
         txtTenGV.setText(tenGV);
@@ -84,6 +88,8 @@ public class HoSoGiaSu extends AppCompatActivity {
                 finish();
             }
         });
+        AlertDialog.Builder builder = new AlertDialog.Builder(HoSoGiaSu.this);
+        LayoutInflater layoutInflater = getLayoutInflater();
         btnDangKyGV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,16 +101,15 @@ public class HoSoGiaSu extends AppCompatActivity {
                         SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                         String nameUser = sharedPreferences.getString("name", "");
                         String user = sharedPreferences.getString("user", "");
-                        if (snapshot.hasChild(user + tenGV)) {
+                        if (snapshot.hasChild(user +"-"+ id)) {
                             Toast.makeText(HoSoGiaSu.this, "Đã Đăng Ký", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        AlertDialog.Builder builder = new AlertDialog.Builder(HoSoGiaSu.this);
-                        LayoutInflater layoutInflater = getLayoutInflater();
+
                         View view = layoutInflater.inflate(R.layout.dialog_request, null);
                         builder.setView(view);
                         TextView txtTenGV = view.findViewById(R.id.txtNameTeach);
-                        EditText edtTextB = view.findViewById(R.id.edtTextB);
+                        TextView edtTextB = view.findViewById(R.id.edtTextB);
                         EditText edtTextN = view.findViewById(R.id.edtTextN);
                         EditText edtSoHS = view.findViewById(R.id.edtSoHS);
                         TextView txtThanhTien = view.findViewById(R.id.txtTien);
@@ -126,12 +131,6 @@ public class HoSoGiaSu extends AppCompatActivity {
                                 showDatePickerDialog(edtTextB);
                             }
                         });
-                        edtTextN.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                showDatePickerDialog(edtTextN);
-                            }
-                        });
                         btnTamTinh.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -139,8 +138,10 @@ public class HoSoGiaSu extends AppCompatActivity {
                                 if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
                                     Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
                                     return;
-                                }
-                                if (edtTextB.getText().toString().isEmpty() || edtTextN.getText().toString().isEmpty()) {
+                                } else if(Integer.parseInt(edtTextN.getText().toString())<10){
+                                    Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else if (edtTextB.getText().toString().isEmpty() || edtTextN.getText().toString().isEmpty()) {
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(HoSoGiaSu.this);
                                     builder1.setTitle("Warning");
                                     builder1.setMessage("Không Được Để Trống Thông Tin");
@@ -149,8 +150,7 @@ public class HoSoGiaSu extends AppCompatActivity {
                                     builder1.show();
                                     return;
                                 } else {
-                                    long date = tinhNgay(edtTextB.getText().toString(), edtTextN.getText().toString());
-                                    long thanhTien = (date * tien) * Long.parseLong(edtSoHS.getText().toString());
+                                    long thanhTien = (Long.parseLong(edtTextN.getText().toString()) * tien) * Long.parseLong(edtSoHS.getText().toString());
                                     txtThanhTien.setText("" + thanhTien);
                                     Toast.makeText(HoSoGiaSu.this, "" + thanhTien, Toast.LENGTH_SHORT).show();
                                 }
@@ -166,6 +166,10 @@ public class HoSoGiaSu extends AppCompatActivity {
                                     Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
+                                else if(Integer.parseInt(endDate)<10){
+                                    Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
                                 if (startDate.isEmpty() || endDate.isEmpty()) {
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(HoSoGiaSu.this);
                                     builder1.setTitle("Warning");
@@ -177,18 +181,12 @@ public class HoSoGiaSu extends AppCompatActivity {
                                 } else {
                                     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                                     DatabaseReference databaseReference = firebaseDatabase.getReference("request");
-                                    if(checkDate(startDate, endDate)){
-                                        long date = tinhNgay(endDate, startDate);
-                                        long thanhTien = (date * tien) * Long.parseLong(edtSoHS.getText().toString());
+                                        long thanhTien = (Long.parseLong(endDate) * tien) * Long.parseLong(edtSoHS.getText().toString());
                                         int status = 0;
                                         ReQuestGS reQuestGS = new ReQuestGS(endDate, scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
-                                        databaseReference.child(user + tenGV).setValue(reQuestGS);
+                                        databaseReference.child(user +"-"+ id).setValue(reQuestGS);
                                         Toast.makeText(HoSoGiaSu.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                                         alertDialog.dismiss();
-                                    }else{
-                                        Toast.makeText(HoSoGiaSu.this, "Sai Định Dạng Ngày", Toast.LENGTH_SHORT).show();
-                                        return;
-                                    }
 
                                 }
                             }
@@ -206,6 +204,7 @@ public class HoSoGiaSu extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
+
                 });
             }
         });
@@ -213,7 +212,7 @@ public class HoSoGiaSu extends AppCompatActivity {
 
     }
 
-    private void showDatePickerDialog(EditText editTextDate) {
+    private void showDatePickerDialog(TextView editTextDate) {
         // Lấy ngày hiện tại
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -239,62 +238,62 @@ public class HoSoGiaSu extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    public boolean checkDate(String stringDay1, String stringDay2) {
-        int day1 = getDayFromDate(stringDay1);
-        int day2 = getDayFromDate(stringDay2);
-        int month1 = getMonthFromDate(stringDay1);
-        int month2 = getMonthFromDate(stringDay2);
-        int year1 = getYearFromDate(stringDay1);
-        int year2 = getYearFromDate(stringDay2);
-        LocalDate currentDate = LocalDate.now();
-        int year = currentDate.getYear();
-        int month = currentDate.getMonthValue();
-        int day = currentDate.getDayOfMonth();
-        if (month1 < month || month2 < month) {
-            return false;
-        } else if (year1 < year || year2 < year || year2 < year1) {
-            return false;
-        } else if (month2 < month1 && year2 < year1) {
-            return false;
-        } else if (day1 < day || day2 < day && month1 == month2) {
-            return false;
-        } else if (month1 > month2 && year1 == year2) {
-            return false;
-        }
-        return true;
-    }
+//    public boolean checkDate(String stringDay1, String stringDay2) {
+//        int day1 = getDayFromDate(stringDay1);
+//        int day2 = getDayFromDate(stringDay2);
+//        int month1 = getMonthFromDate(stringDay1);
+//        int month2 = getMonthFromDate(stringDay2);
+//        int year1 = getYearFromDate(stringDay1);
+//        int year2 = getYearFromDate(stringDay2);
+//        LocalDate currentDate = LocalDate.now();
+//        int year = currentDate.getYear();
+//        int month = currentDate.getMonthValue();
+//        int day = currentDate.getDayOfMonth();
+//        if (month1 < month || month2 < month) {
+//            return false;
+//        } else if (year1 < year || year2 < year || year2 < year1) {
+//            return false;
+//        } else if (month2 < month1 && year2 < year1) {
+//            return false;
+//        } else if (day1 < day || day2 < day && month1 == month2) {
+//            return false;
+//        } else if (month1 > month2 && year1 == year2) {
+//            return false;
+//        }
+//        return true;
+//    }
 
-    public long tinhNgay(String stringDay1, String stringDay2) {
-        int day1 = getDayFromDate(stringDay1);
-        int day2 = getDayFromDate(stringDay2);
-        int month1 = getMonthFromDate(stringDay1);
-        int month2 = getMonthFromDate(stringDay2);
-        int year1 = getYearFromDate(stringDay1);
-        int year2 = getYearFromDate(stringDay2);
-        LocalDate startDate = LocalDate.of(year1, month1, day1);
-        // Ngày kết thúc
-        LocalDate endDate = LocalDate.of(year2, month2, day2);
-        // Tính khoảng cách giữa hai ngày trong nhiều tháng
-        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-        return daysBetween;
-    }
+//    public long tinhNgay(String stringDay1, String stringDay2) {
+//        int day1 = getDayFromDate(stringDay1);
+//        int day2 = getDayFromDate(stringDay2);
+//        int month1 = getMonthFromDate(stringDay1);
+//        int month2 = getMonthFromDate(stringDay2);
+//        int year1 = getYearFromDate(stringDay1);
+//        int year2 = getYearFromDate(stringDay2);
+//        LocalDate startDate = LocalDate.of(year1, month1, day1);
+//        // Ngày kết thúc
+//        LocalDate endDate = LocalDate.of(year2, month2, day2);
+//        // Tính khoảng cách giữa hai ngày trong nhiều tháng
+//        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+//        return daysBetween;
+//    }
 
-    public static int getDayFromDate(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(dateString, formatter);
-        return localDate.getDayOfMonth();
-    }
-
-    public static int getMonthFromDate(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(dateString, formatter);
-        return localDate.getMonthValue();
-    }
-
-    public static int getYearFromDate(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(dateString, formatter);
-        return localDate.getYear();
-    }
+//    public static int getDayFromDate(String dateString) {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//        LocalDate localDate = LocalDate.parse(dateString, formatter);
+//        return localDate.getDayOfMonth();
+//    }
+//
+//    public static int getMonthFromDate(String dateString) {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//        LocalDate localDate = LocalDate.parse(dateString, formatter);
+//        return localDate.getMonthValue();
+//    }
+//
+//    public static int getYearFromDate(String dateString) {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//        LocalDate localDate = LocalDate.parse(dateString, formatter);
+//        return localDate.getYear();
+//    }
 
 }
