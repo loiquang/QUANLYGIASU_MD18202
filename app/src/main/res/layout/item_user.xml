@@ -34,38 +34,48 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nguyễn Văn A"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txtMon"
+                android:id="@+id/txtDiaChi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtName"
 
                 android:layout_toRightOf="@+id/imgTeacher"
                 android:text="Nguyễn Văn A"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtTaiKhoan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtName"
+
+                android:layout_toRightOf="@+id/imgTeacher"
+                android:text="Nguyễn Văn A"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtSDT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtName"
+
+                android:layout_toRightOf="@+id/imgTeacher"
+                android:text="Nguyễn Văn A"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtName"
+                android:layout_toRightOf="@+id/imgTeacher"
+                android:text="Nguyễn Văn A"
+                android:textSize="20sp" />
 
         </LinearLayout>
-        <ImageView
-            android:id="@+id/imgRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/right"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            />
-        <ImageView
-            android:id="@+id/imgPencil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/pencil"
-            android:visibility="gone"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

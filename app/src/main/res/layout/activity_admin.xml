@@ -95,26 +95,47 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginVertical="10dp">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
+
             android:gravity="center">
             <ImageButton
                 android:id="@+id/btnDocument"
                 android:layout_width="150dp"
                 android:layout_height="128dp"
                 android:backgroundTint="#FCB495"
+                android:layout_centerHorizontal="true"
                 android:src="@mipmap/three_file"/>
+            <View
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/layout_warning">
+            </View>
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/txtWarning"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="27dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#ffff"
+                android:textSize="25dp" />
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hồ sơ chờ duyệt"
+                android:layout_below="@+id/btnDocument"
+            android:gravity="center"
                 android:textSize="16dp"
                 android:textStyle="bold"/>
 
-        </LinearLayout>
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -130,7 +151,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thống kê"
+                android:text="Quản lý hồ sơ"
                 android:textSize="16dp"
                 android:textStyle="bold"/>
 
@@ -141,26 +162,46 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginVertical="10dp">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_weight="1"
             android:gravity="center">
+
             <ImageButton
                 android:id="@+id/btnRecommendation"
                 android:layout_width="150dp"
                 android:layout_height="128dp"
                 android:backgroundTint="#DAE5AD"
+                android:layout_centerHorizontal="true"
                 android:src="@mipmap/comments_bubble"/>
+            <View
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/layout_warning">
+            </View>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="27dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#ffff"
+                android:textSize="25dp" />
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/btnRecommendation"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
                 android:text="Khiếu nại"
                 android:textSize="16dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
-        </LinearLayout>
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"

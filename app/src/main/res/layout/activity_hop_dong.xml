@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,11 +15,23 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginVertical="10dp"
-        android:gravity="center"/>
+        android:gravity="center">
+    </TextView>
+    <TextView
+        android:id="@+id/txtHuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="Hủy hợp đồng"
+        android:textStyle="italic"
+        android:textColor="#FF5722"/>
+</RelativeLayout>
+
 
     <ScrollView
+        android:layout_weight="6"
         android:layout_width="match_parent"
-        android:layout_height="400dp">
+        android:layout_height="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:text="Và bên thuê: "/>
                 <TextView
+                    android:id="@+id/txtUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(tên người dùng)"/>
@@ -75,11 +90,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Địa chỉ: "/>
+                    android:text="Gia Sư: "/>
                 <TextView
+                    android:id="@+id/txtAddres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(địa chỉ của người dùng)"/>
+                    android:text="(tên gia sư)"/>
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -89,15 +105,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1. MÔ TẢ DỊCH VỤ: " />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  Bên cho thuê cam kết cung cấp dịch vụ gia sư cho bên thuê. Dịch vụ này bao gồm việc giảng dạy, hướng dẫn và trợ giúp bên thuê trong các môn học cụ thể được thỏa thuận giữa hai bên. Thời gian và địa điểm học sẽ được thống nhất trong tài liệu phụ sau khi hợp đồng này được ký kết." />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" 2. THỜI GIAN: " />
             <TextView
+                android:id="@+id/txtTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Thời gian thuê gia sư được bắt đầu từ ngày [Ngày bắt đầu] và kéo dài cho đến khi hoàn thành các yêu cầu và mục tiêu đã thỏa thuận hoặc cho đến khi bên thuê yêu cầu chấm dứt dịch vụ gia sư này theo quy định tại mục 5 của hợp đồng này." />
@@ -106,6 +125,7 @@
                 android:layout_height="wrap_content"
                 android:text=" 3. GIÁ THUÊ: " />
             <TextView
+                android:id="@+id/txtMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bên thuê cam kết trả cho bên cho thuê số tiền được thỏa thuận là [Số tiền] cho mỗi giờ dịch vụ gia sư. Phương thức thanh toán và lịch trình thanh toán sẽ được thỏa thuận trong tài liệu phụ." />
@@ -113,6 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" 4. NHIỆM VỤ VÀ QUYỀN LỢI: " />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -166,82 +187,93 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6. LUẬT ÁP DỤNG:" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hợp đồng này sẽ được điều chỉnh và hiểu theo luật pháp của Việt Nam, và các tranh chấp phát sinh từ hoặc liên quan đến hợp đồng này sẽ được giải quyết bởi các tòa án có thẩm quyền tại Việt Nam." />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bằng cách ký vào hợp đồng này, cả hai bên xác nhận rằng họ đã đọc, hiểu và đồng ý với tất cả các điều khoản và điều kiện trong hợp đồng này." />
         </LinearLayout>
     </ScrollView>
-    <RadioButton
-        android:id="@+id/rdoAccept"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tôi đã đọc kỹ điều khoản và đồng ý các điều trên"/>
-
     <LinearLayout
+        android:layout_weight="4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginVertical="10dp">
-        <TextView
-            android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical">
+        <RadioButton
+            android:id="@+id/rdoAccept"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BÊN CHO THUÊ"
-            android:layout_weight="1"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="BÊN THUÊ"
-            android:layout_weight="1"
-            android:gravity="center"/>
+            android:text="Tôi đã đọc kỹ điều khoản và đồng ý các điều trên"/>
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginVertical="5dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="A GIA SƯ"
-            android:layout_weight="1"
-            android:gravity="center"/>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+        <LinearLayout
 
-            <!-- ImageView dùng làm hình nền hoặc viền cho TextView -->
-            <ImageView
-                android:id="@+id/signatureImageView1"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center" />
-
-            <!-- TextView để hiển thị văn bản -->
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
             <TextView
-                android:id="@+id/txtSignture"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Nhấn vào đây để ký tên"
-                android:gravity="center"
-                android:background="@android:color/transparent" />
-        </FrameLayout>
+                android:text="BÊN CHO THUÊ"
+                android:layout_weight="1"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="BÊN THUÊ"
+                android:layout_weight="1"
+                android:gravity="center"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="A GIA SƯ"
+                android:layout_weight="1"
+                android:gravity="center"/>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <!-- ImageView dùng làm hình nền hoặc viền cho TextView -->
+                <ImageView
+                    android:id="@+id/signatureImageView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center" />
+
+                <!-- TextView để hiển thị văn bản -->
+                <TextView
+                    android:id="@+id/txtSignture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nhấn vào đây để ký tên"
+                    android:gravity="center"
+                    android:background="@android:color/transparent" />
+            </FrameLayout>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnContinues"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tiếp tục"
+            android:background="@drawable/layout_button"/>
 
     </LinearLayout>
-    <Button
-        android:id="@+id/btnContinues"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tiếp tục"
-        android:background="@drawable/layout_button"/>
+
 
 
 </LinearLayout>

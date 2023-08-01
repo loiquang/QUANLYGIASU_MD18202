@@ -25,8 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Xin chào,"
-                android:textSize="15sp"
-                android:fontFamily="casual"/>
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/txtName"
@@ -36,21 +35,12 @@
                 android:text="Meo Meo"
                 android:textColor="@color/black"
                 android:textSize="30sp"
-                android:textStyle="bold"
-                android:fontFamily="casual"/>
-
-            <ImageView
-                android:id="@+id/imgRing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:padding="10dp"
-                android:src="@drawable/gear" />
+                android:textStyle="bold" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imgRing"
+                android:layout_below="@+id/txtName"
                 android:background="@drawable/outline_searchview"
                 android:padding="8dp"
                 >
@@ -61,7 +51,6 @@
                     android:layout_height="wrap_content"
                     android:text="Tìm kiếm môn học"
                     android:textSize="20sp"
-                    android:fontFamily="casual"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:visibility="visible"

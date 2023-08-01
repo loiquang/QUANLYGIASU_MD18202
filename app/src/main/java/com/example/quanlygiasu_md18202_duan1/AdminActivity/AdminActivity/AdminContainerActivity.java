@@ -13,6 +13,7 @@ import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_nhapotp;
 import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_thongke;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.profile_fragment;
+import com.example.quanlygiasu_md18202_duan1.Fragment2.quanly_dangky;
 import com.example.quanlygiasu_md18202_duan1.R;
 
 public class AdminContainerActivity extends AppCompatActivity {
@@ -36,7 +37,7 @@ public class AdminContainerActivity extends AppCompatActivity {
                 fragment = new giasu_fragment();
                 break;
             case 3:
-                fragment = new giasu_fragment();
+                fragment = new quanly_dangky();
                 break;
             case 4:
                 fragment = new fragment_thongke();

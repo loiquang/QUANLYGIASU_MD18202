@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="13dp" /> <!-- Đặt bán kính bo góc, thay số 20dp bằng giá trị mong muốn -->
-
+    <corners android:radius="13dp"  /> <!-- Đặt bán kính bo góc, thay số 20dp bằng giá trị mong muốn -->
 </shape>

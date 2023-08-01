@@ -139,10 +139,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/layout_button"
             android:text="Đăng ký"
             android:textAllCaps="false"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            android:background="@drawable/layout_button"/>
 
         <TextView
             android:id="@+id/txtBack"

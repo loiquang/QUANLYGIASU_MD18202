@@ -1,6 +1,7 @@
 package com.example.quanlygiasu_md18202_duan1.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,9 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
+import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.MonHoc_User_Models;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
+import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.example.quanlygiasu_md18202_duan1.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -28,14 +32,14 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
     private ArrayList<Teacher_MD> list2;
     private Teacher_In teacherAdapter;
 
-    private Interface_list interface_list;
     private GetListFireBase getListFireBase;
     private Context context;
     int flag = 1;
 
-    public MonHoc_User(ArrayList<MonHoc_User_Models> list) {
+    public MonHoc_User(ArrayList<MonHoc_User_Models> list, Context context) {
         this.list = list;
         this.listOld = list;
+        this.context = context;
     }
 
     @NonNull
@@ -47,61 +51,59 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+
         getListFireBase = new GetListFireBase();
         holder.imgTeacher.setImageResource(list.get(position).getImage());
         holder.txtName.setText(list.get(position).getName());
 
         ArrayList<Teacher_MD> list1 = new ArrayList<>();
-        getListFireBase.readDatabase(new Interface_list() {
+        FirebaseDatabase auth = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference1 = auth.getReference("teacher");
+
+        getListFireBase.readDatabase(databaseReference1, new Interface_list() {
             @Override
             public void onListReceived(ArrayList<Teacher_MD> list) {
                 for (Teacher_MD teacher_md : list) {
-                    if (teacher_md.getSubject().equals(holder.txtName.getText()))
+                    if (teacher_md.getTeacher_md().getSubject().equals(holder.txtName.getText()))
                         list1.add(teacher_md);
                 }
+
+                teacherAdapter = new Teacher_In(list1, context);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context.getApplicationContext());
+                holder.recyclerView.setLayoutManager(linearLayoutManager);
+                holder.recyclerView.setAdapter(teacherAdapter);
                 holder.txtMon.setText("Số Lượng: " + list1.size());
             }
+
+            @Override
+            public void onListReceived1(ArrayList<User> list) {
+            }
+
+            @Override
+            public void onListReceived2(ArrayList<ReQuestGS> list) {
+            }
+
         });
 
         holder.imgDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list2 = new ArrayList<>();
-                getListFireBase.readDatabase(new Interface_list() {
-                    @Override
-                    public void onListReceived(ArrayList<Teacher_MD> list) {
-                        for (Teacher_MD teacher_md : list) {
-                            if (teacher_md.getSubject().equals(holder.txtName.getText()))
-                                list2.add(teacher_md);
-                        }
-                        teacherAdapter = new Teacher_In(list2);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(v.getContext());
-                        holder.recyclerView.setLayoutManager(linearLayoutManager);
-                        holder.recyclerView.setAdapter(teacherAdapter);
-
-                    }
-                });
-
-
-                    holder.recyclerView.setVisibility(View.VISIBLE);
-
-                    holder.imgDown.setVisibility(View.GONE);
-                    holder.imgUp.setVisibility(View.VISIBLE);
-
-
-
+                holder.recyclerView.setVisibility(View.VISIBLE);
+                holder.imgDown.setVisibility(View.GONE);
+                holder.imgUp.setVisibility(View.VISIBLE);
             }
         });
-holder.imgUp.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
+        holder.imgUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        holder.recyclerView.setVisibility(View.GONE);
-        flag--;
-        holder.imgDown.setVisibility(View.VISIBLE);
-        holder.imgUp.setVisibility(View.GONE);
-    }
-});
+                holder.recyclerView.setVisibility(View.GONE);
+                flag--;
+                holder.imgDown.setVisibility(View.VISIBLE);
+                holder.imgUp.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -143,7 +145,7 @@ holder.imgUp.setOnClickListener(new View.OnClickListener() {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtMon;
+        TextView txtName, txtMon, txtNameUser;
         ImageView imgTeacher, imgDown, imgUp;
         RecyclerView recyclerView;
 
@@ -153,8 +155,10 @@ holder.imgUp.setOnClickListener(new View.OnClickListener() {
             txtMon = itemView.findViewById(R.id.txtMon);
             imgTeacher = itemView.findViewById(R.id.imgTeacher);
             imgDown = itemView.findViewById(R.id.imgDown);
-            imgUp= itemView.findViewById(R.id.imgUp);
+            imgUp = itemView.findViewById(R.id.imgUp);
             recyclerView = itemView.findViewById(R.id.recycleView);
+
+
         }
     }
 }

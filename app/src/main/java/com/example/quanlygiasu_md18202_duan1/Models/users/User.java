@@ -1,12 +1,16 @@
 package com.example.quanlygiasu_md18202_duan1.Models.users;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String email;
     private String username;
     private String password;
     private String phone;
     private long money;
     private CCCD cccd;
+    private User user;
+    private String id;
 
     public User() {
     }
@@ -18,6 +22,27 @@ public class User {
         this.phone = phone;
         this.money = money;
         this.cccd = cccd;
+    }
+
+    public User(String id,User user) {
+        this.user = user;
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
