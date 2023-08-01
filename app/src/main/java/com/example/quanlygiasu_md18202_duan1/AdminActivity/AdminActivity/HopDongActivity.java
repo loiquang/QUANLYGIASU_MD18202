@@ -32,8 +32,11 @@ import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -68,6 +71,8 @@ public class HopDongActivity extends AppCompatActivity {
         String startDate = bundle.getString("startDate");
         String endDate = bundle.getString("endDate");
         long payment = bundle.getLong("payment");
+        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
+        String user = sharedPreferences.getString("user", "");
         txtSignture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,10 +93,9 @@ public class HopDongActivity extends AppCompatActivity {
                 builder.setNegativeButton("Oke", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
-                        String user = sharedPreferences.getString("user", "");
+
                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(user +"-"+id);
+                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(user + "-" + id);
 
                         databaseReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -121,27 +125,48 @@ public class HopDongActivity extends AppCompatActivity {
                 builder.setTitle("Thông Báo");
                 builder.setMessage("Ký Hợp Đồng Sẽ Không Hoàn Tác!\nBạn đồng ý chứ");
                 builder.setNegativeButton("Oke", new DialogInterface.OnClickListener() {
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        captureScreen(nameUser + "-" + teacher);
-                        AlertDialog alertDialog = builder.create();
-                        Toast.makeText(HopDongActivity.this, ""+id, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(HopDongActivity.this, PaymentActivity.class);
+                        Bundle bundle1 = new Bundle();
                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(id);
-                        databaseReference.child("status").setValue(2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("user").child(user).child("money");
+                        databaseReference1.addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(HopDongActivity.this, "Ký hợp đồng thành công", Toast.LENGTH_SHORT).show();
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String money = snapshot.getValue().toString();
+                                bundle1.putInt("money", Integer.parseInt(money));
+                                intent.putExtras(bundle1);
+                                startActivity(intent);
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
+
                             @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(HopDongActivity.this, "Ký hợp đồng thất bại", Toast.LENGTH_SHORT).show();
+                            public void onCancelled(@NonNull DatabaseError error) {
+
                             }
                         });
-                        alertDialog.dismiss();
-                        Intent intent = new Intent(HopDongActivity.this, ManHinhUser.class);
+                        DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("user").child("admin").child("money");
+                        databaseReference2.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String money1 = snapshot.getValue().toString();
+                                bundle1.putLong("moneyAdmin", Long.parseLong(money1));
+                                intent.putExtras(bundle1);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                        captureScreen(id);
+                        bundle1.putLong("paymentDone", payment);
+                        bundle1.putString("idPayment", id);
+                        intent.putExtras(bundle1);
                         startActivity(intent);
+                        finish();
                     }
                 });
                 builder.setPositiveButton("No", null);

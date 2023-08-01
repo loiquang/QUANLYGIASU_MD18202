@@ -17,6 +17,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.quanlygiasu_md18202_duan1.Adapter.MonHoc_User;
+import com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity.WalletUserActivity;
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.MonHoc_User_Models;
@@ -28,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -39,7 +42,7 @@ public class giasu_fragment extends Fragment {
     private RecyclerView recyclerView;
     private MonHoc_User userAdapter;
     private SearchView searchView;
-    private TextView txtTimKiem;
+    private TextView txtTimKiem, txtTien;
     private int flag = 1;
     private GetListFireBase getListFireBase;
 
@@ -49,14 +52,18 @@ public class giasu_fragment extends Fragment {
         View view = inflater.inflate(R.layout.giasu_fragment, container, false);
         searchView = view.findViewById(R.id.searchView);
         txtTimKiem = view.findViewById(R.id.txtTimKiem);
+        txtTien = view.findViewById(R.id.txtTien);
+        txtTien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WalletUserActivity.class);
+                startActivity(intent);
+            }
+        });
         getList(view);
         getName(view);
         //click vào nút search
-//   int flag1 =1;
-//        if(flag1==1){
-//            txtXinChao.setVisibility(View.INVISIBLE);
-//            txtName.setText("Quản Lý Gia Sư");
-//        }
+
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +128,7 @@ public class giasu_fragment extends Fragment {
         TextView txtName = view.findViewById(R.id.txtName);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
         String user = sharedPreferences.getString("user", "");
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("user").child(user).child("cccd").child("fullname");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -128,8 +136,6 @@ public class giasu_fragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
                     String a = snapshot.getValue().toString();
-                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("name", a);
                     editor.apply();
                     txtName.setText(a);
@@ -138,6 +144,20 @@ public class giasu_fragment extends Fragment {
                     txtXinChao.setVisibility(View.INVISIBLE);
                 }
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        DatabaseReference databaseReference1 = firebaseDatabase.getReference("user").child(user).child("money");
+        databaseReference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long b = Long.parseLong(snapshot.getValue().toString());
+                NumberFormat numberFormat = new DecimalFormat("#,###");
+                txtTien.setText(numberFormat.format(b));
             }
 
             @Override

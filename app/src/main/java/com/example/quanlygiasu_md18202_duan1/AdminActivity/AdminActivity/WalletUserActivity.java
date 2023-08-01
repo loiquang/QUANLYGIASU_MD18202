@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -57,7 +59,8 @@ public class WalletUserActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 money = snapshot.child(user).child("money").getValue(long.class);
-                tvMoney.setText("Số dư: " + money);
+                NumberFormat numberFormat = new DecimalFormat("#,###");
+                tvMoney.setText("Số dư: " + numberFormat.format(money));
             }
 
             @Override

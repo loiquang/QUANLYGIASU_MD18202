@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Teacher_MD implements Serializable {
-    private String fullname, dob, educationlevel, email, phone, sex, subject, id, status,  scale;
+    private String fullname, dob, educationlevel, email, phone, sex, subject, id, status,  scale, image;
     private int  price, rate;
     private Teacher_MD teacher_md;
     public Teacher_MD(){
@@ -16,9 +16,10 @@ public class Teacher_MD implements Serializable {
         this.teacher_md = teacher_md;
     }
 
-    public Teacher_MD(String dob, String educationlevel, String email, String phone, String name, int price, int rate, String scale, String sex, String status, String subject) {
-        this.fullname = name;
+    public Teacher_MD(String dob, String educationlevel, String email, String phone, String fullname, String image, int price, int rate, String scale, String sex, String status, String subject) {
+        this.fullname = fullname;
         this.dob = dob;
+        this.image = image;
         this.educationlevel = educationlevel;
         this.email = email;
         this.phone = phone;
@@ -28,6 +29,14 @@ public class Teacher_MD implements Serializable {
         this.scale = scale;
         this.price = price;
         this.rate = rate;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Teacher_MD getTeacher_md() {

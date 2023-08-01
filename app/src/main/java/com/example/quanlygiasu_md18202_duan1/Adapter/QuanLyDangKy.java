@@ -78,7 +78,6 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
                     public void onClick(View v) {
                         String key = list1.get(position).getId();
                         databaseReference.child(key).child("status").setValue(1);
-                        Toast.makeText(v.getContext(), ""+list1.size(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

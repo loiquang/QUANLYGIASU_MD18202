@@ -56,7 +56,7 @@ public class GiaSuCuaBan extends AppCompatActivity {
                 if(list2.size()==0){
                     txtNoThing.setVisibility(View.VISIBLE);
                 }
-                Giasucuaban giasucuaban = new Giasucuaban(list2);
+                Giasucuaban giasucuaban = new Giasucuaban(list2, GiaSuCuaBan.this);
                 recyclerView = findViewById(R.id.recycleView2);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(GiaSuCuaBan.this);
                 recyclerView.setLayoutManager(linearLayoutManager);

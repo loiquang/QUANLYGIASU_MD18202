@@ -26,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.firebase.database.DataSnapshot;
@@ -76,9 +77,11 @@ public class HoSoGiaSu extends AppCompatActivity {
         String soHS = bundle.getString("scale");
         String id = sharedPreferences.getString("id", "");
         int tien = bundle.getInt("price");
+        String image = bundle.getString("image");
         String subject = bundle.getString("subject");
         txtTenGV.setText(tenGV);
         txtSoHS.setText(soHS);
+        Glide.with(this).load(image).into(imgGV);
         NumberFormat numberFormat = new DecimalFormat("#,###", new DecimalFormatSymbols(Locale.US));
         txtTien.setText("" + numberFormat.format(tien) + " " + "vnđ/buổi");
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -88,11 +91,11 @@ public class HoSoGiaSu extends AppCompatActivity {
                 finish();
             }
         });
-        AlertDialog.Builder builder = new AlertDialog.Builder(HoSoGiaSu.this);
-        LayoutInflater layoutInflater = getLayoutInflater();
+
         btnDangKyGV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference databaseReference = firebaseDatabase.getReference("request");
                 databaseReference.addValueEventListener(new ValueEventListener() {
@@ -105,7 +108,8 @@ public class HoSoGiaSu extends AppCompatActivity {
                             Toast.makeText(HoSoGiaSu.this, "Đã Đăng Ký", Toast.LENGTH_SHORT).show();
                             return;
                         }
-
+                        AlertDialog.Builder builder = new AlertDialog.Builder(HoSoGiaSu.this);
+                        LayoutInflater layoutInflater = getLayoutInflater();
                         View view = layoutInflater.inflate(R.layout.dialog_request, null);
                         builder.setView(view);
                         TextView txtTenGV = view.findViewById(R.id.txtNameTeach);
@@ -122,9 +126,8 @@ public class HoSoGiaSu extends AppCompatActivity {
                         txtToiDa.setText("Tối Đa: " + soHS);
                         AlertDialog alertDialog = builder.create();
                         alertDialog.setCancelable(false);
-                        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                         alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.layout_dialog);
+                        alertDialog.show();
                         edtTextB.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -183,9 +186,11 @@ public class HoSoGiaSu extends AppCompatActivity {
                                     DatabaseReference databaseReference = firebaseDatabase.getReference("request");
                                         long thanhTien = (Long.parseLong(endDate) * tien) * Long.parseLong(edtSoHS.getText().toString());
                                         int status = 0;
-                                        ReQuestGS reQuestGS = new ReQuestGS(endDate, scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
+                                        ReQuestGS reQuestGS = new ReQuestGS(endDate, image ,scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
                                         databaseReference.child(user +"-"+ id).setValue(reQuestGS);
                                         Toast.makeText(HoSoGiaSu.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(HoSoGiaSu.this, ManHinhUser.class));
+                                        finish();
                                         alertDialog.dismiss();
 
                                 }
@@ -197,7 +202,7 @@ public class HoSoGiaSu extends AppCompatActivity {
                                 alertDialog.dismiss();
                             }
                         });
-                        alertDialog.show();
+
                     }
 
                     @Override

@@ -23,10 +23,6 @@
         <activity
             android:name=".AdminActivity.AdminActivity.WalletUserActivity"
             android:exported="true">
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
         <activity
             android:name=".AdminActivity.AdminActivity.TienTrinhActivity"
@@ -35,7 +31,8 @@
         </activity>
         <activity
             android:name=".AdminActivity.AdminActivity.PhanHoiActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".AdminActivity.AdminActivity.HopDongActivity"
             android:exported="true" />

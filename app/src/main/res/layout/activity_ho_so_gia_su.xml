@@ -67,6 +67,7 @@
                         android:textColor="#ffff"
                         android:background="@drawable/layout_text_tien"
                         android:padding="3dp"
+                        android:layout_marginTop="10dp"
                         android:text="250.000đ" />
 
                     <TextView

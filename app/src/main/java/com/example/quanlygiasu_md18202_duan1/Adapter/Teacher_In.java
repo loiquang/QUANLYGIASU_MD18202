@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.quanlygiasu_md18202_duan1.Activity.HoSoGiaSu;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
@@ -42,6 +44,7 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
 
         holder.txtName.setText(list.get(position).getTeacher_md().getFullname());
         holder.txtMon.setText(list.get(position).getTeacher_md().getSubject());
+        Glide.with(context).load(list.get(position).getTeacher_md().getImage()).into(holder.imgTeacher);
         SharedPreferences sharedPreferences = context.getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String user = sharedPreferences.getString("user", "");
@@ -60,6 +63,7 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
                 bundle.putString("scale", list.get(holder.getAdapterPosition()).getTeacher_md().getScale());
                 bundle.putInt("price", list.get(holder.getAdapterPosition()).getTeacher_md().getPrice());
                 bundle.putString("subject", list.get(holder.getAdapterPosition()).getTeacher_md().getSubject());
+                bundle.putString("image",list.get(position).getTeacher_md().getImage());
                 editor.putString("id",list.get(holder.getAdapterPosition()).getId());
                 editor.apply();
                 intent.putExtras(bundle);
