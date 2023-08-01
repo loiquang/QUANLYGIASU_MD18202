@@ -11,8 +11,12 @@ public class Teacher_MD implements Serializable {
     public Teacher_MD(){
     }
 
+    public Teacher_MD(String id, Teacher_MD teacher_md) {
+        this.id = id;
+        this.teacher_md = teacher_md;
+    }
 
-    public Teacher_MD(String dob, String educationlevel, String email, String phone, String name, int price, int rate,String scale, String sex, String status, String subject) {
+    public Teacher_MD(String dob, String educationlevel, String email, String phone, String name, int price, int rate, String scale, String sex, String status, String subject) {
         this.fullname = name;
         this.dob = dob;
         this.educationlevel = educationlevel;
@@ -60,6 +64,14 @@ public class Teacher_MD implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public Teacher_MD getTeacher_md() {
+        return teacher_md;
+    }
+
+    public void setTeacher_md(Teacher_MD teacher_md) {
+        this.teacher_md = teacher_md;
     }
 
     public void setEmail(String email) {

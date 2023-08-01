@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,8 +41,8 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.txtName.setText(list.get(position).getFullname());
-        holder.txtMon.setText(list.get(position).getSubject());
+        holder.txtName.setText(list.get(position).getTeacher_md().getFullname());
+        holder.txtMon.setText(list.get(position).getTeacher_md().getSubject());
         SharedPreferences sharedPreferences = context.getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
         String user = sharedPreferences.getString("user", "");
         if(user.equals("admin")){
@@ -56,9 +57,11 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
                 Intent intent = new Intent(context, HoSoGiaSu.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("name", holder.txtName.getText().toString());
-                bundle.putString("scale", list.get(holder.getAdapterPosition()).getScale());
-                bundle.putInt("price", list.get(holder.getAdapterPosition()).getPrice());
-                bundle.putString("subject", list.get(holder.getAdapterPosition()).getSubject());
+                bundle.putString("scale", list.get(holder.getAdapterPosition()).getTeacher_md().getScale());
+                bundle.putInt("price", list.get(holder.getAdapterPosition()).getTeacher_md().getPrice());
+                bundle.putString("subject", list.get(holder.getAdapterPosition()).getTeacher_md().getSubject());
+                bundle.putString("id",list.get(holder.getAdapterPosition()).getId());
+
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

@@ -70,6 +70,7 @@ public class HoSoGiaSu extends AppCompatActivity {
         actionBar.setTitle("");
         Bundle bundle = getIntent().getExtras();
         String tenGV = bundle.getString("name");
+        String id = bundle.getString("id");
         String soHS = bundle.getString("scale");
         int tien = bundle.getInt("price");
         String subject = bundle.getString("subject");
@@ -95,7 +96,7 @@ public class HoSoGiaSu extends AppCompatActivity {
                         SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                         String nameUser = sharedPreferences.getString("name", "");
                         String user = sharedPreferences.getString("user", "");
-                        if (snapshot.hasChild(user + tenGV)) {
+                        if (snapshot.hasChild(user +"-"+ id)) {
                             Toast.makeText(HoSoGiaSu.this, "Đã Đăng Ký", Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -112,6 +113,8 @@ public class HoSoGiaSu extends AppCompatActivity {
                         Button btnOke = view.findViewById(R.id.btnDK);
                         Button btnHuy = view.findViewById(R.id.btnHuy);
                         Button btnTamTinh = view.findViewById(R.id.btnTamTinh);
+                        String startDate = edtTextB.getText().toString();
+                        String endDate = edtTextN.getText().toString();
                         txtTenGV.setText(tenGV);
                         edtSoHS.setText("" + 1);
                         txtToiDa.setText("Tối Đa: " + soHS);
@@ -149,18 +152,23 @@ public class HoSoGiaSu extends AppCompatActivity {
                                     builder1.show();
                                     return;
                                 } else {
+                                    if(checkDate(startDate, endDate)){
                                     long date = tinhNgay(edtTextB.getText().toString(), edtTextN.getText().toString());
                                     long thanhTien = (date * tien) * Long.parseLong(edtSoHS.getText().toString());
                                     txtThanhTien.setText("" + thanhTien);
                                     Toast.makeText(HoSoGiaSu.this, "" + thanhTien, Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(HoSoGiaSu.this, "Sai Định Dạng Ngày", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+
                                 }
                             }
                         });
                         btnOke.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String startDate = edtTextB.getText().toString();
-                                String endDate = edtTextN.getText().toString();
+
                                 int scale1 = Integer.parseInt(edtSoHS.getText().toString());
                                 if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
                                     Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
@@ -182,7 +190,7 @@ public class HoSoGiaSu extends AppCompatActivity {
                                         long thanhTien = (date * tien) * Long.parseLong(edtSoHS.getText().toString());
                                         int status = 0;
                                         ReQuestGS reQuestGS = new ReQuestGS(endDate, scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
-                                        databaseReference.child(user + tenGV).setValue(reQuestGS);
+                                        databaseReference.child(user +"-"+ id).setValue(reQuestGS);
                                         Toast.makeText(HoSoGiaSu.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                                         alertDialog.dismiss();
                                     }else{
@@ -256,7 +264,7 @@ public class HoSoGiaSu extends AppCompatActivity {
             return false;
         } else if (month2 < month1 && year2 < year1) {
             return false;
-        } else if (day1 < day || day2 < day && month1 == month2) {
+        } else if (day1==day2||day1 < day || day2 < day && month1 == month2) {
             return false;
         } else if (month1 > month2 && year1 == year2) {
             return false;
