@@ -31,7 +31,8 @@ public interface MoMoAPIService {
     @POST("/pay/confirm")
     Call<ResponseConfirmPayment> getConfirmPayment(@Body RequestConfirmPayment requestConfirmPayment);
 
-    @POST("/pay/query-status")
-    Call<ResponseQueryStatus> getQueryStatus(@Body RequestQueryStatus requestQueryStatus);
+//    @Headers("Content-Type: application/json; charset=UTF-8")
+//    @POST("/pay/query-status")
+//    Call<ResponseQueryStatus> getQueryStatus(@Body RequestQueryStatus requestQueryStatus);
 
 }

@@ -3,6 +3,7 @@ package com.example.quanlygiasu_md18202_duan1.Models.users;
 import java.io.Serializable;
 
 public class CCCD implements Serializable {
+    private String address;
     private String id;
     private String name;
     private String type;
@@ -23,8 +24,10 @@ public class CCCD implements Serializable {
         this.id = id;
         this.name = name;
         this.sex = sex;
-        this.dob = dob;}
-    public CCCD(String address, String dob, String doe,String face, String features, String fullname, String home, String issue_date, String nationality, String sex) {
+        this.dob = dob;
+    }
+
+    public CCCD(String address, String dob, String doe, String face, String features, String fullname, String home, String issue_date, String nationality, String sex) {
         this.address = address;
         this.dob = dob;
         this.doe = doe;
