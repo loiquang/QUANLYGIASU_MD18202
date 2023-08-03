@@ -76,6 +76,7 @@
         <activity
             android:name=".Activity.DangKy"
             android:exported="false" />
+
         <activity
             android:name=".Activity.ManHinhUser"
             android:exported="false"

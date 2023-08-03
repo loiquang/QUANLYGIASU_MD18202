@@ -62,5 +62,7 @@ dependencies {
     // MoMo Android SDK
     implementation 'com.github.momo-wallet:mobile-sdk:1.0.7'
 
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
+
 
 }

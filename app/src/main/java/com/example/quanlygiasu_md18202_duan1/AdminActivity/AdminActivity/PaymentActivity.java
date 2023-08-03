@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.quanlygiasu_md18202_duan1.MoMoController.MoMoConfig;
 import com.example.quanlygiasu_md18202_duan1.MoMoController.MoMoPayment;
+import com.example.quanlygiasu_md18202_duan1.Models.MoMo.ResponseConfirmPayment;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -170,11 +171,13 @@ public class PaymentActivity extends AppCompatActivity {
                     //tvMessage.setText("Token: " + "Get token " + data.getStringExtra("message"));
                     String token = data.getStringExtra("data"); //Token response
                     String phoneNumber = data.getStringExtra("phonenumber");
-                    String partnerRefId = UUID.randomUUID().toString();
+                    String partnerRefId = UUID.randomUUID().toString(); // Mã đơn hàng
+                    String requestId = UUID.randomUUID().toString();
                     if (data.getStringExtra("data") != null && !data.getStringExtra("data").equals("")) {
                         // TODO: send phoneNumber & token to your server side to process payment with MoMo server
                         // IF Momo topup success, continue to process your order
-                        MoMoPayment.payment(PaymentActivity.this, Long.parseLong(String.valueOf(amount)), partnerRefId, phoneNumber, token, new MoMoPayment.PaymentCallback() {
+                        MoMoPayment moMoPayment = new MoMoPayment();
+                        moMoPayment.payment(PaymentActivity.this, Long.parseLong(String.valueOf(amount)), partnerRefId, phoneNumber, token, requestId, new MoMoPayment.PaymentCallback() {
                             @Override
                             public void onPaymentSuccess(long amount) {
                                 // TODO: Thực hiện thanh toán bằng MoMo ở đây

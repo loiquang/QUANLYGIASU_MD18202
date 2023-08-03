@@ -18,7 +18,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class MoMoUtils {
     private static final String HMAC_SHA256 = "HmacSHA256";
 
-    private static String toHexString(byte[] bytes) {
+    private String toHexString(byte[] bytes) {
         StringBuilder sb = new StringBuilder(bytes.length * 2);
         Formatter formatter = new Formatter(sb);
         for (byte b : bytes) {
@@ -27,7 +27,7 @@ public class MoMoUtils {
         return sb.toString();
     }
 
-    public static String signHmacSHA256(String data, String secretKey) throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
+    public String signHmacSHA256(String data, String secretKey) throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
         SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(), HMAC_SHA256);
         Mac mac = Mac.getInstance(HMAC_SHA256);
         mac.init(secretKeySpec);
@@ -37,7 +37,7 @@ public class MoMoUtils {
 
 
     // Phương thức mã hóa dữ liệu JSON bằng publicKey RSA
-    public static String encryptDataWithRSA(String jsonData, String publicKey) {
+    public String encryptDataWithRSA(String jsonData, String publicKey) {
         try {
             byte[] publicKeyBytes = Base64.decode(publicKey, Base64.DEFAULT);
             X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKeyBytes);

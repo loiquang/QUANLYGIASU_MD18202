@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.quanlygiasu_md18202_duan1.MoMoController.MoMoConfig;
 import com.example.quanlygiasu_md18202_duan1.MoMoController.MoMoPayment;
+import com.example.quanlygiasu_md18202_duan1.Models.MoMo.ResponseConfirmPayment;
+import com.example.quanlygiasu_md18202_duan1.Models.MoMo.ResponseQueryStatus;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -118,14 +120,16 @@ public class WalletUserActivity extends AppCompatActivity {
                     //tvMessage.setText("Token: " + "Get token " + data.getStringExtra("message"));
                     String token = data.getStringExtra("data"); //Token response
                     String phoneNumber = data.getStringExtra("phonenumber");
-                    String partnerRefId = UUID.randomUUID().toString();
+                    String partnerRefId = UUID.randomUUID().toString(); // Mã đơn hàng
+                    String requestId = UUID.randomUUID().toString();
                     if (data.getStringExtra("data") != null && !data.getStringExtra("data").equals("")) {
                         // TODO: send phoneNumber & token to your server side to process payment with MoMo server
                         // IF Momo topup success, continue to process your order
-                        MoMoPayment.payment(WalletUserActivity.this, Long.parseLong(String.valueOf(amount)), partnerRefId, phoneNumber, token, new MoMoPayment.PaymentCallback() {
+                        MoMoPayment moMoPayment = new MoMoPayment();
+                        moMoPayment.payment(WalletUserActivity.this, Long.parseLong(String.valueOf(amount)), partnerRefId, phoneNumber, token, requestId, new MoMoPayment.PaymentCallback() {
                             @Override
-                            public void onPaymentSuccess(long amount) {
-                                userRef.child(user).child("money").setValue(money + amount);
+                            public void onPaymentSuccess(ResponseConfirmPayment responseConfirmPayment) {
+                                userRef.child(user).child("money").setValue(money + responseConfirmPayment.getData().getAmount());
                                 userRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -137,6 +141,18 @@ public class WalletUserActivity extends AppCompatActivity {
 
                                     }
                                 });
+
+                                moMoPayment.queryStatus(WalletUserActivity.this, MoMoConfig.MERCHANT_CODE, partnerRefId, requestId, new MoMoPayment.QueryStatusCallback() {
+                                    @Override
+                                    public void onQueryStatusSuccess(ResponseQueryStatus responseQueryStatus) {
+                                        Toast.makeText(WalletUserActivity.this, "Thành Công", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onQueryStatusFailure(String errorMessage) {
+
+                                    }
+                                });
                             }
 
                             @Override
@@ -144,7 +160,6 @@ public class WalletUserActivity extends AppCompatActivity {
 
                             }
                         });
-
 
                     } else {
                         Toast.makeText(this, this.getString(R.string.not_receive_info), Toast.LENGTH_SHORT).show();

@@ -2,8 +2,10 @@ package com.example.quanlygiasu_md18202_duan1.API;
 
 import com.example.quanlygiasu_md18202_duan1.Models.MoMo.RequestConfirmPayment;
 import com.example.quanlygiasu_md18202_duan1.Models.MoMo.RequestPayment;
+import com.example.quanlygiasu_md18202_duan1.Models.MoMo.RequestQueryStatus;
 import com.example.quanlygiasu_md18202_duan1.Models.MoMo.ResponseConfirmPayment;
 import com.example.quanlygiasu_md18202_duan1.Models.MoMo.ResponsePayment;
+import com.example.quanlygiasu_md18202_duan1.Models.MoMo.ResponseQueryStatus;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -28,4 +30,8 @@ public interface MoMoAPIService {
 
     @POST("/pay/confirm")
     Call<ResponseConfirmPayment> getConfirmPayment(@Body RequestConfirmPayment requestConfirmPayment);
+
+    @POST("/pay/query-status")
+    Call<ResponseQueryStatus> getQueryStatus(@Body RequestQueryStatus requestQueryStatus);
+
 }

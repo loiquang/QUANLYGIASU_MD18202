@@ -74,6 +74,7 @@ public class HoSoGiaSu extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
         Bundle bundle = getIntent().getExtras();
         String tenGV = bundle.getString("name");
+        String id = bundle.getString("id");
         String soHS = bundle.getString("scale");
         String id = sharedPreferences.getString("id", "");
         int tien = bundle.getInt("price");
@@ -121,6 +122,8 @@ public class HoSoGiaSu extends AppCompatActivity {
                         Button btnOke = view.findViewById(R.id.btnDK);
                         Button btnHuy = view.findViewById(R.id.btnHuy);
                         Button btnTamTinh = view.findViewById(R.id.btnTamTinh);
+                        String startDate = edtTextB.getText().toString();
+                        String endDate = edtTextN.getText().toString();
                         txtTenGV.setText(tenGV);
                         edtSoHS.setText("" + 1);
                         txtToiDa.setText("Tối Đa: " + soHS);
@@ -155,15 +158,13 @@ public class HoSoGiaSu extends AppCompatActivity {
                                 } else {
                                     long thanhTien = (Long.parseLong(edtTextN.getText().toString()) * tien) * Long.parseLong(edtSoHS.getText().toString());
                                     txtThanhTien.setText("" + thanhTien);
-                                    Toast.makeText(HoSoGiaSu.this, "" + thanhTien, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
                         btnOke.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String startDate = edtTextB.getText().toString();
-                                String endDate = edtTextN.getText().toString();
+
                                 int scale1 = Integer.parseInt(edtSoHS.getText().toString());
                                 if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
                                     Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();

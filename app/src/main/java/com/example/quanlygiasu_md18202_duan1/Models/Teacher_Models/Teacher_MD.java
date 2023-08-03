@@ -39,13 +39,6 @@ public class Teacher_MD implements Serializable {
         this.image = image;
     }
 
-    public Teacher_MD getTeacher_md() {
-        return teacher_md;
-    }
-
-    public void setTeacher_md(Teacher_MD teacher_md) {
-        this.teacher_md = teacher_md;
-    }
 
     public String getFullname() {
         return fullname;
@@ -81,6 +74,14 @@ public class Teacher_MD implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public Teacher_MD getTeacher_md() {
+        return teacher_md;
+    }
+
+    public void setTeacher_md(Teacher_MD teacher_md) {
+        this.teacher_md = teacher_md;
     }
 
     public void setEmail(String email) {
