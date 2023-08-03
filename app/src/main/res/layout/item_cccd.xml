@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Số ID:"/>
+        <TextView
+            android:id="@+id/txtID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Đây là đoạn text vô nghĩa"
+            android:background="@drawable/boder_text_cccd"
+            android:padding="5dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Họ và tên:"/>
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Đây là đoạn text vô nghĩa"
+            android:background="@drawable/boder_text_cccd"
+            android:padding="5dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Giới tính:"/>
+        <TextView
+            android:id="@+id/txtSex"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Đây là đoạn text vô nghĩa"
+            android:background="@drawable/boder_text_cccd"
+            android:padding="5dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ngày sinh:"
+            />
+        <TextView
+            android:id="@+id/txtDOB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Đây là đoạn text vô nghĩa"
+            android:background="@drawable/boder_text_cccd"
+            android:padding="5dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Địa chỉ"/>
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Đây là đoạn text vô nghĩa"
+            android:background="@drawable/boder_text_cccd"
+            android:padding="5dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ngày cấp: "/>
+        <TextView
+            android:id="@+id/txtIssueDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Đây là đoạn text vô nghĩa"
+            android:background="@drawable/boder_text_cccd"
+            android:padding="5dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</LinearLayout>
