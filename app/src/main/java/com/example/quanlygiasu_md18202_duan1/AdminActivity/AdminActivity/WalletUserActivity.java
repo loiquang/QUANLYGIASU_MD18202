@@ -78,7 +78,7 @@ public class WalletUserActivity extends AppCompatActivity {
 
 
         // Load data "money", "transaction"
-        userRef.child(user).child("wallet").addValueEventListener(new ValueEventListener() {
+        userRef.child(user).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -186,11 +186,11 @@ public class WalletUserActivity extends AppCompatActivity {
                             public void onPaymentSuccess(ResponseConfirmPayment responseConfirmPayment) {
 
                                 // Cộng tiền nạp vào Firebase
-                                userRef.child(user).child("wallet").child("money").setValue(money + responseConfirmPayment.getData().getAmount());
+                                userRef.child(user).child("money").setValue(money + responseConfirmPayment.getData().getAmount());
                                 userRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        tvMoney.setText("Số dư: " + numberFormat.format(snapshot.child(user).child("wallet").child("money").getValue(long.class)));
+                                        tvMoney.setText("Số dư: " + numberFormat.format(snapshot.child(user).child("money").getValue(long.class)));
                                     }
 
                                     @Override
@@ -207,7 +207,7 @@ public class WalletUserActivity extends AppCompatActivity {
                                 String formattedDateTime = currentDateTime.format(formatter);
 
                                 Transaction transaction = new Transaction(responseConfirmPayment.getData().getPartnerRefId(), formattedDateTime, responseConfirmPayment.getData().getAmount());
-                                userRef.child(user).child("wallet/transaction").push().setValue(transaction);
+                                userRef.child(user).child("transaction").push().setValue(transaction);
 
 
 //                                moMoPayment.queryStatus(WalletUserActivity.this, partnerRefId, requestId, new MoMoPayment.QueryStatusCallback() {
