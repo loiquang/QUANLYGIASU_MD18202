@@ -51,10 +51,10 @@
                 android:background="@drawable/layout_button"/>
 
             <Button
-                android:id="@+id/btnLichHoc"
+                android:id="@+id/btnNapTien"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lịch Học"
+                android:text="Nạp Tiền"
                 android:layout_marginTop="20dp"
                 android:padding="15dp"
                 android:textAllCaps="false"
@@ -75,10 +75,10 @@
                 android:background="@drawable/layout_button"/>
 
             <Button
-                android:id="@+id/btnTienTrinh"
+                android:id="@+id/btnDoiMK"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tiến Trình"
+                android:text="Đổi Mật Khẩu"
                 android:padding="15dp"
                 android:textSize="20sp"
                 android:textStyle="bold"

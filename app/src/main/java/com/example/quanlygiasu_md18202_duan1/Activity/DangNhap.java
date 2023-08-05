@@ -62,7 +62,13 @@ public class DangNhap extends AppCompatActivity {
             checkRMB.setChecked(isRemember);
 //            startActivity(new Intent(DangNhap.this, ManHinhUser.class));
         }
-
+txtQuenMK.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(DangNhap.this, QuenMK.class);
+        startActivity(intent);
+    }
+});
         txtDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
