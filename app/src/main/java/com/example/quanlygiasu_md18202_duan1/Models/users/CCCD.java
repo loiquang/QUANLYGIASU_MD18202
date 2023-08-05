@@ -21,6 +21,8 @@ public class CCCD implements Serializable {
     public CCCD() {
     }
 
+
+
     public CCCD(String address, String dob, String doe, String face, String features, String fullname, String home, String issue_date, String nationality, String sex) {
         this.address = address;
         this.dob = dob;

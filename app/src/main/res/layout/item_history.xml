@@ -25,11 +25,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mã giao dịch: "/>
+                    android:text="Mã đơn hàng: "/>
                 <TextView
+                    android:id="@+id/tvPartnerRefId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="(Đây là billID)"
+                    android:text="(Đây là PartnerRefId)"
                     android:layout_marginLeft="5dp"/>
             </LinearLayout>
             <LinearLayout
@@ -41,6 +42,7 @@
                     android:layout_height="wrap_content"
                     android:text="Ngày giao dịch: "/>
                 <TextView
+                    android:id="@+id/tvDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="(đây là responseDate)"
@@ -55,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:text="Số tiền: "/>
                 <TextView
+                    android:id="@+id/tvAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="(Đây là amount)"
