@@ -42,6 +42,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -75,11 +76,13 @@ public class HoSoGiaSu extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String tenGV = bundle.getString("name");
         String id = bundle.getString("id");
+        Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
         String soHS = bundle.getString("scale");
-        String id = sharedPreferences.getString("id", "");
         int tien = bundle.getInt("price");
         String image = bundle.getString("image");
         String subject = bundle.getString("subject");
+        String phoneTC = bundle.getString("sdt");
+        String emailTC = bundle.getString("email");
         txtTenGV.setText(tenGV);
         txtSoHS.setText(soHS);
         Glide.with(this).load(image).into(imgGV);
@@ -98,112 +101,123 @@ public class HoSoGiaSu extends AppCompatActivity {
             public void onClick(View v) {
 
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference = firebaseDatabase.getReference("request");
+                DatabaseReference databaseReference = firebaseDatabase.getReference().child("request");
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                         String nameUser = sharedPreferences.getString("name", "");
                         String user = sharedPreferences.getString("user", "");
-                        if (snapshot.hasChild(user +"-"+ id)) {
+
+                        boolean bcd = false;
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            String abc = dataSnapshot.child("subject").getValue(String.class);
+                            if (abc.equals(subject)) {
+                                bcd = true;
+                                break;
+                            }
+                        }
+                        if (snapshot.hasChild(user + "-" + id)) {
                             Toast.makeText(HoSoGiaSu.this, "Đã Đăng Ký", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        AlertDialog.Builder builder = new AlertDialog.Builder(HoSoGiaSu.this);
-                        LayoutInflater layoutInflater = getLayoutInflater();
-                        View view = layoutInflater.inflate(R.layout.dialog_request, null);
-                        builder.setView(view);
-                        TextView txtTenGV = view.findViewById(R.id.txtNameTeach);
-                        TextView edtTextB = view.findViewById(R.id.edtTextB);
-                        EditText edtTextN = view.findViewById(R.id.edtTextN);
-                        EditText edtSoHS = view.findViewById(R.id.edtSoHS);
-                        TextView txtThanhTien = view.findViewById(R.id.txtTien);
-                        TextView txtToiDa = view.findViewById(R.id.txtToiDa);
-                        Button btnOke = view.findViewById(R.id.btnDK);
-                        Button btnHuy = view.findViewById(R.id.btnHuy);
-                        Button btnTamTinh = view.findViewById(R.id.btnTamTinh);
-                        String startDate = edtTextB.getText().toString();
-                        String endDate = edtTextN.getText().toString();
-                        txtTenGV.setText(tenGV);
-                        edtSoHS.setText("" + 1);
-                        txtToiDa.setText("Tối Đa: " + soHS);
-                        AlertDialog alertDialog = builder.create();
-                        alertDialog.setCancelable(false);
-                        alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.layout_dialog);
-                        alertDialog.show();
-                        edtTextB.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                showDatePickerDialog(edtTextB);
-                            }
-                        });
-                        btnTamTinh.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                int scale1 = Integer.parseInt(edtSoHS.getText().toString());
-                                if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
-                                    Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
-                                    return;
-                                } else if(Integer.parseInt(edtTextN.getText().toString())<10){
-                                    Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
-                                    return;
-                                } else if (edtTextB.getText().toString().isEmpty() || edtTextN.getText().toString().isEmpty()) {
-                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(HoSoGiaSu.this);
-                                    builder1.setTitle("Warning");
-                                    builder1.setMessage("Không Được Để Trống Thông Tin");
-                                    builder1.setIcon(R.drawable.baseline_warning_amber_24);
-                                    builder1.setNegativeButton("OKE", null);
-                                    builder1.show();
-                                    return;
-                                } else {
-                                    long thanhTien = (Long.parseLong(edtTextN.getText().toString()) * tien) * Long.parseLong(edtSoHS.getText().toString());
-                                    txtThanhTien.setText("" + thanhTien);
-                                }
-                            }
-                        });
-                        btnOke.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                        if(bcd){
+                            Toast.makeText(HoSoGiaSu.this, "Đã Đăng Ký Môn", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                                int scale1 = Integer.parseInt(edtSoHS.getText().toString());
-                                if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
-                                    Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
-                                    return;
+                        try {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(HoSoGiaSu.this);
+                            LayoutInflater layoutInflater = getLayoutInflater();
+                            View view = layoutInflater.inflate(R.layout.dialog_request, null);
+                            builder.setView(view);
+                            TextView txtTenGV = view.findViewById(R.id.txtNameTeach);
+                            TextView edtTextB = view.findViewById(R.id.edtTextB);
+                            EditText edtTextN = view.findViewById(R.id.edtTextN);
+                            EditText edtSoHS = view.findViewById(R.id.edtSoHS);
+                            TextView txtThanhTien = view.findViewById(R.id.txtTien);
+                            TextView txtToiDa = view.findViewById(R.id.txtToiDa);
+                            Button btnOke = view.findViewById(R.id.btnDK);
+                            Button btnHuy = view.findViewById(R.id.btnHuy);
+                            Button btnTamTinh = view.findViewById(R.id.btnTamTinh);
+                            txtTenGV.setText(tenGV);
+                            edtSoHS.setText("" + 1);
+                            txtToiDa.setText("Tối Đa: " + soHS);
+                            AlertDialog alertDialog = builder.create();
+
+                            edtTextB.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    showDatePickerDialog(edtTextB);
                                 }
-                                else if(Integer.parseInt(endDate)<10){
-                                    Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
-                                    return;
+                            });
+                            btnTamTinh.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String endDate = edtTextN.getText().toString();
+                                    Toast.makeText(HoSoGiaSu.this, "" + endDate, Toast.LENGTH_SHORT).show();
+                                    int scale1 = Integer.parseInt(edtSoHS.getText().toString());
+                                    if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
+                                        Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    } else if (edtTextB.getText().toString().isEmpty() || edtTextN.getText().toString().isEmpty()) {
+                                        Toast.makeText(HoSoGiaSu.this, "Không để trống thông tin", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    } else {
+                                        if (Integer.parseInt(edtTextN.getText().toString()) < 10) {
+                                            Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }
+                                        long thanhTien = (Long.parseLong(edtTextN.getText().toString()) * tien) * Long.parseLong(edtSoHS.getText().toString());
+                                        txtThanhTien.setText("" + thanhTien);
+                                    }
                                 }
-                                if (startDate.isEmpty() || endDate.isEmpty()) {
-                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(HoSoGiaSu.this);
-                                    builder1.setTitle("Warning");
-                                    builder1.setMessage("Không Được Để Trống Thông Tin");
-                                    builder1.setIcon(R.drawable.baseline_warning_amber_24);
-                                    builder1.setNegativeButton("OKE", null);
-                                    builder1.show();
-                                    return;
-                                } else {
-                                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                                    DatabaseReference databaseReference = firebaseDatabase.getReference("request");
+                            });
+                            btnOke.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String startDate = edtTextB.getText().toString();
+                                    String endDate = edtTextN.getText().toString();
+                                    Toast.makeText(HoSoGiaSu.this, "" + endDate, Toast.LENGTH_SHORT).show();
+                                    int scale1 = Integer.parseInt(edtSoHS.getText().toString());
+                                    if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
+                                        Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    if (endDate.isEmpty()) {
+                                        Toast.makeText(HoSoGiaSu.this, "Không để trống thông tin", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    } else {
+                                        if (Integer.parseInt(endDate) < 10) {
+                                            Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }
+                                        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                        DatabaseReference databaseReference = firebaseDatabase.getReference("request");
                                         long thanhTien = (Long.parseLong(endDate) * tien) * Long.parseLong(edtSoHS.getText().toString());
                                         int status = 0;
-                                        ReQuestGS reQuestGS = new ReQuestGS(endDate, image ,scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
-                                        databaseReference.child(user +"-"+ id).setValue(reQuestGS);
+                                        ReQuestGS reQuestGS = new ReQuestGS(endDate, emailTC, image, phoneTC, scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
+                                        databaseReference.child(user + "-" + id).setValue(reQuestGS);
+                                        alertDialog.dismiss();
                                         Toast.makeText(HoSoGiaSu.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(HoSoGiaSu.this, ManHinhUser.class));
                                         finish();
-                                        alertDialog.dismiss();
 
+
+                                    }
                                 }
-                            }
-                        });
-                        btnHuy.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                alertDialog.dismiss();
-                            }
-                        });
-
+                            });
+                            btnHuy.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    alertDialog.dismiss();
+                                }
+                            });
+                            alertDialog.setCancelable(false);
+                            alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.layout_dialog);
+                            alertDialog.show();
+                        } catch (Exception e) {
+                        }
                     }
 
                     @Override
@@ -212,6 +226,7 @@ public class HoSoGiaSu extends AppCompatActivity {
                     }
 
                 });
+
             }
         });
 
@@ -239,9 +254,12 @@ public class HoSoGiaSu extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 String formattedDate = sdf.format(selectedCalendar.getTime());
                 editTextDate.setText(formattedDate);
+
             }
         }, year, month, day);
+
         datePickerDialog.show();
+
     }
 
 //    public boolean checkDate(String stringDay1, String stringDay2) {

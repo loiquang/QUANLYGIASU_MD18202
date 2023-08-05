@@ -71,8 +71,7 @@ public class HopDongActivity extends AppCompatActivity {
         String startDate = bundle.getString("startDate");
         String endDate = bundle.getString("endDate");
         long payment = bundle.getLong("payment");
-        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
-        String user = sharedPreferences.getString("user", "");
+
         txtSignture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,21 +88,37 @@ public class HopDongActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(HopDongActivity.this);
                 builder.setTitle("Thông báo");
                 builder.setIcon(R.drawable.baseline_warning_amber_24);
-                builder.setMessage("Bạn thực sự muốn hủy hợp đồng chứ");
+                builder.setMessage("Bạn sẽ bị phạt 5% hợp đồng!\n\nBạn thực sự muốn hủy hợp đồng chứ");
                 builder.setNegativeButton("Oke", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        SharedPreferences sharedPreferences = v.getContext().getSharedPreferences("isRememberData", MODE_PRIVATE);
+                        String user = sharedPreferences.getString("user", "");
+                        long money = sharedPreferences.getLong("money", -1);
+                        long moneyAdmin = sharedPreferences.getLong("moneyAdmin", -1);
                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(user + "-" + id);
+                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(id);
+                        double phat = payment * 0.05;
+                        double pushmoney = money - phat;
+                        Toast.makeText(HopDongActivity.this, ""+phat, Toast.LENGTH_SHORT).show();
+                        DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("user").child(user).child("money");
+                        databaseReference1.setValue(pushmoney).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
 
+                                Toast.makeText(HopDongActivity.this, "Thanh Toán Thành Công", Toast.LENGTH_SHORT).show();
+                                DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("user").child("admin").child("money");
+                                double soDuAdmin = moneyAdmin + phat;
+                                databaseReference2.setValue(soDuAdmin);
+                            }
+
+
+                        });
                         databaseReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 // Xóa dữ liệu thành công
-                                Toast.makeText(HopDongActivity.this, "Đã hủy hợp đồng", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(HopDongActivity.this, ManHinhUser.class);
-                                startActivity(intent);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -111,8 +126,13 @@ public class HopDongActivity extends AppCompatActivity {
                                 // Xử lý lỗi trong quá trình xóa dữ liệu
                             }
                         });
+                        Toast.makeText(HopDongActivity.this, "Đã hủy hợp đồng", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(HopDongActivity.this, ManHinhUser.class);
+                        startActivity(intent);
+                        finish();
                     }
                 });
+
                 builder.setPositiveButton("No", null);
                 builder.show();
             }
@@ -130,47 +150,19 @@ public class HopDongActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(HopDongActivity.this, PaymentActivity.class);
                         Bundle bundle1 = new Bundle();
-                        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("user").child(user).child("money");
-                        databaseReference1.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String money = snapshot.getValue().toString();
-                                bundle1.putInt("money", Integer.parseInt(money));
-                                intent.putExtras(bundle1);
-                                startActivity(intent);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                        DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("user").child("admin").child("money");
-                        databaseReference2.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String money1 = snapshot.getValue().toString();
-                                bundle1.putLong("moneyAdmin", Long.parseLong(money1));
-                                intent.putExtras(bundle1);
-                                startActivity(intent);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
                         captureScreen(id);
                         bundle1.putLong("paymentDone", payment);
                         bundle1.putString("idPayment", id);
                         intent.putExtras(bundle1);
                         startActivity(intent);
+                        Done(id);
                         finish();
+
                     }
                 });
                 builder.setPositiveButton("No", null);
                 builder.show();
+
             }
         });
         //lay thong tin hop dong
@@ -297,5 +289,11 @@ public class HopDongActivity extends AppCompatActivity {
                 databaseReference.child(teacher).setValue(imageUrl);
             }
         });
+    }
+    public void Done(String id) {
+        Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(id);
+        databaseReference.child("status").setValue(2);
     }
 }

@@ -54,6 +54,7 @@
             android:text="Tên môn học"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/linearUser"
         android:layout_weight="8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -97,48 +98,7 @@
             android:layout_marginLeft="5dp"
             android:text="Đây là nội dung cuộc hội thoại"
             android:background="@drawable/boder_text_cccd"/>
-
-            <TextView
-                android:id="@+id/txtTextUser"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_weight="3"
-                android:layout_marginRight="5dp"
-                android:text="Đây là nội dung cuộc hội thoại"
-                android:background="@drawable/boder_text_cccd"/>
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/avatar_icon"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linearAdmin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/logo"/>
-            <TextView
-                android:id="@+id/txtTextAdmin"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_weight="3"
-                android:layout_marginLeft="5dp"
-                android:text="Đây là nội dung cuộc hội thoại"
-                android:background="@drawable/boder_text_cccd"/>
-
-        </LinearLayout>
     </LinearLayout>
-
-
-
 
     <LinearLayout
         android:id="@+id/linearEdit"
@@ -164,4 +124,4 @@
             android:src="@mipmap/btn_send"/>
     </LinearLayout>
 
-  </RelativeLayout>
+</RelativeLayout>

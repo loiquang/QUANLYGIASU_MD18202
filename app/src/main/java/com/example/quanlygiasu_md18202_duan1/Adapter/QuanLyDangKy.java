@@ -73,13 +73,18 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
                     }
 
                 }
-                holder.btnDuyet.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String key = list1.get(position).getId();
-                        databaseReference.child(key).child("status").setValue(1);
-                    }
-                });
+
+                    holder.btnDuyet.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            String key = list1.get(position).getId();
+                            databaseReference.child(key).child("status").setValue(1);
+
+                    }});
+
+
+
             }
         });
     }

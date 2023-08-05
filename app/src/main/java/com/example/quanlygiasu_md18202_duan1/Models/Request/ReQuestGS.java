@@ -3,13 +3,15 @@ package com.example.quanlygiasu_md18202_duan1.Models.Request;
 import java.io.Serializable;
 
 public class ReQuestGS implements Serializable {
-    private String date, startdate,teacher, user, subject, id, imageTeacher;
+    private String date, startdate,teacher, user, subject, id, imageTeacher, phoneTC, emailTC;
     private int scale, status ;
     private long totalpayment;
     private ReQuestGS reQuestGS;
 
-    public ReQuestGS(String date,String imageTeacher , int scale, String startdate, int status, String subject, String teacher, long totalpayment, String user) {
+    public ReQuestGS(String date, String emailTC,String imageTeacher, String phoneTC , int scale, String startdate, int status, String subject, String teacher, long totalpayment, String user) {
         this.date = date;
+        this.emailTC = emailTC;
+        this.phoneTC = phoneTC;
         this.imageTeacher = imageTeacher;
         this.startdate = startdate;
         this.teacher = teacher;
@@ -18,6 +20,22 @@ public class ReQuestGS implements Serializable {
         this.status = status;
         this.totalpayment = totalpayment;
         this.subject = subject;
+    }
+
+    public String getPhoneTC() {
+        return phoneTC;
+    }
+
+    public void setPhoneTC(String phoneTC) {
+        this.phoneTC = phoneTC;
+    }
+
+    public String getEmailTC() {
+        return emailTC;
+    }
+
+    public void setEmailTC(String emailTC) {
+        this.emailTC = emailTC;
     }
 
     public String getImageTeacher() {

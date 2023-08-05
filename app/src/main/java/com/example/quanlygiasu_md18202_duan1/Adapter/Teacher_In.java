@@ -26,7 +26,7 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
     private ArrayList<Teacher_MD> list;
     private Context context;
 
-    public Teacher_In(ArrayList<Teacher_MD> list,Context context ) {
+    public Teacher_In(ArrayList<Teacher_MD> list, Context context) {
         this.list = list;
         this.context = context;
 
@@ -48,7 +48,7 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
         SharedPreferences sharedPreferences = context.getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String user = sharedPreferences.getString("user", "");
-        if(user.equals("admin")){
+        if (user.equals("admin")) {
             holder.imgRight.setVisibility(View.GONE);
             holder.imgPencil.setVisibility(View.VISIBLE);
 
@@ -63,9 +63,10 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
                 bundle.putString("scale", list.get(holder.getAdapterPosition()).getTeacher_md().getScale());
                 bundle.putInt("price", list.get(holder.getAdapterPosition()).getTeacher_md().getPrice());
                 bundle.putString("subject", list.get(holder.getAdapterPosition()).getTeacher_md().getSubject());
-                bundle.putString("image",list.get(position).getTeacher_md().getImage());
-                editor.putString("id",list.get(holder.getAdapterPosition()).getId());
-                editor.apply();
+                bundle.putString("image", list.get(position).getTeacher_md().getImage());
+                bundle.putString("id", list.get(holder.getAdapterPosition()).getId());
+                bundle.putString("sdt", list.get(holder.getAdapterPosition()).getTeacher_md().getPhone());
+                bundle.putString("email", list.get(holder.getAdapterPosition()).getTeacher_md().getEmail());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
@@ -90,7 +91,7 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
             txtMon = itemView.findViewById(R.id.txtMon);
             imgTeacher = itemView.findViewById(R.id.imgTeacher);
             imgRight = itemView.findViewById(R.id.imgRight);
-            imgPencil= itemView.findViewById(R.id.imgPencil);
+            imgPencil = itemView.findViewById(R.id.imgPencil);
         }
     }
 }

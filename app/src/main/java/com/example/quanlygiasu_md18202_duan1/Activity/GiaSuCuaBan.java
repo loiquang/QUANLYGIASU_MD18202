@@ -48,11 +48,12 @@ public class GiaSuCuaBan extends AppCompatActivity {
                 ArrayList<ReQuestGS> list2 = new ArrayList<>();
                 SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                 String name = sharedPreferences.getString("name", "");
-                for (ReQuestGS reQuestGS : list) {
+            for (ReQuestGS reQuestGS : list) {
                     if(reQuestGS.getReQuestGS().getUser().equals(name)){
-                     list2.add(reQuestGS);
+                        list2.add(reQuestGS);
                     }
                 }
+
                 if(list2.size()==0){
                     txtNoThing.setVisibility(View.VISIBLE);
                 }

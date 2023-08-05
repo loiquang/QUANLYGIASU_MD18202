@@ -15,12 +15,13 @@ public class CCCD implements Serializable {
     private String nationality;
     private String sex;
     private String face;
+    private String address;
 
     public CCCD() {
     }
 
 
-    public CCCD(String address, String dob, String doe,String face, String features, String fullname, String home, String issue_date, String nationality, String sex) {
+    public CCCD(String address, String dob, String doe, String face, String features, String fullname, String home, String issue_date, String nationality, String sex) {
         this.address = address;
         this.dob = dob;
         this.doe = doe;

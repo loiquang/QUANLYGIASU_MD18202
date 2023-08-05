@@ -156,6 +156,11 @@ public class WalletUserActivity extends AppCompatActivity {
                             }
 
                             @Override
+                            public void onPaymentSuccess(long amount) {
+
+                            }
+
+                            @Override
                             public void onPaymentFailure(String errorMessage) {
 
                             }

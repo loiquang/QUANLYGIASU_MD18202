@@ -33,6 +33,8 @@ public class MoMoPayment {
     public interface PaymentCallback {
         void onPaymentSuccess(ResponseConfirmPayment responseConfirmPayment);
 
+        void onPaymentSuccess(long amount);
+
         void onPaymentFailure(String errorMessage);
     }
 
