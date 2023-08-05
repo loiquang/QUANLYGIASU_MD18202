@@ -7,6 +7,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     private String phone;
+    private long money;
     private CCCD cccd;
     private User user;
     private String id;
@@ -14,11 +15,12 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String username, String password, String email, String phone, CCCD cccd) {
+    public User(String email, String username, String password, String phone, long money, CCCD cccd) {
         this.email = email;
         this.username = username;
         this.password = password;
         this.phone = phone;
+        this.money = money;
         this.cccd = cccd;
     }
 
@@ -73,6 +75,14 @@ public class User implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public long getMoney() {
+        return money;
+    }
+
+    public void setMoney(long money) {
+        this.money = money;
     }
 
     public CCCD getCccd() {

@@ -32,9 +32,9 @@ public class GetListFireBase {
                     list.clear();
                 }
                 for (DataSnapshot dtSnap : snapshot.getChildren()) {
-
+                    String key = dtSnap.getKey();
                     Teacher_MD a = dtSnap.getValue(Teacher_MD.class);
-                    list.add(a);
+                    list.add(new Teacher_MD(key, a));
                 }
                 interface_list.onListReceived(list);
 

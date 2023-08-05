@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+android:layout_margin="10dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp"
+    tools:context=".AdminActivity.AdminActivity.TienTrinhActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên gia sư : "
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txtTenGV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="italic"
+            android:text="Tên gia sư"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Môn học: "
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txtMonHoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="italic"
+            android:text="Tên môn học"/>
+    </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/buoc1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Chờ duyệt "
+            android:visibility="gone"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/baseline_circle_24"
+            android:drawablePadding="8dp"
+            android:textColor="#F3EAEA"/>
+        <TextView
+            android:id="@+id/buoc2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Đã duyệt"
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/baseline_circle_24"
+            android:drawablePadding="8dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#F3EAEA"/>
+
+        <TextView
+            android:id="@+id/buoc3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Ký hợp đồng "
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/baseline_circle_24"
+            android:drawablePadding="8dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#F3EAEA"/>
+
+        <TextView
+            android:id="@+id/buoc4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/baseline_circle_24"
+            android:drawablePadding="8dp"
+            android:text="Đã thanh toán "
+            android:visibility="gone"
+            android:layout_marginLeft="20dp"
+            android:textColor="#F3EAEA"/>
+
+
+</LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

@@ -36,6 +36,20 @@
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtTien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100000000"
+                android:layout_toLeftOf="@+id/txtVND"
+                android:layout_marginRight="5dp"/>
+            <TextView
+                android:id="@+id/txtVND"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="vnd"
+                android:layout_alignParentRight="true"
+              />
 
             <RelativeLayout
                 android:layout_width="wrap_content"

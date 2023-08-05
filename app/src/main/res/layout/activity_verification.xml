@@ -15,17 +15,6 @@
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"/>
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="THÔNG TIN NHẬN DIỆN KHÁCH HÀNG"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:textStyle="bold"/>-->
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:text="Vui lòng cung cấp thông tin CMND/CCCD để xác thực khách hàng"/>-->
 
     <TextView
         android:layout_width="match_parent"
@@ -39,6 +28,7 @@
         android:layout_height="wrap_content"
         android:text="Hình ảnh chụp trực diện và rõ nét thông tin"
         android:gravity="center" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,13 +44,32 @@
             android:layout_height="200dp"
             android:scaleType="fitCenter"/>
         <!-- Button -->
-        <Button
-            android:id="@+id/btnCMNDtruoc"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@mipmap/add_image_icon"
-            />
+            android:orientation="horizontal"
+            android:layout_alignBottom="@+id/ivCMNDtruoc"
+            android:layout_margin="5dp">
+            <ImageView
+                android:id="@+id/btnCMNDtruoc"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="80dp"
+                android:background="@mipmap/add_image_icon" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="4"
+                android:text="Nhấn để upload ảnh"/>
+        </LinearLayout>
+<!--        <Button-->
+<!--            android:id="@+id/btnCMNDtruoc"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:background="@mipmap/add_image_icon"-->
+<!--            />-->
 
 
     </RelativeLayout>
@@ -90,12 +99,31 @@
             android:scaleType="fitCenter"/>
 
         <!-- Button -->
-        <Button
-            android:id="@+id/btnCMNDsau"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@mipmap/add_image_icon" />
+            android:orientation="horizontal"
+            android:layout_alignBottom="@+id/ivCMNDsau"
+            android:layout_margin="5dp">
+            <ImageView
+                android:id="@+id/btnCMNDsau"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="80dp"
+                android:background="@mipmap/add_image_icon" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="4"
+                android:text="Nhấn để upload ảnh"/>
+        </LinearLayout>
+<!--        <Button-->
+<!--            android:id="@+id/btnCMNDsau"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:background="@mipmap/add_image_icon" />-->
 
     </RelativeLayout>
 

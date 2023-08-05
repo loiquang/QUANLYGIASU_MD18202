@@ -41,60 +41,83 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="16dp"
+                android:background="@drawable/boder_background_image"
+                android:orientation="vertical"
                 android:layout_margin="10dp">
 
                 <!-- ImageView -->
                 <ImageView
                     android:id="@+id/ivCMNDtruoc"
-                    android:background="@drawable/boder_background_image"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"/>
-
                 <!-- Button -->
-                <Button
-                    android:id="@+id/btnCMNDtruoc"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:background="@mipmap/add_image_icon" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
+                    <ImageView
+                        android:id="@+id/btnCMNDtruoc"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="@mipmap/add_image_icon" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="Nhấn để upload ảnh"/>
+                </LinearLayout>
 
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="0dp"
+
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/boder_background_image"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+
+            <!-- ImageView -->
+            <ImageView
+                android:id="@+id/ivCMNDsau"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"/>
+            <!-- Button -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:layout_margin="10dp">
-
-                <!-- ImageView -->
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
                 <ImageView
-                    android:id="@+id/ivCMNDsau"
-                    android:background="@drawable/boder_background_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:scaleType="fitCenter"/>
-
-                <!-- Button -->
-                <Button
                     android:id="@+id/btnCMNDsau"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
                     android:background="@mipmap/add_image_icon" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="Nhấn để upload ảnh"/>
+            </LinearLayout>
 
-            </RelativeLayout>
+
+        </LinearLayout>
     </LinearLayout>
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upload"
+        android:background="@drawable/layout_button"
         android:layout_margin="10dp"
         android:layout_centerInParent="true" />
     <LinearLayout
@@ -228,7 +251,7 @@
             android:layout_height="wrap_content"
             android:text="Hủy"
             android:layout_margin="10dp"
-            android:layout_centerInParent="true"
+            android:background="@drawable/layout_button"
             android:layout_weight="1"/>
         <Button
             android:id="@+id/btnComplete"
@@ -236,7 +259,7 @@
             android:layout_height="wrap_content"
             android:text="xác nhận"
             android:layout_margin="10dp"
-            android:layout_centerInParent="true"
+            android:background="@drawable/layout_button"
             android:layout_weight="4"/>
     </LinearLayout>
 
