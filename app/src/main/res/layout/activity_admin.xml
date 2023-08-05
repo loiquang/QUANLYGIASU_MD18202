@@ -31,18 +31,11 @@
                 android:textSize="24dp"/>
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:cardCornerRadius="24dp"
-            android:layout_marginRight="20dp">
-
-            <ImageView
-                android:id="@+id/btnNotify"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@mipmap/notification"/>
-        </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đây là money"
+            android:textStyle="bold"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,7 +53,7 @@
                 android:layout_width="150dp"
                 android:layout_height="128dp"
                 android:backgroundTint="#F1DC90"
-                android:src="@mipmap/task_management"/>
+                android:src="@mipmap/giasu_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,7 +73,7 @@
                 android:layout_width="150dp"
                 android:layout_height="128dp"
                 android:backgroundTint="#ECCDD8"
-                android:src="@mipmap/student_male"/>
+                android:src="@mipmap/nguoidung_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -108,7 +101,7 @@
                 android:layout_height="128dp"
                 android:backgroundTint="#FCB495"
                 android:layout_centerHorizontal="true"
-                android:src="@mipmap/three_file"/>
+                android:src="@mipmap/hoso_icon"/>
             <View
                 android:layout_width="35dp"
                 android:layout_height="35dp"
@@ -147,7 +140,7 @@
                 android:layout_width="150dp"
                 android:layout_height="128dp"
                 android:backgroundTint="#7DB2F0"
-                android:src="@mipmap/chart_and_statistics"/>
+                android:src="@mipmap/hopdong_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -174,7 +167,7 @@
                 android:layout_height="128dp"
                 android:backgroundTint="#DAE5AD"
                 android:layout_centerHorizontal="true"
-                android:src="@mipmap/comments_bubble"/>
+                android:src="@mipmap/khieunai_icon"/>
             <View
                 android:layout_width="35dp"
                 android:layout_height="35dp"
@@ -213,11 +206,11 @@
                 android:layout_width="150dp"
                 android:layout_height="128dp"
                 android:backgroundTint="#FFF0D3"
-                android:src="@mipmap/trail_map"/>
+                android:src="@mipmap/lichsu_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bản đồ gia sư"
+                android:text="Lịch sử giao dịch"
                 android:textSize="16dp"
                 android:textStyle="bold"/>
 
