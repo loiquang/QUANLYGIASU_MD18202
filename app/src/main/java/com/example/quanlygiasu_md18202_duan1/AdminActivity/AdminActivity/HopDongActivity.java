@@ -97,10 +97,10 @@ public class HopDongActivity extends AppCompatActivity {
                         long money = sharedPreferences.getLong("money", -1);
                         long moneyAdmin = sharedPreferences.getLong("moneyAdmin", -1);
                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(id);
+                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request");
                         double phat = payment * 0.05;
                         double pushmoney = money - phat;
-                        Toast.makeText(HopDongActivity.this, ""+phat, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HopDongActivity.this, "" + phat, Toast.LENGTH_SHORT).show();
                         DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("user").child(user).child("money");
                         databaseReference1.setValue(pushmoney).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -114,18 +114,9 @@ public class HopDongActivity extends AppCompatActivity {
 
 
                         });
-                        databaseReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                // Xóa dữ liệu thành công
+                        databaseReference.child(id).child("status").setValue(4);
+                        databaseReference.child(id).child("totalpayment").setValue(phat);
 
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Xử lý lỗi trong quá trình xóa dữ liệu
-                            }
-                        });
                         Toast.makeText(HopDongActivity.this, "Đã hủy hợp đồng", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(HopDongActivity.this, ManHinhUser.class);
                         startActivity(intent);
@@ -290,8 +281,9 @@ public class HopDongActivity extends AppCompatActivity {
             }
         });
     }
+
     public void Done(String id) {
-        Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(id);
         databaseReference.child("status").setValue(2);

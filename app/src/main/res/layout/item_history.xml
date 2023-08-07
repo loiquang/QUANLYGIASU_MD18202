@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     android:padding="5dp"
     android:orientation="vertical">
 
@@ -25,8 +24,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#0E0E0E"
                     android:text="Mã giao dịch: "/>
                 <TextView
+                    android:id="@+id/txtIdRQ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="(Đây là billID)"
@@ -39,8 +40,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#0E0E0E"
                     android:text="Ngày giao dịch: "/>
                 <TextView
+                    android:id="@+id/txtDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="(đây là responseDate)"
@@ -53,8 +56,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#0E0E0E"
                     android:text="Số tiền: "/>
                 <TextView
+                    android:id="@+id/txtAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="(Đây là amount)"

@@ -48,7 +48,7 @@ private RecyclerView recyclerView;
                         list2.add(reQuestGS);
                     }
                 }
-                QuanLyDangKy giasucuaban = new QuanLyDangKy(list2);
+                QuanLyDangKy giasucuaban = new QuanLyDangKy(list2,getContext());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(giasucuaban);

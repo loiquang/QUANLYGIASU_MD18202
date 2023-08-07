@@ -45,26 +45,31 @@ public class GiaSuCuaBan extends AppCompatActivity {
             public void onListReceived1(ArrayList<User> list) {}
             @Override
             public void onListReceived2(ArrayList<ReQuestGS> list) {
-                ArrayList<ReQuestGS> list2 = new ArrayList<>();
-                SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
-                String name = sharedPreferences.getString("name", "");
-            for (ReQuestGS reQuestGS : list) {
-                    if(reQuestGS.getReQuestGS().getUser().equals(name)){
-                        list2.add(reQuestGS);
+                try {
+                    ArrayList<ReQuestGS> list2 = new ArrayList<>();
+                    SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
+                    String name = sharedPreferences.getString("name", "");
+                    for (ReQuestGS reQuestGS : list) {
+                        if (reQuestGS.getReQuestGS().getUser().equals(name)&&reQuestGS.getReQuestGS().getStatus()!=4) {
+                            list2.add(reQuestGS);
+                        }
                     }
+
+                    if (list2.size() == 0) {
+                        txtNoThing.setVisibility(View.VISIBLE);
+                    }
+                    Giasucuaban giasucuaban = new Giasucuaban(list2, GiaSuCuaBan.this);
+                    recyclerView = findViewById(R.id.recycleView2);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(GiaSuCuaBan.this);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    recyclerView.setAdapter(giasucuaban);
+
+                } catch (Exception e) {
+
                 }
 
-                if(list2.size()==0){
-                    txtNoThing.setVisibility(View.VISIBLE);
-                }
-                Giasucuaban giasucuaban = new Giasucuaban(list2, GiaSuCuaBan.this);
-                recyclerView = findViewById(R.id.recycleView2);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(GiaSuCuaBan.this);
-                recyclerView.setLayoutManager(linearLayoutManager);
-                recyclerView.setAdapter(giasucuaban);
+
             }
-
-
 
         });
 

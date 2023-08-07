@@ -55,16 +55,13 @@
                 android:textStyle="bold"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/txtTen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Đây là tên người dùng"
                 android:textSize="18sp"/>
         </LinearLayout>
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/button_left_icon"/>
 
     </LinearLayout>
     <LinearLayout
@@ -77,6 +74,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@mipmap/address_icon"
+            android:layout_gravity="center"
             android:layout_marginHorizontal="10dp"/>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -91,16 +89,13 @@
                 android:textStyle="bold"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/txtDiaChi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Đây là địa chỉ người dùng"
                 android:textSize="18sp"/>
         </LinearLayout>
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/button_left_icon"/>
 
     </LinearLayout>
     <LinearLayout
@@ -127,6 +122,7 @@
                 android:textStyle="bold"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/txtSDT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -134,10 +130,11 @@
                 android:textSize="18sp"/>
         </LinearLayout>
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/button_left_icon"/>
 
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/button_left_icon"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -163,17 +160,13 @@
                 android:textStyle="bold"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/txtSoDu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Đây là số tiền người dùng"
                 android:textSize="18sp"/>
         </LinearLayout>
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/button_left_icon"/>
-
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -195,10 +188,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Mật khẩu "
+                android:text="Email "
                 android:textStyle="bold"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -206,8 +200,9 @@
                 android:textSize="18sp"/>
         </LinearLayout>
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
             android:src="@mipmap/button_left_icon"/>
 
     </LinearLayout>

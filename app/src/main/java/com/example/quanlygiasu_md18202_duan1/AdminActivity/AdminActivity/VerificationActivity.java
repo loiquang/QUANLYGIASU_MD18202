@@ -34,7 +34,8 @@ import retrofit2.Response;
 public class VerificationActivity extends AppCompatActivity {
 
     ImageView ivCMNDtruoc, ivCMNDsau;
-    Button btnCMNDtruoc, btnCMNDsau, btnUpload;
+   ImageView btnCMNDtruoc, btnCMNDsau;
+    Button btnUpload;
     Uri uriMatTruoc, uriMatSau;
     Infor infor;
     CCCD cccd;

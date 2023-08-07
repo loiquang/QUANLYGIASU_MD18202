@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.quanlygiasu_md18202_duan1.Adapter.MonHoc_User;
 import com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity.AdminActivity;
+import com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity.VerificationActivity;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.example.quanlygiasu_md18202_duan1.R;
@@ -60,15 +61,15 @@ public class DangNhap extends AppCompatActivity {
             tilUsername.getEditText().setText(user);
             tilPassword.getEditText().setText(pass);
             checkRMB.setChecked(isRemember);
-//            startActivity(new Intent(DangNhap.this, ManHinhUser.class));
+
         }
-txtQuenMK.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(DangNhap.this, QuenMK.class);
-        startActivity(intent);
-    }
-});
+        txtQuenMK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DangNhap.this, QuenMK.class);
+                startActivity(intent);
+            }
+        });
         txtDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +83,7 @@ txtQuenMK.setOnClickListener(new View.OnClickListener() {
                 if (!validateUsername() | !validatePassword()) {
                     return;
                 }
-               checkUser();
+                checkUser();
 
             }
         });
@@ -126,6 +127,8 @@ txtQuenMK.setOnClickListener(new View.OnClickListener() {
                     ArrayList<User> list = new ArrayList<>();
                     tilUsername.setError(null);
                     String passWordFromDB = snapshot.child(userName).child("password").getValue(String.class);
+                    String name = snapshot.child(userName).child("cccd").child("name").getValue(String.class);
+                    long money = snapshot.child(userName).child("money").getValue(Long.class);
                     if (passWord.equals(passWordFromDB)) {
                         tilPassword.setError(null);
 
@@ -135,12 +138,18 @@ txtQuenMK.setOnClickListener(new View.OnClickListener() {
                         editor.putBoolean("isRemember", checkRMB.isChecked());
                         editor.putString("user", userName);
                         editor.putString("pass", passWord);
+                        editor.putString("name", name);
+                        editor.putLong("money", money);
                         editor.apply();
-                        Toast.makeText(DangNhap.this, "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
-                        if(userName.equals("admin")){
+
+                        if (userName.equals("admin")) {
                             startActivity(new Intent(DangNhap.this, AdminActivity.class));
-                        }else {
+                        } else if(snapshot.child(userName).child("cccd").getValue()==null) {
+                            startActivity(new Intent(DangNhap.this, VerificationActivity.class));
+                        }else{
+                            Toast.makeText(DangNhap.this, "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(DangNhap.this, ManHinhUser.class));
+                            finish();
                         }
 
 

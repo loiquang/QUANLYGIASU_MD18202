@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity.VerificationActivity;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.android.material.textfield.TextInputLayout;
@@ -81,9 +82,11 @@ public class DangKy extends AppCompatActivity {
                                 tilUsername.setError("Tên tài khoản đã tồn tại");
                             } else {
                                 tilUsername.setError(null);
-                                User user = new User(null, passWord, null, null, 0, null);
+                                User user = new User(null, null, 0, passWord, null);
                                 userRef.child(userName).setValue(user);
                                 Toast.makeText(DangKy.this, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(DangKy.this, VerificationActivity.class));
+
                             }
                         }
 

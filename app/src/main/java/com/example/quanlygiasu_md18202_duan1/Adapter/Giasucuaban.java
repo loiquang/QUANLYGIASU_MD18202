@@ -119,23 +119,7 @@ public class Giasucuaban extends RecyclerView.Adapter<Giasucuaban.ViewHolder> {
                         bundle.putString("idHopDong", list.get(holder.getAdapterPosition()).getId());
                         intent.putExtras(bundle);
                         v.getContext().startActivity(intent);
-                        SharedPreferences sharedPreferences = v.getContext().getSharedPreferences("isRememberData", MODE_PRIVATE);
-                        String user = sharedPreferences.getString("user", "");
                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("user").child(user).child("money");
-                        databaseReference1.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                long money = snapshot.getValue(long.class);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putLong("money", money);
-                                editor.apply();
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                            }
-                        });
                         DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("user").child("admin").child("money");
                         databaseReference2.addValueEventListener(new ValueEventListener() {
                             @Override

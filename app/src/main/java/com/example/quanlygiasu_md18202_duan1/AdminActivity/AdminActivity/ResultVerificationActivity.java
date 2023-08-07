@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.quanlygiasu_md18202_duan1.Activity.DangNhap;
 import com.example.quanlygiasu_md18202_duan1.Activity.ManHinhUser;
 import com.example.quanlygiasu_md18202_duan1.Models.users.CCCD;
 import com.example.quanlygiasu_md18202_duan1.R;
@@ -65,7 +66,7 @@ public class ResultVerificationActivity extends AppCompatActivity {
                         if(!snapshot.hasChild("cccd")){
                             userRef.child(user).child("cccd").setValue(cccd);
                             Toast.makeText(ResultVerificationActivity.this, "Xác thực CMND/CCCD thành công", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(ResultVerificationActivity.this, ManHinhUser.class));
+                            startActivity(new Intent(ResultVerificationActivity.this, DangNhap.class));
                             finish();
                         }
                     }
