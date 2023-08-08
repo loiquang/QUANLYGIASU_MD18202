@@ -118,145 +118,137 @@ public class HoSoGiaSu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                databaseReference.addValueEventListener(new ValueEventListener() {
+//
+
+                SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
+                String nameUser = sharedPreferences.getString("name", "");
+                String user = sharedPreferences.getString("user", "");
+                AlertDialog.Builder builder = new AlertDialog.Builder(HoSoGiaSu.this);
+                LayoutInflater layoutInflater = getLayoutInflater();
+                View view = layoutInflater.inflate(R.layout.dialog_request, null);
+                builder.setView(view);
+                TextView txtTenGV = view.findViewById(R.id.txtNameTeach);
+                TextView edtTextB = view.findViewById(R.id.edtTextB);
+                EditText edtTextN = view.findViewById(R.id.edtTextN);
+                EditText edtSoHS = view.findViewById(R.id.edtSoHS);
+                TextView txtThanhTien = view.findViewById(R.id.txtTien);
+                TextView txtToiDa = view.findViewById(R.id.txtToiDa);
+                Button btnOke = view.findViewById(R.id.btnDK);
+                Button btnHuy = view.findViewById(R.id.btnHuy);
+                Button btnTamTinh = view.findViewById(R.id.btnTamTinh);
+                txtTenGV.setText(tenGV);
+                edtSoHS.setText("" + 1);
+                txtToiDa.setText("Tối Đa: " + soHS);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.setCancelable(false);
+                alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.layout_dialog);
+                alertDialog.show();
+                edtTextB.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-
-                        try {
-                            SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
-                            String nameUser = sharedPreferences.getString("name", "");
-                            String user = sharedPreferences.getString("user", "");
-                            AlertDialog.Builder builder = new AlertDialog.Builder(HoSoGiaSu.this);
-                            LayoutInflater layoutInflater = getLayoutInflater();
-                            View view = layoutInflater.inflate(R.layout.dialog_request, null);
-                            builder.setView(view);
-                            TextView txtTenGV = view.findViewById(R.id.txtNameTeach);
-                            TextView edtTextB = view.findViewById(R.id.edtTextB);
-                            EditText edtTextN = view.findViewById(R.id.edtTextN);
-                            EditText edtSoHS = view.findViewById(R.id.edtSoHS);
-                            TextView txtThanhTien = view.findViewById(R.id.txtTien);
-                            TextView txtToiDa = view.findViewById(R.id.txtToiDa);
-                            Button btnOke = view.findViewById(R.id.btnDK);
-                            Button btnHuy = view.findViewById(R.id.btnHuy);
-                            Button btnTamTinh = view.findViewById(R.id.btnTamTinh);
-                            txtTenGV.setText(tenGV);
-                            edtSoHS.setText("" + 1);
-                            txtToiDa.setText("Tối Đa: " + soHS);
-                            AlertDialog alertDialog = builder.create();
-                            alertDialog.setCancelable(false);
-                            alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.layout_dialog);
-                            alertDialog.show();
-                            edtTextB.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    showDatePickerDialog(edtTextB);
-                                }
-                            });
-
-                            btnTamTinh.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    int scale1 = Integer.parseInt(edtSoHS.getText().toString());
-                                    if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
-                                        Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
-                                        return;
-                                    } else if (edtTextB.getText().toString().isEmpty() || edtTextN.getText().toString().isEmpty()) {
-                                        Toast.makeText(HoSoGiaSu.this, "Không để trống thông tin", Toast.LENGTH_SHORT).show();
-                                        return;
-                                    } else {
-                                        if (Integer.parseInt(edtTextN.getText().toString()) < 10) {
-                                            Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
-                                            return;
-                                        }
-                                        long thanhTien = (Long.parseLong(edtTextN.getText().toString()) * tien) * Long.parseLong(edtSoHS.getText().toString());
-                                        txtThanhTien.setText(numberFormat.format(thanhTien)+" vnd");
-                                    }
-                                }
-                            });
-                            btnOke.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    String startDate = edtTextB.getText().toString();
-                                    String endDate = edtTextN.getText().toString();
-                                    int scale1 = Integer.parseInt(edtSoHS.getText().toString());
-                                    if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
-                                        Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
-                                        return;
-                                    }
-                                    if (endDate.isEmpty()) {
-                                        Toast.makeText(HoSoGiaSu.this, "Không để trống thông tin", Toast.LENGTH_SHORT).show();
-                                        return;
-                                    } else {
-                                        if (Integer.parseInt(endDate) < 10) {
-                                            Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
-                                            return;
-                                        }
-                                        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                                        DatabaseReference databaseReference = firebaseDatabase.getReference("request");
-                                        long thanhTien = (Long.parseLong(endDate) * tien) * Long.parseLong(edtSoHS.getText().toString());
-                                        int status = 0;
-                                        ReQuestGS reQuestGS = new ReQuestGS(endDate, emailTC, image, phoneTC, scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
-                                        databaseReference.child(user + "-" + id).setValue(reQuestGS);
-                                        startActivity(new Intent(HoSoGiaSu.this, ManHinhUser.class));
-                                        finish();
-                                        alertDialog.dismiss();
-
-                                    }
-                                }
-                            });
-                            btnHuy.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    alertDialog.dismiss();
-                                }
-                            });
-
-                        } catch (Throwable e) {
-                        }
+                    public void onClick(View v) {
+                        showDatePickerDialog(edtTextB);
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-
                 });
 
+                btnTamTinh.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int scale1 = Integer.parseInt(edtSoHS.getText().toString());
+                        if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
+                            Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if (edtTextB.getText().toString().isEmpty() || edtTextN.getText().toString().isEmpty()) {
+                            Toast.makeText(HoSoGiaSu.this, "Không để trống thông tin", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else {
+                            if (Integer.parseInt(edtTextN.getText().toString()) < 10) {
+                                Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            long thanhTien = (Long.parseLong(edtTextN.getText().toString()) * tien) * Long.parseLong(edtSoHS.getText().toString());
+                            txtThanhTien.setText(numberFormat.format(thanhTien) + " vnd");
+                        }
+                    }
+                });
+                btnOke.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String startDate = edtTextB.getText().toString();
+                                String endDate = edtTextN.getText().toString();
+                                int scale1 = Integer.parseInt(edtSoHS.getText().toString());
+                                if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
+                                    Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                if (endDate.isEmpty()) {
+                                    Toast.makeText(HoSoGiaSu.this, "Không để trống thông tin", Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else {
+                                    if (Integer.parseInt(endDate) < 10) {
+                                        Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                    DatabaseReference databaseReference = firebaseDatabase.getReference("request");
+                                    long thanhTien = (Long.parseLong(endDate) * tien) * Long.parseLong(edtSoHS.getText().toString());
+                                    int status = 0;
+                                    ReQuestGS reQuestGS = new ReQuestGS(endDate, emailTC, image, phoneTC, scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
+                                    databaseReference.child(user + "-" + id).setValue(reQuestGS);
+                                    alertDialog.dismiss();
+                                    startActivity(new Intent(HoSoGiaSu.this, ManHinhUser.class));
+                                    finish();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                });
+                btnHuy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+
+            }});}
+
+
+            private void showDatePickerDialog(TextView editTextDate) {
+                // Lấy ngày hiện tại
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                // Hiển thị DatePickerDialog
+                DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        // Xử lý ngày được chọn từ DatePickerDialog
+                        Calendar selectedCalendar = Calendar.getInstance();
+                        selectedCalendar.set(Calendar.YEAR, year);
+                        selectedCalendar.set(Calendar.MONTH, month);
+                        selectedCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        // Định dạng ngày và hiển thị trong EditText
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        String formattedDate = sdf.format(selectedCalendar.getTime());
+                        editTextDate.setText(formattedDate);
+
+                    }
+                }, year, month, day);
+
+                datePickerDialog.show();
+
             }
-        });
-
-
-    }
-
-    private void showDatePickerDialog(TextView editTextDate) {
-        // Lấy ngày hiện tại
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        // Hiển thị DatePickerDialog
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                // Xử lý ngày được chọn từ DatePickerDialog
-                Calendar selectedCalendar = Calendar.getInstance();
-                selectedCalendar.set(Calendar.YEAR, year);
-                selectedCalendar.set(Calendar.MONTH, month);
-                selectedCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-                // Định dạng ngày và hiển thị trong EditText
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                String formattedDate = sdf.format(selectedCalendar.getTime());
-                editTextDate.setText(formattedDate);
-
-            }
-        }, year, month, day);
-
-        datePickerDialog.show();
-
-    }
 
 //    public boolean checkDate(String stringDay1, String stringDay2) {
 //        int day1 = getDayFromDate(stringDay1);
@@ -315,5 +307,4 @@ public class HoSoGiaSu extends AppCompatActivity {
 //        LocalDate localDate = LocalDate.parse(dateString, formatter);
 //        return localDate.getYear();
 //    }
-
-}
+        }
