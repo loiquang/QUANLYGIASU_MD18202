@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -82,8 +83,11 @@ public class DangKy extends AppCompatActivity {
                                 tilUsername.setError("Tên tài khoản đã tồn tại");
                             } else {
                                 tilUsername.setError(null);
-                                User user = new User(null, null, 0, passWord, null);
+                                User user = new User(null, userName+"@gmail.com", 0, passWord, "0353883883");
                                 userRef.child(userName).setValue(user);
+                                SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("nameNew", userName);
                                 Toast.makeText(DangKy.this, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(DangKy.this, VerificationActivity.class));
 
