@@ -1,8 +1,5 @@
-package com.example.quanlygiasu_md18202_duan1.Fragment2;
+package com.example.quanlygiasu_md18202_duan1.FragMent;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,10 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.quanlygiasu_md18202_duan1.Adapter.TienTrinh;
+import com.example.quanlygiasu_md18202_duan1.Adapter.Giasucuaban;
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
 import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
@@ -27,16 +22,23 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+public class fragment_admin_hopdong extends Fragment {
 
-public class TienTrinh_fragment extends Fragment {
+    private RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tien_trinh_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_thongke, container, false);
+        recyclerView = view.findViewById(R.id.recycleViewRQAM);
+        getDS(recyclerView);
+        return view;
+    }
+
+    public void getDS(RecyclerView recyclerView) {
         GetListFireBase getListFireBase = new GetListFireBase();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request");
+        DatabaseReference databaseReference = firebaseDatabase.getReference("request");
         getListFireBase.readDatabase3(databaseReference, new Interface_list() {
             @Override
             public void onListReceived(ArrayList<Teacher_MD> list) {
@@ -45,33 +47,18 @@ public class TienTrinh_fragment extends Fragment {
 
             @Override
             public void onListReceived1(ArrayList<User> list) {
-
             }
 
             @Override
             public void onListReceived2(ArrayList<ReQuestGS> list) {
-try {
-    ArrayList<ReQuestGS> list2 = new ArrayList<>();
-    SharedPreferences sharedPreferences = getContext().getSharedPreferences("isRememberData", MODE_PRIVATE);
-    String name = sharedPreferences.getString("name", "");
-    Toast.makeText(getContext(), ""+name, Toast.LENGTH_SHORT).show();
-    for (ReQuestGS reQuestGS : list) {
-        if(reQuestGS.getReQuestGS().getUser().equals(name)){
-            list2.add(reQuestGS);
-        }
-    }
-    RecyclerView recyclerView = view.findViewById(R.id.recycleViewTT);
-    TienTrinh tienTrinh = new TienTrinh(list2, view.getContext());
-    LinearLayoutManager linearLayoutManager = new  LinearLayoutManager(view.getContext());
-    recyclerView.setLayoutManager(linearLayoutManager);
-    recyclerView.setAdapter(tienTrinh);
-}catch(Exception e){}
-
-
-
+                ArrayList<ReQuestGS> list2 = new ArrayList<>();
+                list2 = list;
+                Giasucuaban giasucuaban = new Giasucuaban(list2, getContext());
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(giasucuaban);
             }
+
+
         });
-        // Inflate the layout for this fragment
-        return view;
-    }
-}
+}}

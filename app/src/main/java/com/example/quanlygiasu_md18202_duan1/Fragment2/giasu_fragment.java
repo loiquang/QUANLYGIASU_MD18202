@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quanlygiasu_md18202_duan1.Adapter.MonHoc_User;
 import com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity.WalletUserActivity;
@@ -128,21 +129,20 @@ public class giasu_fragment extends Fragment {
         TextView txtName = view.findViewById(R.id.txtName);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
         String user = sharedPreferences.getString("user", "");
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("user").child(user).child("cccd").child("fullname");
+        DatabaseReference databaseReference = firebaseDatabase.getReference("user").child(user).child("cccd").child("name");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
-                    String a = snapshot.getValue().toString();
-                    editor.putString("name", a);
-                    editor.apply();
-                    txtName.setText(a);
+                    String a = snapshot.getValue(String.class);
+                    if(a.equals(""))
+                        txtName.setText(a);
                 }catch (Exception e){
-                    txtName.setText("Quản Lý Gia Sư");
-                    txtXinChao.setVisibility(View.INVISIBLE);
-                }
+                        txtName.setText("Quản Lý Gia Sư");
+                        txtXinChao.setVisibility(View.INVISIBLE);}
+
+
 
             }
 
@@ -155,7 +155,7 @@ public class giasu_fragment extends Fragment {
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                long b = Long.parseLong(snapshot.getValue().toString());
+                double b = Double.parseDouble(snapshot.getValue().toString());
                 NumberFormat numberFormat = new DecimalFormat("#,###");
                 txtTien.setText(numberFormat.format(b));
             }

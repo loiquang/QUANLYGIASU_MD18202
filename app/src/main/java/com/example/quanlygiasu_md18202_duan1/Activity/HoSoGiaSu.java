@@ -27,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity.ThongTinActivity;
+import com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity.VerificationActivity;
 import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.firebase.database.DataSnapshot;
@@ -83,10 +85,11 @@ public class HoSoGiaSu extends AppCompatActivity {
         String subject = bundle.getString("subject");
         String phoneTC = bundle.getString("sdt");
         String emailTC = bundle.getString("email");
+        String user = sharedPreferences.getString("user", "");
         txtTenGV.setText(tenGV);
         txtSoHS.setText(soHS);
         Glide.with(this).load(image).into(imgGV);
-        NumberFormat numberFormat = new DecimalFormat("#,###", new DecimalFormatSymbols(Locale.US));
+        NumberFormat numberFormat = new DecimalFormat("#,###");
         txtTien.setText("" + numberFormat.format(tien) + " " + "vnđ/buổi");
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,38 +98,35 @@ public class HoSoGiaSu extends AppCompatActivity {
                 finish();
             }
         });
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild(user + "-" + id)) {
+                    btnDangKyGV.setVisibility(View.GONE);
+                    return;
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         btnDangKyGV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference = firebaseDatabase.getReference().child("request");
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
-                        String nameUser = sharedPreferences.getString("name", "");
-                        String user = sharedPreferences.getString("user", "");
 
-                        boolean bcd = false;
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            String abc = dataSnapshot.child("subject").getValue(String.class);
-                            if (abc.equals(subject)) {
-                                bcd = true;
-                                break;
-                            }
-                        }
-                        if (snapshot.hasChild(user + "-" + id)) {
-                            Toast.makeText(HoSoGiaSu.this, "Đã Đăng Ký", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        if(bcd){
-                            Toast.makeText(HoSoGiaSu.this, "Đã Đăng Ký Môn", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
 
                         try {
+                            SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
+                            String nameUser = sharedPreferences.getString("name", "");
+                            String user = sharedPreferences.getString("user", "");
                             AlertDialog.Builder builder = new AlertDialog.Builder(HoSoGiaSu.this);
                             LayoutInflater layoutInflater = getLayoutInflater();
                             View view = layoutInflater.inflate(R.layout.dialog_request, null);
@@ -144,18 +144,19 @@ public class HoSoGiaSu extends AppCompatActivity {
                             edtSoHS.setText("" + 1);
                             txtToiDa.setText("Tối Đa: " + soHS);
                             AlertDialog alertDialog = builder.create();
-
+                            alertDialog.setCancelable(false);
+                            alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.layout_dialog);
+                            alertDialog.show();
                             edtTextB.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     showDatePickerDialog(edtTextB);
                                 }
                             });
+
                             btnTamTinh.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    String endDate = edtTextN.getText().toString();
-                                    Toast.makeText(HoSoGiaSu.this, "" + endDate, Toast.LENGTH_SHORT).show();
                                     int scale1 = Integer.parseInt(edtSoHS.getText().toString());
                                     if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
                                         Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
@@ -169,7 +170,7 @@ public class HoSoGiaSu extends AppCompatActivity {
                                             return;
                                         }
                                         long thanhTien = (Long.parseLong(edtTextN.getText().toString()) * tien) * Long.parseLong(edtSoHS.getText().toString());
-                                        txtThanhTien.setText("" + thanhTien);
+                                        txtThanhTien.setText(numberFormat.format(thanhTien)+" vnd");
                                     }
                                 }
                             });
@@ -178,7 +179,6 @@ public class HoSoGiaSu extends AppCompatActivity {
                                 public void onClick(View v) {
                                     String startDate = edtTextB.getText().toString();
                                     String endDate = edtTextN.getText().toString();
-                                    Toast.makeText(HoSoGiaSu.this, "" + endDate, Toast.LENGTH_SHORT).show();
                                     int scale1 = Integer.parseInt(edtSoHS.getText().toString());
                                     if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
                                         Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
@@ -198,11 +198,9 @@ public class HoSoGiaSu extends AppCompatActivity {
                                         int status = 0;
                                         ReQuestGS reQuestGS = new ReQuestGS(endDate, emailTC, image, phoneTC, scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
                                         databaseReference.child(user + "-" + id).setValue(reQuestGS);
-                                        alertDialog.dismiss();
-                                        Toast.makeText(HoSoGiaSu.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(HoSoGiaSu.this, ManHinhUser.class));
                                         finish();
-
+                                        alertDialog.dismiss();
 
                                     }
                                 }
@@ -213,10 +211,8 @@ public class HoSoGiaSu extends AppCompatActivity {
                                     alertDialog.dismiss();
                                 }
                             });
-                            alertDialog.setCancelable(false);
-                            alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.layout_dialog);
-                            alertDialog.show();
-                        } catch (Exception e) {
+
+                        } catch (Throwable e) {
                         }
                     }
 

@@ -1,6 +1,7 @@
 package com.example.quanlygiasu_md18202_duan1.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,13 +46,17 @@ public class ManHinhCho extends AppCompatActivity {
         //ánh xạ nút button and skip
         txtSkip = findViewById(R.id.txtSkip);
         btnNext = findViewById(R.id.btnNext);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+       boolean acti = sharedPreferences.getBoolean("splashShown", false);
+       if(acti){
+           startActivity(new Intent(ManHinhCho.this, DangNhap.class));
+           finish();
+       }
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment1 = null;
                 flag++;
-                Toast.makeText(ManHinhCho.this, "" + flag, Toast.LENGTH_SHORT).show();
                 switch (flag) {
                     case 1:
                         fragment1 = new fragment_hoctainhavui();
@@ -64,7 +69,11 @@ public class ManHinhCho extends AppCompatActivity {
                         btnNext.setText("Bắt Đầu");
                         break;
                     case 4:
-                        startActivity(new Intent(ManHinhCho.this, DangNhap.class));
+                        startActivity(new Intent(ManHinhCho.this, DangNhap.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY));
+                        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("splashShown", true);
+                        editor.apply();
                         finish();
                         break;
                     default:
@@ -81,7 +90,11 @@ public class ManHinhCho extends AppCompatActivity {
         txtSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ManHinhCho.this, DangNhap.class));
+                startActivity(new Intent(ManHinhCho.this, DangNhap.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY));
+                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("splashShown", true);
+                editor.apply();
                 finish();
 
             }

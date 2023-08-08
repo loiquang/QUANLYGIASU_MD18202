@@ -1,20 +1,16 @@
-package com.example.quanlygiasu_md18202_duan1.FragMent;
+package com.example.quanlygiasu_md18202_duan1.Fragment2;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlygiasu_md18202_duan1.Activity.GiaSuCuaBan;
-import com.example.quanlygiasu_md18202_duan1.Adapter.Giasucuaban;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.quanlygiasu_md18202_duan1.Adapter.QuanLyUser;
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
 import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
@@ -26,23 +22,22 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class fragment_thongke extends Fragment {
+
+public class quanlyUser_fragment extends Fragment {
     private RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_thongke, container, false);
-        recyclerView = view.findViewById(R.id.recycleViewRQAM);
-        getDS(recyclerView);
+        View view = inflater.inflate(R.layout.combo_fragment, container, false);
+GetDS(view);
         return view;
     }
-
-    public void getDS(RecyclerView recyclerView) {
+    public void GetDS(View view){
         GetListFireBase getListFireBase = new GetListFireBase();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("request");
-        getListFireBase.readDatabase3(databaseReference, new Interface_list() {
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("user");
+        getListFireBase.readDatabase2(databaseReference, new Interface_list() {
             @Override
             public void onListReceived(ArrayList<Teacher_MD> list) {
 
@@ -50,19 +45,22 @@ public class fragment_thongke extends Fragment {
 
             @Override
             public void onListReceived1(ArrayList<User> list) {
-            }
+                ArrayList<User> list1 = new ArrayList<>();
+                for (User user: list) {
+                    if(!user.getId().equals("admin"))
+                        list1.add(user);
 
-            @Override
-            public void onListReceived2(ArrayList<ReQuestGS> list) {
-                ArrayList<ReQuestGS> list2 = new ArrayList<>();
-                list2 = list;
-                Giasucuaban giasucuaban = new Giasucuaban(list2, getContext());
+                }
+                recyclerView = view.findViewById(R.id.recycleViewCombo);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 recyclerView.setLayoutManager(linearLayoutManager);
-                recyclerView.setAdapter(giasucuaban);
+                QuanLyUser user = new QuanLyUser(list1, getContext());
+                recyclerView.setAdapter(user);
             }
+            @Override
+            public void onListReceived2(ArrayList<ReQuestGS> list) {
 
-
+            }
         });
 
     }

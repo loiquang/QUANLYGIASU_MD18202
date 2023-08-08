@@ -35,6 +35,7 @@
                 android:text="Meo Meo"
                 android:textColor="@color/black"
                 android:textSize="30sp"
+                android:layout_marginBottom="10dp"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/txtTien"

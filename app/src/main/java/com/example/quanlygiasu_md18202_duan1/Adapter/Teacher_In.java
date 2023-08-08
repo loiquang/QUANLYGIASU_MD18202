@@ -43,10 +43,9 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.txtName.setText(list.get(position).getTeacher_md().getFullname());
-        holder.txtMon.setText(list.get(position).getTeacher_md().getSubject());
+        holder.txtMon.setText(list.get(position).getTeacher_md().getStatus());
         Glide.with(context).load(list.get(position).getTeacher_md().getImage()).into(holder.imgTeacher);
         SharedPreferences sharedPreferences = context.getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         String user = sharedPreferences.getString("user", "");
         if (user.equals("admin")) {
             holder.imgRight.setVisibility(View.GONE);

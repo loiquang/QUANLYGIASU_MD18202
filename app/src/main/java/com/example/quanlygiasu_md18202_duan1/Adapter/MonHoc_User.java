@@ -1,5 +1,7 @@
 package com.example.quanlygiasu_md18202_duan1.Adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -56,18 +58,23 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
         getListFireBase = new GetListFireBase();
         holder.imgTeacher.setImageResource(list.get(position).getImage());
         holder.txtName.setText(list.get(position).getName());
-
+        SharedPreferences sharedPreferences = context.getSharedPreferences("isRememberData", MODE_PRIVATE);
+        String user = sharedPreferences.getString("user", "");
         ArrayList<Teacher_MD> list1 = new ArrayList<>();
         FirebaseDatabase auth = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference1 = auth.getReference("teacher");
-
         getListFireBase.readDatabase(databaseReference1, new Interface_list() {
             @Override
             public void onListReceived(ArrayList<Teacher_MD> list) {
+
                 for (Teacher_MD teacher_md : list) {
-                    if (teacher_md.getTeacher_md().getSubject().equals(holder.txtName.getText()))
+                    if (teacher_md.getTeacher_md().getSubject().equals(holder.txtName.getText()) && teacher_md.getTeacher_md().getStatus().equals("Hoạt động"))
                         list1.add(teacher_md);
+                    else if (teacher_md.getTeacher_md().getSubject().equals(holder.txtName.getText()) && user.equals("admin")) {
+                        list1.add(teacher_md);
+                    }
                 }
+
 
                 teacherAdapter = new Teacher_In(list1, context);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context.getApplicationContext());
@@ -99,7 +106,6 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
             public void onClick(View v) {
 
                 holder.recyclerView.setVisibility(View.GONE);
-                flag--;
                 holder.imgDown.setVisibility(View.VISIBLE);
                 holder.imgUp.setVisibility(View.GONE);
             }

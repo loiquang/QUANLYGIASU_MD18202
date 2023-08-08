@@ -97,11 +97,12 @@ public class HopDongActivity extends AppCompatActivity {
                         long money = sharedPreferences.getLong("money", -1);
                         long moneyAdmin = sharedPreferences.getLong("moneyAdmin", -1);
                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(id);
+                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request");
                         double phat = payment * 0.05;
                         double pushmoney = money - phat;
-                        Toast.makeText(HopDongActivity.this, ""+phat, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HopDongActivity.this, "" + phat, Toast.LENGTH_SHORT).show();
                         DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("user").child(user).child("money");
+                        DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("teacher");
                         databaseReference1.setValue(pushmoney).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
@@ -114,16 +115,17 @@ public class HopDongActivity extends AppCompatActivity {
 
 
                         });
-                        databaseReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        databaseReference.child(id).child("status").setValue(4);
+                        databaseReference.child(id).child("totalpayment").setValue(phat);
+                        databaseReference.addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onSuccess(Void aVoid) {
-                                // Xóa dữ liệu thành công
-
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String key1 = id.substring(7);
+                                databaseReference2.child(key1).child("status").setValue("Hoạt động");
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
+
                             @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Xử lý lỗi trong quá trình xóa dữ liệu
+                            public void onCancelled(@NonNull DatabaseError error) {
                             }
                         });
                         Toast.makeText(HopDongActivity.this, "Đã hủy hợp đồng", Toast.LENGTH_SHORT).show();
@@ -170,7 +172,7 @@ public class HopDongActivity extends AppCompatActivity {
         NumberFormat numberFormat = new DecimalFormat("#,###");
         txtUser.setText(nameUser);
         txtAddres.setText(teacher);
-        txtTime.setText("Thời gian thuê gia sư được bắt đầu từ ngày " + startDate + " và kéo dài cho đến ngày " + endDate + " hoặc khi hoàn thành các yêu cầu và mục tiêu đã thỏa thuận hoặc cho đến khi bên thuê yêu cầu chấm dứt dịch vụ gia sư này theo quy định tại mục 5 của hợp đồng này.");
+        txtTime.setText("Thời gian thuê gia sư được bắt đầu từ ngày " + startDate + " trong vòng " + endDate + " hoặc khi hoàn thành các yêu cầu và mục tiêu đã thỏa thuận hoặc cho đến khi bên thuê yêu cầu chấm dứt dịch vụ gia sư này theo quy định tại mục 5 của hợp đồng này.");
         txtMoney.setText("Bên thuê cam kết trả cho bên cho thuê số tiền được thỏa thuận là " + numberFormat.format(payment) + "VND cho hợp đồng dịch vụ gia sư. Phương thức thanh toán và lịch trình thanh toán sẽ được thỏa thuận trong tài liệu phụ.");
 
 
@@ -290,8 +292,9 @@ public class HopDongActivity extends AppCompatActivity {
             }
         });
     }
+
     public void Done(String id) {
-        Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(id);
         databaseReference.child("status").setValue(2);
