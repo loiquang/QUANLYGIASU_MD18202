@@ -81,7 +81,7 @@ public class DangKy extends AppCompatActivity {
                                 tilUsername.setError("Tên tài khoản đã tồn tại");
                             } else {
                                 tilUsername.setError(null);
-                                User user = new User(null, passWord, null, null, 0, null);
+                                User user = new User(null, null, passWord, null, 0, null);
                                 userRef.child(userName).setValue(user);
                                 Toast.makeText(DangKy.this, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
                             }
@@ -132,8 +132,8 @@ public class DangKy extends AppCompatActivity {
             tilRePassword.setErrorIconDrawable(null);
             return false;
         } else if (!val.matches(passWordVal)) {
-            tilPassword.setError("Mật khẩu quá yếu hoặc có chứa khoảng trắng");
-            tilRePassword.setError("Mật khẩu quá yếu hoặc có chứa khoảng trắng");
+            tilPassword.setError("Mật khẩu phải có một số, một ký tự đặc biệt và không chứa khoảng trắng");
+            tilRePassword.setError("Mật khẩu phải có một số, một ký tự đặc biệt và không chứa khoảng trắng");
             tilPassword.setErrorIconDrawable(null);
             tilRePassword.setErrorIconDrawable(null);
             return false;
