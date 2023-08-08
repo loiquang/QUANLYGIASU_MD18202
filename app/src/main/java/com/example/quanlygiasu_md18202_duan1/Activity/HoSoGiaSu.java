@@ -89,7 +89,7 @@ public class HoSoGiaSu extends AppCompatActivity {
         txtTenGV.setText(tenGV);
         txtSoHS.setText(soHS);
         Glide.with(this).load(image).into(imgGV);
-        NumberFormat numberFormat = new DecimalFormat("#,###", new DecimalFormatSymbols(Locale.US));
+        NumberFormat numberFormat = new DecimalFormat("#,###");
         txtTien.setText("" + numberFormat.format(tien) + " " + "vnđ/buổi");
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override

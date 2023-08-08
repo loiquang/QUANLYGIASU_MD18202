@@ -63,10 +63,10 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
         ArrayList<Teacher_MD> list1 = new ArrayList<>();
         FirebaseDatabase auth = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference1 = auth.getReference("teacher");
-
         getListFireBase.readDatabase(databaseReference1, new Interface_list() {
             @Override
             public void onListReceived(ArrayList<Teacher_MD> list) {
+
                 for (Teacher_MD teacher_md : list) {
                     if (teacher_md.getTeacher_md().getSubject().equals(holder.txtName.getText()) && teacher_md.getTeacher_md().getStatus().equals("Hoạt động"))
                         list1.add(teacher_md);

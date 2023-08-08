@@ -17,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.example.quanlygiasu_md18202_duan1.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class QuanLyUser extends RecyclerView.Adapter<QuanLyUser.ViewHolder> {
@@ -38,10 +40,10 @@ public class QuanLyUser extends RecyclerView.Adapter<QuanLyUser.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 try {
-
+    NumberFormat numberFormat = new DecimalFormat("#,###");
     Glide.with(context).load(list.get(position).getUser().getCccd().getFace()).into(holder.imgUser);
     holder.txtUserN.setText(list.get(position).getUser().getCccd().getName());
-    holder.txtSoDu.setText(list.get(position).getUser().getMoney()+"");
+    holder.txtSoDu.setText(numberFormat.format(list.get(position).getUser().getMoney())+"vnd");
     holder.txtBD.setText(list.get(position).getUser().getCccd().getDob());
     holder.txtPhone.setText(list.get(position).getUser().getPhone());
     holder.txtAddress.setText(list.get(position).getUser().getCccd().getAddress());

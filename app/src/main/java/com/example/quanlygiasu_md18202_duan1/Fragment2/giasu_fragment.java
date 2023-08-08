@@ -129,9 +129,7 @@ public class giasu_fragment extends Fragment {
         TextView txtName = view.findViewById(R.id.txtName);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("isRememberData", Context.MODE_PRIVATE);
         String user = sharedPreferences.getString("user", "");
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-
         DatabaseReference databaseReference = firebaseDatabase.getReference("user").child(user).child("cccd").child("name");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
