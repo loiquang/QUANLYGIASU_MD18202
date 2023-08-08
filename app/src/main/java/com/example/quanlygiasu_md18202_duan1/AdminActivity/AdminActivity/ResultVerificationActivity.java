@@ -168,9 +168,8 @@ public class ResultVerificationActivity extends AppCompatActivity {
             }
 
             private void saveImageUrlToFirebaseDatabase(String imageUrl, String key) {
-                SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference = firebaseDatabase.getReference("user").child(key);
+                DatabaseReference databaseReference = firebaseDatabase.getReference().child("user").child(key);
                 databaseReference.child("cccd").child("face").setValue(imageUrl);
             }
         });

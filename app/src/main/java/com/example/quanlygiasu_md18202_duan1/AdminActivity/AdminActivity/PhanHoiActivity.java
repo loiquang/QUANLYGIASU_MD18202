@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quanlygiasu_md18202_duan1.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import javax.security.auth.Subject;
 
@@ -43,6 +45,8 @@ public class PhanHoiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (edtUser.getText() != null) {
                     String text = edtUser.getText().toString();
+                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                    DatabaseReference databaseReference = firebaseDatabase.getReference();
                     txtUser.setText(text);
                     linearLayoutUser.setVisibility(View.VISIBLE);
                     linearLayoutEdit.setVisibility(View.GONE);
