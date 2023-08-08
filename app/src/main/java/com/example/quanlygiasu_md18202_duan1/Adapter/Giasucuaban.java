@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,29 +67,15 @@ public class Giasucuaban extends RecyclerView.Adapter<Giasucuaban.ViewHolder> {
         holder.txtName.setText(list.get(position).getReQuestGS().getTeacher());
         Glide.with(context).load(list.get(position).getReQuestGS().getImageTeacher()).into(holder.imgTeacher);
         if (user.equals("admin")) {
-            holder.txtDoiGV.setVisibility(View.GONE);
+            holder.txtSub.setText("Học Sinh: ");
+            holder.txtMon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+            int topPaddingInPixels = 5; // Khoảng cách bên trên, tính theo pixel
+
+            holder.txtMon.setPadding(holder.txtMon.getPaddingLeft(), topPaddingInPixels, holder.txtMon.getPaddingRight(), holder.txtMon.getPaddingBottom());
+            holder.txtMon.setText(list.get(position).getReQuestGS().getUser());
             holder.btnTrangThai.setText("Hủy bỏ");
         } else {
 
-
-            holder.txtDoiGV.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    builder.setTitle("Thông Báo").setMessage("Bạn phải trả 10% hợp đồng để đổi GV\n\nBạn chắc chắn muốn đổi GV").setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(v.getContext(), PhanHoiActivity.class);
-                            int status = 1;
-                            Bundle bundle1 = new Bundle();
-                            bundle1.putString("nameTeacher", list.get(holder.getAdapterPosition()).getReQuestGS().getTeacher());
-                            bundle1.putString("subject", list.get(holder.getAdapterPosition()).getReQuestGS().getSubject());
-                            bundle1.putInt("status", status);
-                            intent.putExtras(bundle1);
-                            v.getContext().startActivity(intent);
-                        }
-                    }).setPositiveButton("No", null).show();
-                }
-            });
             if (list.get(position).getReQuestGS().getStatus() == 0) {
                 holder.btnTrangThai.setText("Chờ duyệt");
                 holder.btnTrangThai.setBackgroundResource(R.drawable.layout_text_tien);
@@ -195,7 +182,7 @@ public class Giasucuaban extends RecyclerView.Adapter<Giasucuaban.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtMon, txtName, txtDoiGV, txtTextI;
+        TextView txtMon, txtName, txtTextI, txtSub;
         Button btnTrangThai;
         ImageView imgTeacher;
 
@@ -203,10 +190,11 @@ public class Giasucuaban extends RecyclerView.Adapter<Giasucuaban.ViewHolder> {
             super(itemView);
             txtMon = itemView.findViewById(R.id.txtMon);
             txtName = itemView.findViewById(R.id.txtName);
-            txtDoiGV = itemView.findViewById(R.id.txtTrangThai);
             btnTrangThai = itemView.findViewById(R.id.btnTrangThai);
             imgTeacher = itemView.findViewById(R.id.imgTeacher);
             txtTextI = itemView.findViewById(R.id.txtTextI);
+            txtSub= itemView.findViewById(R.id.txtSub);
+
         }
     }
 }

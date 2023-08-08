@@ -59,8 +59,8 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
         NumberFormat numberFormat = new DecimalFormat("#,###");
         holder.txtPayment.setText(numberFormat.format(list.get(holder.getAdapterPosition()).getReQuestGS().getTotalpayment()));
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("request");
-        DatabaseReference databaseReference1 = firebaseDatabase.getReference("teacher");
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request");
+        DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("teacher");
         GetListFireBase getListFireBase = new GetListFireBase();
         getListFireBase.readDatabase3(databaseReference, new Interface_list() {
             ArrayList<ReQuestGS> list1 = new ArrayList<>();
@@ -86,8 +86,8 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
                         @Override
                         public void onClick(View v) {
                             String key = list1.get(position).getId();
-                           String key1= key.substring(7);
-                            Toast.makeText(v.getContext(), ""+key1, Toast.LENGTH_SHORT).show();
+                           String key1= key.substring(6);
+
                             databaseReference.child(key).child("status").setValue(1);
                             databaseReference1.child(key1).child("status").setValue("Đang Dạy");
                     }});

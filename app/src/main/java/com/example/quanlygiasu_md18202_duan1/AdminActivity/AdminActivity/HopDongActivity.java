@@ -102,6 +102,7 @@ public class HopDongActivity extends AppCompatActivity {
                         double pushmoney = money - phat;
                         Toast.makeText(HopDongActivity.this, "" + phat, Toast.LENGTH_SHORT).show();
                         DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("user").child(user).child("money");
+                        DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("teacher");
                         databaseReference1.setValue(pushmoney).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
@@ -116,7 +117,17 @@ public class HopDongActivity extends AppCompatActivity {
                         });
                         databaseReference.child(id).child("status").setValue(4);
                         databaseReference.child(id).child("totalpayment").setValue(phat);
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String key1 = id.substring(7);
+                                databaseReference2.child(key1).child("status").setValue("Hoạt động");
+                            }
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
                         Toast.makeText(HopDongActivity.this, "Đã hủy hợp đồng", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(HopDongActivity.this, ManHinhUser.class);
                         startActivity(intent);

@@ -144,8 +144,6 @@ public class DangNhap extends AppCompatActivity {
 
                         if (userName.equals("admin")) {
                             startActivity(new Intent(DangNhap.this, AdminActivity.class));
-                        } else if(snapshot.child(userName).child("cccd").getValue()==null) {
-                            startActivity(new Intent(DangNhap.this, VerificationActivity.class));
                         }else{
                             Toast.makeText(DangNhap.this, "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(DangNhap.this, ManHinhUser.class));
