@@ -82,12 +82,14 @@ public class DangKy extends AppCompatActivity {
                             if (snapshot.hasChild(userName)) {
                                 tilUsername.setError("Tên tài khoản đã tồn tại");
                             } else {
+
                                 tilUsername.setError(null);
                                 User user = new User(null, userName+"@gmail.com", 0, passWord, "0353883883");
                                 userRef.child(userName).setValue(user);
                                 SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("nameNew", userName);
+                                editor.apply();
                                 Toast.makeText(DangKy.this, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(DangKy.this, VerificationActivity.class));
 
