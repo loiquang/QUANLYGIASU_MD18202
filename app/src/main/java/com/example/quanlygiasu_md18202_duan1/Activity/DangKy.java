@@ -82,7 +82,7 @@ public class DangKy extends AppCompatActivity {
                                 tilUsername.setError("Tên tài khoản đã tồn tại");
                             } else {
                                 tilUsername.setError(null);
-                                User user = new User(null, null, 0, passWord, null);
+                                User user = new User(null, userName+"@gmail.com", 0, passWord, "097285557");
                                 userRef.child(userName).setValue(user);
                                 Toast.makeText(DangKy.this, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(DangKy.this, VerificationActivity.class));
@@ -100,6 +100,7 @@ public class DangKy extends AppCompatActivity {
         });
 
     }
+
 
     public boolean validateUsername() {
         String val = tilUsername.getEditText().getText().toString();
