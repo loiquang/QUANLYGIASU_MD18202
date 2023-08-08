@@ -73,17 +73,19 @@ public class ResultVerificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firebaseDatabase = FirebaseDatabase.getInstance();
-                userRef = firebaseDatabase.getReference("user");
+                userRef = firebaseDatabase.getReference().child("user");
                 SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                 String user = sharedPreferences.getString("user", "");
                 captureScreen(ivAvatarUser, user);
                 userRef.child(user).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(!snapshot.hasChild("cccd")){
+                        if(!snapshot.child(user).hasChild("cccd")){
                             userRef.child(user).child("cccd").setValue(cccd);
+
                             Toast.makeText(ResultVerificationActivity.this, "Xác thực CMND/CCCD thành công", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(ResultVerificationActivity.this, DangNhap.class));
+
                             finish();
                         }
                     }

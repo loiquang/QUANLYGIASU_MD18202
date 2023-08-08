@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_2"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyGiaSu_MD18202_DuAn1"
@@ -28,10 +28,6 @@
         <activity
             android:name=".AdminActivity.AdminActivity.WalletUserActivity"
             android:exported="false"></activity>
-        <activity
-            android:name=".AdminActivity.AdminActivity.TienTrinhActivity"
-            android:exported="false">
-        </activity>
         <activity
             android:name=".AdminActivity.AdminActivity.PhanHoiActivity"
             android:exported="false"
