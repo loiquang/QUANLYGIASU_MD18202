@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,14 +43,16 @@ public class MoMoPayment {
         void onQueryStatusFailure(String errorMessage);
     }
 
-    MoMoUtils moMoUtils = new MoMoUtils();
-    static MoMoAPIService momoAPIService = new Retrofit.Builder()
+
+    MoMoAPIService momoAPIService = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MoMoAPIService.class);
 
     public void payment(Activity activity, long amount, String partnerRefId, String phoneNumber, String token, String requestId, PaymentCallback callback) {
+
+        // Bước 4:
 
         // Tạo dataHash bằng JSONObject
         JSONObject dataHash = new JSONObject();
@@ -63,18 +64,18 @@ public class MoMoPayment {
             e.printStackTrace();
         }
 
-
         // Mã hóa dữ liệu JSON bằng publicKey RSA
+        MoMoUtils moMoUtils = new MoMoUtils();
         String hash = moMoUtils.encryptDataWithRSA(dataHash.toString(), MoMoConfig.PUBLIC_KEY);
-        Log.d("Hash>>>>>", hash);
-
         RequestPayment requestPayment = new RequestPayment(MoMoConfig.MERCHANT_CODE, partnerRefId, phoneNumber, token, hash, 2.0, 3);
         momoAPIService.getPayment(requestPayment).enqueue(new Callback<ResponsePayment>() {
             @Override
             public void onResponse(Call<ResponsePayment> call, Response<ResponsePayment> response) {
                 ResponsePayment responsePayment = response.body();
 
+                // Bước 5: (Hiện vẫn còn lỗi văng app nếu như thất bại (không thể treo tiền User))
                 if (responsePayment.getStatus() == 0) {
+                    // Bước 6:
                     confirmPayment(activity, responsePayment.getTransid(), partnerRefId, requestId, callback);
 
                 } else {
@@ -92,10 +93,13 @@ public class MoMoPayment {
 
     public void confirmPayment(Activity activity, String momoTransId, String partnerRefId, String requestId, PaymentCallback callback) {
 
+        // Bước 6:
+
         // Tạo các trường dữ liệu còn thiếu cho requestConfirmPayment
         String signature = "";
         String signatureFormat = "partnerCode=" + MoMoConfig.MERCHANT_CODE + "&partnerRefId=" + partnerRefId + "&requestType=" + "capture" + "&requestId=" + requestId + "&momoTransId=" + momoTransId;
 
+        MoMoUtils moMoUtils = new MoMoUtils();
         // Sử dụng thuật toán Hmac_SHA256 với data theo định dạng:
         // partnerCode=$partnerCode&partnerRefId=$partnerRefId&requestType=$requestType&requestId=$requestId&momoTransId=$momoTransId
         try {
@@ -114,6 +118,7 @@ public class MoMoPayment {
             public void onResponse(Call<ResponseConfirmPayment> call, Response<ResponseConfirmPayment> response) {
                 ResponseConfirmPayment responseConfirmPayment = response.body();
                 if (responseConfirmPayment.getStatus() == 0) {
+                    // Bước 7:
                     callback.onPaymentSuccess(responseConfirmPayment);
                 } else {
                     Toast.makeText(activity, responseConfirmPayment.getMessage(), Toast.LENGTH_SHORT).show();
@@ -127,35 +132,35 @@ public class MoMoPayment {
         });
     }
 
-    public void queryStatus(Activity activity, String partnerCode, String partnerRefId, String requestId, QueryStatusCallback queryStatusCallback) {
-        // Tạo dataHash bằng JSONObject
-        JSONObject dataHash = new JSONObject();
-        try {
-            dataHash.put("requestId", requestId);
-            dataHash.put("partnerCode", partnerCode);
-            dataHash.put("partnerRefId", partnerRefId);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        // Mã hóa dữ liệu JSON bằng publicKey RSA
-        String hash = moMoUtils.encryptDataWithRSA(dataHash.toString(), MoMoConfig.PUBLIC_KEY);
-
-        RequestQueryStatus requestQueryStatus = new RequestQueryStatus(partnerCode, partnerRefId, hash, 2.0);
-        momoAPIService.getQueryStatus(requestQueryStatus).enqueue(new Callback<ResponseQueryStatus>() {
-            @Override
-            public void onResponse(Call<ResponseQueryStatus> call, Response<ResponseQueryStatus> response) {
-                ResponseQueryStatus responseQueryStatus = response.body();
-                queryStatusCallback.onQueryStatusSuccess(responseQueryStatus);
-            }
-
-            @Override
-            public void onFailure(Call<ResponseQueryStatus> call, Throwable t) {
-
-            }
-        });
-
-    }
+//    public void queryStatus(Activity activity, String partnerRefId, String requestId, QueryStatusCallback queryStatusCallback) {
+//        // Tạo dataHash bằng JSONObject
+//        JSONObject dataHash = new JSONObject();
+//        try {
+//            dataHash.put("requestId", requestId);
+//            dataHash.put("partnerCode", MoMoConfig.MERCHANT_CODE);
+//            dataHash.put("partnerRefId", partnerRefId);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//        MoMoUtils moMoUtils = new MoMoUtils();
+//        // Mã hóa dữ liệu JSON bằng publicKey RSA
+//        String hash = moMoUtils.encryptDataWithRSA(dataHash.toString(), MoMoConfig.PUBLIC_KEY);
+//
+//        RequestQueryStatus requestQueryStatus = new RequestQueryStatus(MoMoConfig.MERCHANT_CODE, partnerRefId, hash, 2);
+//        momoAPIService.getQueryStatus(requestQueryStatus).enqueue(new Callback<ResponseQueryStatus>() {
+//            @Override
+//            public void onResponse(Call<ResponseQueryStatus> call, Response<ResponseQueryStatus> response) {
+//                ResponseQueryStatus responseQueryStatus = response.body();
+//                queryStatusCallback.onQueryStatusSuccess(responseQueryStatus);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseQueryStatus> call, Throwable t) {
+//
+//            }
+//        });
+//
+//    }
 
 }

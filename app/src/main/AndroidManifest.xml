@@ -29,6 +29,10 @@
             android:name=".AdminActivity.AdminActivity.WalletUserActivity"
             android:exported="false"></activity>
         <activity
+            android:name=".AdminActivity.AdminActivity.TienTrinhActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".AdminActivity.AdminActivity.PhanHoiActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

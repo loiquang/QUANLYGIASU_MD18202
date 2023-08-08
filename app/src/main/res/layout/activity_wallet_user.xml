@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        android:text="Số dư: 0 đ"
+        android:text="Số dư: 0 VNĐ"
         android:textSize="24sp" />
 
     <EditText
@@ -127,7 +127,7 @@
         android:textSize="16sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewTransactions"
+        android:id="@+id/rvTransactions"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

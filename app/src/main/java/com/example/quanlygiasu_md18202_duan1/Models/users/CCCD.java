@@ -3,6 +3,7 @@ package com.example.quanlygiasu_md18202_duan1.Models.users;
 import java.io.Serializable;
 
 public class CCCD implements Serializable {
+    private String address;
     private String id;
     private String name;
     private String type;
@@ -10,7 +11,7 @@ public class CCCD implements Serializable {
     private String issue_date;
     private String sex;
     private String face;
-    private String address;
+  
 
     public CCCD() {
     }
