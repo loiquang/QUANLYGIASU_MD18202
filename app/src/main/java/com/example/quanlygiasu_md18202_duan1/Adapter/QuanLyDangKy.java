@@ -86,7 +86,8 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
                         @Override
                         public void onClick(View v) {
                             String key = list1.get(position).getId();
-                           String key1= key.substring(6);
+                            String[] parts = key.split("-");
+                           String key1= parts[1];
 
                             databaseReference.child(key).child("status").setValue(1);
                             databaseReference1.child(key1).child("status").setValue("Đang Dạy");

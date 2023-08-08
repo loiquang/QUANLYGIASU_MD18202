@@ -120,7 +120,8 @@ public class HopDongActivity extends AppCompatActivity {
                         databaseReference.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String key1 = id.substring(7);
+                                String[] parts = id.split("-");
+                                String key1= parts[1];
                                 databaseReference2.child(key1).child("status").setValue("Hoạt động");
                             }
 
