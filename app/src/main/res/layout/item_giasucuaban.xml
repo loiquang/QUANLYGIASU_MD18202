@@ -79,16 +79,6 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txtTrangThai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtName"
-                android:text="Yêu Cầu Đổi GV"
-                android:layout_marginTop="10dp"
-                android:textColor="#F44336"
-                android:textSize="13sp"
-                android:textStyle="italic" />
 
             <Button
                 android:id="@+id/btnTrangThai"
