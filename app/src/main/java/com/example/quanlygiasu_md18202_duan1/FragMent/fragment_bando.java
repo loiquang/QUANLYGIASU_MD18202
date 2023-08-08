@@ -49,7 +49,7 @@ public class fragment_bando extends Fragment {
             public void onListReceived2(ArrayList<ReQuestGS> list) {
                 ArrayList<ReQuestGS> list1 = new ArrayList<>();
                 for (ReQuestGS reQuestGS: list) {
-                    if(reQuestGS.getReQuestGS().getStatus()!=2)
+                    if(reQuestGS.getReQuestGS().getStatus()>2)
                         list1.add(reQuestGS);
                 }
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
