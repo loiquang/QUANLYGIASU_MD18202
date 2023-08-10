@@ -189,7 +189,6 @@ public class HoSoGiaSu extends AppCompatActivity {
                                     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                                     DatabaseReference databaseReference = firebaseDatabase.getReference("request");
                                     long thanhTien = (Long.parseLong(endDate) * tien) * Long.parseLong(edtSoHS.getText().toString());
-
                                     ReQuestGS reQuestGS = new ReQuestGS(endDate, emailTC, image, phoneTC, scale1, startDate, 0, subject, tenGV, Math.abs(thanhTien), nameUser);
                                     databaseReference.child(user + "-" + id).setValue(reQuestGS);
                                     alertDialog.dismiss();
@@ -238,7 +237,12 @@ public class HoSoGiaSu extends AppCompatActivity {
 
             }
 
-//    public boolean checkDate(String stringDay1, String stringDay2) {
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, ManHinhUser.class));
+        finish();
+    }
+    //    public boolean checkDate(String stringDay1, String stringDay2) {
 //        int day1 = getDayFromDate(stringDay1);
 //        int day2 = getDayFromDate(stringDay2);
 //        int month1 = getMonthFromDate(stringDay1);

@@ -50,6 +50,7 @@ public class ManHinhUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ManHinhUser.this, DangNhap.class));
+                finish();
             }
         });
 
@@ -153,4 +154,8 @@ public class ManHinhUser extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+       finish();
+    }
 }
