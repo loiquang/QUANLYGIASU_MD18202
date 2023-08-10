@@ -70,7 +70,6 @@ public class Giasucuaban extends RecyclerView.Adapter<Giasucuaban.ViewHolder> {
             holder.txtSub.setText("Học Sinh: ");
             holder.txtMon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
             int topPaddingInPixels = 5; // Khoảng cách bên trên, tính theo pixel
-
             holder.txtMon.setPadding(holder.txtMon.getPaddingLeft(), topPaddingInPixels, holder.txtMon.getPaddingRight(), holder.txtMon.getPaddingBottom());
             holder.txtMon.setText(list.get(position).getReQuestGS().getUser());
             holder.btnTrangThai.setText("Hủy bỏ");
