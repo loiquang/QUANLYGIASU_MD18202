@@ -135,6 +135,7 @@ public class DangKy extends AppCompatActivity {
     }
 
     public boolean validatePassword() {
+        String val1 =tilRePassword.getEditText().getText().toString();
         String val = tilPassword.getEditText().getText().toString();
         String passWordVal = "^"
                 + "(?=.*[0-9])"     // at least 1 digit
@@ -143,13 +144,13 @@ public class DangKy extends AppCompatActivity {
                 + "(?=\\S+$)"       // no white spaces
                 + ".{4,}"           // at least 4 characters
                 + "$";
-        if (val.isEmpty()) {
+        if (val.isEmpty()||val1.isEmpty()) {
             tilPassword.setError("Mật khẩu không được để trống");
             tilRePassword.setError("Mật khẩu không được để trống");
             tilPassword.setErrorIconDrawable(null);
             tilRePassword.setErrorIconDrawable(null);
             return false;
-        } else if (!val.matches(passWordVal)) {
+        } else if (!val.matches(passWordVal)||!val1.matches(passWordVal)) {
             tilPassword.setError("Mật khẩu quá yếu hoặc có chứa khoảng trắng");
             tilRePassword.setError("Mật khẩu quá yếu hoặc có chứa khoảng trắng");
             tilPassword.setErrorIconDrawable(null);
