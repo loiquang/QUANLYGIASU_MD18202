@@ -1,5 +1,6 @@
 package com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,14 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.quanlygiasu_md18202_duan1.Activity.GiaSuCuaBan;
 import com.example.quanlygiasu_md18202_duan1.Activity.ManHinhUser;
 import com.example.quanlygiasu_md18202_duan1.MoMoController.MoMoConfig;
 import com.example.quanlygiasu_md18202_duan1.MoMoController.MoMoPayment;
 import com.example.quanlygiasu_md18202_duan1.Models.MoMo.ResponseConfirmPayment;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -49,7 +54,7 @@ public class PaymentActivity extends AppCompatActivity {
         NumberFormat numberFormat = new DecimalFormat("#,###");
         SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
         long payment = bundle.getLong("paymentDone");
-        long money = sharedPreferences.getLong("money", -1);
+        money = sharedPreferences.getLong("money1", -1);
         long moneyAdmin = sharedPreferences.getLong("moneyAdmin", -1);
         double discount = 0;
         if (payment > 400000) {
@@ -66,7 +71,23 @@ public class PaymentActivity extends AppCompatActivity {
         user = sharedPreferences.getString("user", "");
         firebaseDatabase = FirebaseDatabase.getInstance();
         userRef = firebaseDatabase.getReference("user");
-        txtSoDu.setText(numberFormat.format(money));
+        userRef.child(user).child("money").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                money = snapshot.getValue(Long.class);
+                txtSoDu.setText(numberFormat.format(money));
+                SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putLong("money1", money);
+                editor.apply();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         btnWallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,7 +236,7 @@ public class PaymentActivity extends AppCompatActivity {
     public void Done() {
         Bundle bundle = getIntent().getExtras();
         String id = bundle.getString("idPayment");
-        Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(id);
         databaseReference.child("status").setValue(3);
@@ -223,8 +244,7 @@ public class PaymentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-      AlertDialog.Builder builder =  new AlertDialog.Builder(PaymentActivity.this);
-
-        super.onBackPressed();
+        startActivity(new Intent(this, GiaSuCuaBan.class));
+        finish();
     }
 }
