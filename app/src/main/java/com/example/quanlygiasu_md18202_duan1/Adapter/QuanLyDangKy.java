@@ -1,5 +1,10 @@
 package com.example.quanlygiasu_md18202_duan1.Adapter;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity.HopDongActivity;
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
 import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.example.quanlygiasu_md18202_duan1.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,9 +33,11 @@ import java.util.ArrayList;
 
 public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> {
     private ArrayList<ReQuestGS> list;
+    private Context context;
 
-    public QuanLyDangKy(ArrayList<ReQuestGS> list) {
+    public QuanLyDangKy(ArrayList<ReQuestGS> list, Context context) {
         this.list = list;
+        this.context = context;
     }
 
     @NonNull
@@ -41,7 +51,7 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.txtStartDate.setText(list.get(position).getReQuestGS().getStartdate());
-        holder.txtEndDate.setText(list.get(position).getReQuestGS().getEnddate());
+        holder.txtEndDate.setText(list.get(position).getReQuestGS().getDate());
         holder.txtScale.setText("" + list.get(position).getReQuestGS().getScale());
         holder.txtSubject.setText(list.get(position).getReQuestGS().getSubject());
         holder.txtTeacher.setText(list.get(position).getReQuestGS().getTeacher());
@@ -49,7 +59,8 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
         NumberFormat numberFormat = new DecimalFormat("#,###");
         holder.txtPayment.setText(numberFormat.format(list.get(holder.getAdapterPosition()).getReQuestGS().getTotalpayment()));
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("request");
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request");
+        DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("teacher");
         GetListFireBase getListFireBase = new GetListFireBase();
         getListFireBase.readDatabase3(databaseReference, new Interface_list() {
             ArrayList<ReQuestGS> list1 = new ArrayList<>();
@@ -70,14 +81,38 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
                     }
 
                 }
+
                 holder.btnDuyet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String key = list1.get(position).getId();
+                        String[] parts = key.split("-");
+                        String key1 = parts[1];
                         databaseReference.child(key).child("status").setValue(1);
-                        Toast.makeText(v.getContext(), ""+list1.size(), Toast.LENGTH_SHORT).show();
+                        databaseReference1.child(key1).child("status").setValue("Đang Dạy");
                     }
                 });
+                holder.btnHuy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setTitle("Cảnh Báo").setIcon(R.drawable.baseline_warning_amber_24).setMessage("Bạn chắc chắn muốn hủy không")
+                                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String key = list1.get(position).getId();
+                                        databaseReference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(v.getContext(), "Đã hủy hợp đồng", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                }).setPositiveButton("No", null).show();
+                    }
+                });
+
+
             }
         });
     }
@@ -102,6 +137,8 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
             txtUser = itemView.findViewById(R.id.txtUser);
             txtPayment = itemView.findViewById(R.id.txtPayment);
             btnDuyet = itemView.findViewById(R.id.btnDuyet);
+            btnHuy = itemView.findViewById(R.id.btnHuy);
+
         }
     }
 }

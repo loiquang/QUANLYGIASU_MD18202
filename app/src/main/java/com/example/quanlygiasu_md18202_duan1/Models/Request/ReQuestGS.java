@@ -1,13 +1,18 @@
 package com.example.quanlygiasu_md18202_duan1.Models.Request;
 
-public class ReQuestGS {
-    private String enddate, startdate,teacher, user, subject, id;
+import java.io.Serializable;
+
+public class ReQuestGS implements Serializable {
+    private String date, startdate,teacher, user, subject, id, imageTeacher, phoneTC, emailTC;
     private int scale, status ;
     private long totalpayment;
     private ReQuestGS reQuestGS;
 
-    public ReQuestGS(String enddate, int scale, String startdate, int status, String subject, String teacher, long totalpayment, String user) {
-        this.enddate = enddate;
+    public ReQuestGS(String date, String emailTC,String imageTeacher, String phoneTC , int scale, String startdate, int status, String subject, String teacher, long totalpayment, String user) {
+        this.date = date;
+        this.emailTC = emailTC;
+        this.phoneTC = phoneTC;
+        this.imageTeacher = imageTeacher;
         this.startdate = startdate;
         this.teacher = teacher;
         this.user = user;
@@ -15,6 +20,39 @@ public class ReQuestGS {
         this.status = status;
         this.totalpayment = totalpayment;
         this.subject = subject;
+    }
+
+    public ReQuestGS(String date, String startdate, String teacher, String user, String id, long totalpayment) {
+        this.date = date;
+        this.startdate = startdate;
+        this.teacher = teacher;
+        this.user = user;
+        this.id = id;
+        this.totalpayment = totalpayment;
+    }
+
+    public String getPhoneTC() {
+        return phoneTC;
+    }
+
+    public void setPhoneTC(String phoneTC) {
+        this.phoneTC = phoneTC;
+    }
+
+    public String getEmailTC() {
+        return emailTC;
+    }
+
+    public void setEmailTC(String emailTC) {
+        this.emailTC = emailTC;
+    }
+
+    public String getImageTeacher() {
+        return imageTeacher;
+    }
+
+    public void setImageTeacher(String imageTeacher) {
+        this.imageTeacher = imageTeacher;
     }
 
     public ReQuestGS getReQuestGS() {
@@ -48,12 +86,12 @@ public class ReQuestGS {
         this.subject = subject;
     }
 
-    public String getEnddate() {
-        return enddate;
+    public String getDate() {
+        return date;
     }
 
-    public void setEnddate(String enddate) {
-        this.enddate = enddate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getStartdate() {

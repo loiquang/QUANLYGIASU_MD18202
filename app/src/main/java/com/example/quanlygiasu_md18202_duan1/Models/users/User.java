@@ -15,15 +15,13 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String email, String username, String password, String phone, long money, CCCD cccd) {
+    public User(CCCD cccd,String email, long money , String password, String phone) {
         this.email = email;
-        this.username = username;
         this.password = password;
         this.phone = phone;
         this.money = money;
         this.cccd = cccd;
     }
-
     public User(String id,User user) {
         this.user = user;
         this.id = id;

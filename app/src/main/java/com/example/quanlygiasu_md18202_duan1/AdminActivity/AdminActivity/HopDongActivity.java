@@ -14,6 +14,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,11 +29,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quanlygiasu_md18202_duan1.Activity.ManHinhUser;
+import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -40,6 +45,11 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class HopDongActivity extends AppCompatActivity {
     private ImageView signatureImageView;
@@ -59,12 +69,15 @@ public class HopDongActivity extends AppCompatActivity {
         btnContinues = findViewById(R.id.btnContinues);
         btnContinues.setVisibility(View.GONE);
         txtCancle = findViewById(R.id.txtHuy);
+        Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
+        String id = bundle.getString("idHopDong");
         String nameUser = bundle.getString("nameUser");
         String teacher = bundle.getString("nameTeacher");
         String startDate = bundle.getString("startDate");
         String endDate = bundle.getString("endDate");
         long payment = bundle.getLong("payment");
+        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
         txtSignture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,30 +94,54 @@ public class HopDongActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(HopDongActivity.this);
                 builder.setTitle("Thông báo");
                 builder.setIcon(R.drawable.baseline_warning_amber_24);
-                builder.setMessage("Bạn thực sự muốn hủy hợp đồng chứ");
+                builder.setMessage("Bạn sẽ bị phạt 5% hợp đồng!\n\nBạn thực sự muốn hủy hợp đồng chứ");
                 builder.setNegativeButton("Oke", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
+
                         String user = sharedPreferences.getString("user", "");
+                        long money = sharedPreferences.getLong("money", -1);
+                        long moneyAdmin = sharedPreferences.getLong("moneyAdmin", -1);
                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(user + teacher);
-                        databaseReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request");
+                        double phat = payment * 0.05;
+                        double pushmoney = money - phat;
+                        Toast.makeText(HopDongActivity.this, "" + phat, Toast.LENGTH_SHORT).show();
+                        DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("user").child(user).child("money");
+                        DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("teacher");
+                        databaseReference1.setValue(pushmoney).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(Void aVoid) {
-                                // Xóa dữ liệu thành công
-                                Toast.makeText(HopDongActivity.this, "Đã hủy hợp đồng", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(HopDongActivity.this, ManHinhUser.class);
-                                startActivity(intent);
+                            public void onSuccess(Void unused) {
+
+                                Toast.makeText(HopDongActivity.this, "Thanh Toán Thành Công", Toast.LENGTH_SHORT).show();
+                                DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("user").child("admin").child("money");
+                                double soDuAdmin = moneyAdmin + phat;
+                                databaseReference2.setValue(soDuAdmin);
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
+
+
+                        });
+                        databaseReference.child(id).child("status").setValue(4);
+                        databaseReference.child(id).child("totalpayment").setValue(phat);
+                        databaseReference.addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Xử lý lỗi trong quá trình xóa dữ liệu
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String[] parts = id.split("-");
+                                String key1= parts[1];
+                                databaseReference2.child(key1).child("status").setValue("Hoạt động");
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
                             }
                         });
+                        Toast.makeText(HopDongActivity.this, "Đã hủy hợp đồng", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(HopDongActivity.this, ManHinhUser.class);
+                        startActivity(intent);
+                        finish();
                     }
                 });
+
                 builder.setPositiveButton("No", null);
                 builder.show();
             }
@@ -117,28 +154,35 @@ public class HopDongActivity extends AppCompatActivity {
                 builder.setTitle("Thông Báo");
                 builder.setMessage("Ký Hợp Đồng Sẽ Không Hoàn Tác!\nBạn đồng ý chứ");
                 builder.setNegativeButton("Oke", new DialogInterface.OnClickListener() {
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(HopDongActivity.this, PaymentActivity.class);
                         Bundle bundle1 = new Bundle();
-                        bundle1.getLong("thanhtien", payment);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        signatureImageView = findViewById(R.id.signatureImageView1);
+                        Bitmap bitmap = ((BitmapDrawable) signatureImageView.getDrawable()).getBitmap();
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 80, stream); // Nén ảnh với chất lượng 80%
+                        byte[] byteArray = stream.toByteArray();
+                        String base64Image = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                        editor.putString("imageBitmap", base64Image);
+                        editor.apply();
+
+                        ReQuestGS reQuestGS = new ReQuestGS(endDate,startDate,teacher, nameUser, id, payment);
+                        intent.putExtra("request", reQuestGS);
+                        bundle1.putLong("paymentDone", payment);
+                        bundle1.putString("idPayment", id);
                         intent.putExtras(bundle1);
                         startActivity(intent);
+                        Done(id);
+                        finish();
 
-//                        captureScreen(nameUser + "-" + teacher);
-//                        AlertDialog alertDialog = builder.create();
-//                        SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
-//                        String user = sharedPreferences.getString("user", "");
-//                        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//                        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(user + teacher);
-//                        databaseReference.child("status").setValue(2);
-//                        alertDialog.dismiss();
-//                        Intent intent = new Intent(HopDongActivity.this, ManHinhUser.class);
-//                        startActivity(intent);
                     }
                 });
                 builder.setPositiveButton("No", null);
                 builder.show();
+
             }
         });
         //lay thong tin hop dong
@@ -146,7 +190,7 @@ public class HopDongActivity extends AppCompatActivity {
         NumberFormat numberFormat = new DecimalFormat("#,###");
         txtUser.setText(nameUser);
         txtAddres.setText(teacher);
-        txtTime.setText("Thời gian thuê gia sư được bắt đầu từ ngày " + startDate + " và kéo dài cho đến ngày " + endDate + " hoặc khi hoàn thành các yêu cầu và mục tiêu đã thỏa thuận hoặc cho đến khi bên thuê yêu cầu chấm dứt dịch vụ gia sư này theo quy định tại mục 5 của hợp đồng này.");
+        txtTime.setText("Thời gian thuê gia sư được bắt đầu từ ngày " + startDate + " trong vòng " + endDate + " hoặc khi hoàn thành các yêu cầu và mục tiêu đã thỏa thuận hoặc cho đến khi bên thuê yêu cầu chấm dứt dịch vụ gia sư này theo quy định tại mục 5 của hợp đồng này.");
         txtMoney.setText("Bên thuê cam kết trả cho bên cho thuê số tiền được thỏa thuận là " + numberFormat.format(payment) + "VND cho hợp đồng dịch vụ gia sư. Phương thức thanh toán và lịch trình thanh toán sẽ được thỏa thuận trong tài liệu phụ.");
 
 
@@ -186,6 +230,7 @@ public class HopDongActivity extends AppCompatActivity {
         signatureImageView = findViewById(R.id.signatureImageView1);
         signatureImageView.setImageBitmap(signatureBitmap);
 
+
         signatureImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,76 +239,12 @@ public class HopDongActivity extends AppCompatActivity {
         });
     }
 
-    private void captureScreen(String teacher) {
-        WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-
-        // Lấy WindowManager để truy cập màn hình
-        WindowMetrics windowMetrics = windowManager.getCurrentWindowMetrics();
-        Rect bounds = windowMetrics.getBounds();
-        int width = bounds.width();
-        int height = bounds.height();
-
-        // Tạo bitmap để chứa ảnh màn hình
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-
-        // Lấy SurfaceView để chụp ảnh màn hình
-        View rootView = getWindow().getDecorView().getRootView();
-        rootView.draw(new Canvas(bitmap));
-
-        // Lưu ảnh màn hình vào Storage
-        saveScreenshotToStorage(bitmap, teacher);
-    }
-
-    private void saveScreenshotToStorage(Bitmap bitmap, String teacher) {
-        // Khởi tạo Firebase Storage
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        // Tham chiếu đến thư mục (hoặc đường dẫn) bạn muốn lưu ảnh
-        StorageReference storageRef = storage.getReference().child("image");
-        // Tạo một tên tệp duy nhất cho ảnh (ví dụ: "image_123.jpg")
-        String fileName = "image_" + System.currentTimeMillis() + ".jpg";
-        // Tạo tham chiếu đến tệp trong Firebase Storage
-        StorageReference imageRef = storageRef.child(fileName);
 
 
-        // Chuyển đổi Bitmap thành dữ liệu nhị phân
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageData = baos.toByteArray();
-
-        // Lưu dữ liệu nhị phân (ảnh) lên Firebase Storage
-        UploadTask uploadTask = imageRef.putBytes(imageData);
-
-
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // Thành công: ảnh đã được lưu lên Firebase Storage
-                // Lấy URL truy cập để truy xuất ảnh từ Firebase Storage
-
-                imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        // Đây là URL để truy xuất ảnh từ Firebase Storage
-                        String imageUrl = uri.toString();
-                        // Lưu URL vào Firebase Realtime Database
-                        saveImageUrlToFirebaseDatabase(imageUrl, teacher);
-                    }
-
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("FirebaseStorage", "Lỗi tải ảnh lên: " + e.getMessage());
-
-                        // Lỗi xảy ra trong quá trình tải ảnh lên Firebase Storage
-                    }
-                });
-            }
-
-            private void saveImageUrlToFirebaseDatabase(String imageUrl, String teacher) {
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference = firebaseDatabase.getReference("imageRequest");
-                databaseReference.child(teacher).setValue(imageUrl);
-            }
-        });
+    public void Done(String id) {
+        Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(id);
+        databaseReference.child("status").setValue(2);
     }
 }

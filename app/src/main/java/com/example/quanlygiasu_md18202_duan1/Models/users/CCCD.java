@@ -8,38 +8,26 @@ public class CCCD implements Serializable {
     private String name;
     private String type;
     private String dob;
-    private String doe;
-    private String features;
-    private String fullname;
-    private String home;
     private String issue_date;
-    private String nationality;
     private String sex;
     private String face;
+  
 
     public CCCD() {
     }
+
+
 
     public CCCD(String id, String name, String sex, String dob, String address, String issue_date, String face, String type) {
         this.id = id;
         this.name = name;
         this.sex = sex;
         this.dob = dob;
-    }
-
-    public CCCD(String address, String dob, String doe, String face, String features, String fullname, String home, String issue_date, String nationality, String sex) {
         this.address = address;
-        this.dob = dob;
-        this.doe = doe;
-        this.features = features;
-        this.fullname = fullname;
-        this.home = home;
         this.issue_date = issue_date;
-        this.nationality = nationality;
-        this.sex = sex;
         this.face = face;
+        this.type = type;
     }
-
 
     public String getId() {
         return id;

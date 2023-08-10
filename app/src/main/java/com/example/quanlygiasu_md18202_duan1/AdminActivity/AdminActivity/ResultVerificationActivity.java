@@ -5,22 +5,39 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.WindowMetrics;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.quanlygiasu_md18202_duan1.Activity.DangNhap;
 import com.example.quanlygiasu_md18202_duan1.Activity.ManHinhUser;
 import com.example.quanlygiasu_md18202_duan1.Models.users.CCCD;
 import com.example.quanlygiasu_md18202_duan1.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
 
 public class ResultVerificationActivity extends AppCompatActivity {
 
@@ -56,16 +73,19 @@ public class ResultVerificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firebaseDatabase = FirebaseDatabase.getInstance();
-                userRef = firebaseDatabase.getReference("user");
+                userRef = firebaseDatabase.getReference().child("user");
                 SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
-                String user = sharedPreferences.getString("user", "");
+                String user = sharedPreferences.getString("nameNew", "");
+                captureScreen(ivAvatarUser, user);
                 userRef.child(user).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(!snapshot.hasChild("cccd")){
+                        if(!snapshot.child(user).hasChild("cccd")){
                             userRef.child(user).child("cccd").setValue(cccd);
+
                             Toast.makeText(ResultVerificationActivity.this, "Xác thực CMND/CCCD thành công", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(ResultVerificationActivity.this, ManHinhUser.class));
+                            startActivity(new Intent(ResultVerificationActivity.this, DangNhap.class));
+
                             finish();
                         }
                     }
@@ -95,5 +115,69 @@ public class ResultVerificationActivity extends AppCompatActivity {
         txtIssueDate = findViewById(R.id.txtIssueDate);
         btnComplete = findViewById(R.id.btnComplete);
         btnBack = findViewById(R.id.btnBack);
+    }
+    private void captureScreen(ImageView imageView,String key) {
+        // Lấy WindowManager để truy cập màn hình
+        Drawable drawable = imageView.getDrawable();
+        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+        // Lưu ảnh màn hình vào Storage
+        saveScreenshotToStorage(bitmap, key);
+    }
+
+    private void saveScreenshotToStorage(Bitmap bitmap, String key) {
+        // Khởi tạo Firebase Storage
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        // Tham chiếu đến thư mục (hoặc đường dẫn) bạn muốn lưu ảnh
+        StorageReference storageRef = storage.getReference().child("image");
+        // Tạo một tên tệp duy nhất cho ảnh (ví dụ: "image_123.jpg")
+        String fileName = "image_" + System.currentTimeMillis() + ".jpg";
+        // Tạo tham chiếu đến tệp trong Firebase Storage
+        StorageReference imageRef = storageRef.child(fileName);
+
+
+        // Chuyển đổi Bitmap thành dữ liệu nhị phân
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageData = baos.toByteArray();
+
+        // Lưu dữ liệu nhị phân (ảnh) lên Firebase Storage
+        UploadTask uploadTask = imageRef.putBytes(imageData);
+
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // Thành công: ảnh đã được lưu lên Firebase Storage
+                // Lấy URL truy cập để truy xuất ảnh từ Firebase Storage
+
+                imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        // Đây là URL để truy xuất ảnh từ Firebase Storage
+                        String imageUrl = uri.toString();
+                        // Lưu URL vào Firebase Realtime Database
+                        saveImageUrlToFirebaseDatabase(imageUrl, key);
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("FirebaseStorage", "Lỗi tải ảnh lên: " + e.getMessage());
+
+                        // Lỗi xảy ra trong quá trình tải ảnh lên Firebase Storage
+                    }
+                });
+            }
+
+            private void saveImageUrlToFirebaseDatabase(String imageUrl, String key) {
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference databaseReference = firebaseDatabase.getReference().child("user").child(key);
+                databaseReference.child("cccd").child("face").setValue(imageUrl);
+            }
+        });
+    }
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Chưa thực hiện xong thao tác", Toast.LENGTH_SHORT).show();
     }
 }

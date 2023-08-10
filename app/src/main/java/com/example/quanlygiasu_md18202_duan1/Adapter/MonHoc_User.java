@@ -1,5 +1,7 @@
 package com.example.quanlygiasu_md18202_duan1.Adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,21 +59,27 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
         getListFireBase = new GetListFireBase();
         holder.imgTeacher.setImageResource(list.get(position).getImage());
         holder.txtName.setText(list.get(position).getName());
-
+        SharedPreferences sharedPreferences = context.getSharedPreferences("isRememberData", MODE_PRIVATE);
+        String user = sharedPreferences.getString("user", "");
         ArrayList<Teacher_MD> list1 = new ArrayList<>();
         FirebaseDatabase auth = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference1 = auth.getReference("teacher");
-
         getListFireBase.readDatabase(databaseReference1, new Interface_list() {
             @Override
             public void onListReceived(ArrayList<Teacher_MD> list) {
-                for (Teacher_MD teacher_md : list) {
-                    if (teacher_md.getTeacher_md().getSubject().equals(holder.txtName.getText()))
-                        list1.add(teacher_md);
-                }
 
-                teacherAdapter = new Teacher_In(list1, context);
+                for (Teacher_MD teacher_md : list) {
+                    if (teacher_md.getTeacher_md().getSubject().equals(holder.txtName.getText()) && teacher_md.getTeacher_md().getStatus().equals("Hoạt động"))
+                        list1.add(teacher_md);
+                    else if (teacher_md.getTeacher_md().getSubject().equals(holder.txtName.getText()) && user.equals("admin")) {
+                        list1.add(teacher_md);
+                    }
+                }
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context.getApplicationContext());
+                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(holder.recyclerView.getContext(), linearLayoutManager.getOrientation());
+                holder.recyclerView.addItemDecoration(dividerItemDecoration);
+                teacherAdapter = new Teacher_In(list1, context);
+
                 holder.recyclerView.setLayoutManager(linearLayoutManager);
                 holder.recyclerView.setAdapter(teacherAdapter);
                 holder.txtMon.setText("Số Lượng: " + list1.size());
@@ -99,7 +108,6 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
             public void onClick(View v) {
 
                 holder.recyclerView.setVisibility(View.GONE);
-                flag--;
                 holder.imgDown.setVisibility(View.VISIBLE);
                 holder.imgUp.setVisibility(View.GONE);
             }

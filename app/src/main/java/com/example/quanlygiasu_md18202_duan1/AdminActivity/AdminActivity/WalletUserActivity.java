@@ -81,7 +81,8 @@ public class WalletUserActivity extends AppCompatActivity {
         userRef.child(user).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                NumberFormat numberFormat = new DecimalFormat("#,###");
+            
                 money = snapshot.child("money").getValue(long.class);
                 tvMoney.setText("Số dư: " + numberFormat.format(money));
 
@@ -222,6 +223,11 @@ public class WalletUserActivity extends AppCompatActivity {
 //
 //                                    }
 //                                });
+                            }
+
+                            @Override
+                            public void onPaymentSuccess(long amount) {
+
                             }
 
                             @Override

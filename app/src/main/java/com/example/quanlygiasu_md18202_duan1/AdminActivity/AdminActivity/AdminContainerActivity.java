@@ -4,15 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
+import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_admin_hopdong;
 import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_bando;
-import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_nhapotp;
-import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_thongke;
+import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_timkiemgiasu;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
-import com.example.quanlygiasu_md18202_duan1.Fragment2.profile_fragment;
+import com.example.quanlygiasu_md18202_duan1.Fragment2.quanlyUser_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.quanly_dangky;
 import com.example.quanlygiasu_md18202_duan1.R;
 
@@ -34,13 +34,13 @@ public class AdminContainerActivity extends AppCompatActivity {
                 fragment = new giasu_fragment();
                 break;
             case 2:
-                fragment = new giasu_fragment();
+                fragment = new quanlyUser_fragment();
                 break;
             case 3:
                 fragment = new quanly_dangky();
                 break;
             case 4:
-                fragment = new fragment_thongke();
+                fragment = new fragment_admin_hopdong();
                 break;
             case 5:
                 fragment = new giasu_fragment();
@@ -52,5 +52,11 @@ public class AdminContainerActivity extends AppCompatActivity {
         if(fragment!=null){
             fragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, AdminActivity.class));
+        finish();
     }
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,7 +35,8 @@ import retrofit2.Response;
 public class VerificationActivity extends AppCompatActivity {
 
     ImageView ivCMNDtruoc, ivCMNDsau;
-    Button btnCMNDtruoc, btnCMNDsau, btnUpload;
+   ImageView btnCMNDtruoc, btnCMNDsau;
+    Button btnUpload;
     Uri uriMatTruoc, uriMatSau;
     Infor infor;
     CCCD cccd;
@@ -216,5 +218,10 @@ public class VerificationActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Chưa thực hiện xong thao tác", Toast.LENGTH_SHORT).show();
     }
 }

@@ -25,15 +25,15 @@
             android:background="@drawable/layout_edt"
             android:hint="Ngày bắt đầu" />
 
-        <TextView
+        <EditText
             android:id="@+id/edtTextN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:layout_marginTop="5dp"
-            android:inputType="date"
+            android:inputType="number"
             android:background="@drawable/layout_edt"
-            android:hint="Ngày kết thúc" />
+            android:hint="Số ngày học" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.quanlygiasu_md18202_duan1.Fragment2.TienTrinh_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
-import com.example.quanlygiasu_md18202_duan1.Fragment2.combo_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.profile_fragment;
 import com.example.quanlygiasu_md18202_duan1.R;
 
@@ -50,6 +51,7 @@ public class ManHinhUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ManHinhUser.this, DangNhap.class));
+                finish();
             }
         });
 
@@ -67,7 +69,7 @@ public class ManHinhUser extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.baseline_person_24));
         //đặt tên cho từng item
         bottomNavigation.setCount(1, "Gia Sư");
-        bottomNavigation.setCount(2, "Combo");
+        bottomNavigation.setCount(2, "Tiến Trình");
         bottomNavigation.setCount(3, "Profile");
         //gọi onReselect để tránh lỗi null khi bấm lần đầu tiên vào icon mặc định
         bottomNavigation.setOnReselectListener(new Function1<MeowBottomNavigation.Model, Unit>() {
@@ -94,8 +96,8 @@ public class ManHinhUser extends AppCompatActivity {
                         txtTitle.setText("Gia Sư");
                         break;
                     case 2:
-                        fragment = new combo_fragment();
-                        txtTitle.setText("Combo");
+                        fragment = new TienTrinh_fragment();
+                        txtTitle.setText("Tiến Trình");
                         break;
                     case 3:
 
@@ -116,7 +118,7 @@ public class ManHinhUser extends AppCompatActivity {
             public Unit invoke(MeowBottomNavigation.Model model) {
                 switch (model.getId()) {
                     case 2:
-                        fragment = new combo_fragment();
+                        fragment = new TienTrinh_fragment();
                         break;
                 }
                 if (fragment != null)
@@ -153,4 +155,9 @@ public class ManHinhUser extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, DangNhap.class));
+       finish();
+    }
 }

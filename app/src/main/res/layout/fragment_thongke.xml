@@ -5,28 +5,9 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Textview to display the title of the statistics -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Thống kê"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <!-- TextView to display the statistic data -->
-    <TextView
-        android:id="@+id/tvStatisticData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dữ liệu thống kê sẽ được hiển thị ở đây." />
-
-    <!-- Button to trigger the statistics calculation -->
-    <Button
-        android:id="@+id/btnCalculateStatistics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tính toán thống kê"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp" />
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/recycleViewRQAM"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"/>
 
 </LinearLayout>

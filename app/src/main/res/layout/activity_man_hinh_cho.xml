@@ -35,13 +35,16 @@
 
     <Button
         android:id="@+id/btnNext"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_gravity="center"
         android:layout_margin="16dp"
         android:layout_weight="0.8"
-        android:background="@drawable/layout_button"
+        android:background="@android:color/transparent"
         android:text="Tiếp Tục"
         android:textAllCaps="false"
-        android:textColor="#ffff" />
+        android:textColor="#FF5722"
+        android:textSize="15dp"
+        android:textStyle="italic" />
 
 </LinearLayout>
