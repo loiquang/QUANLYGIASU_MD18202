@@ -191,8 +191,8 @@ public class HoSoGiaSu extends AppCompatActivity {
                                     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                                     DatabaseReference databaseReference = firebaseDatabase.getReference("request");
                                     long thanhTien = (Long.parseLong(endDate) * tien) * Long.parseLong(edtSoHS.getText().toString());
-                                    int status = 0;
-                                    ReQuestGS reQuestGS = new ReQuestGS(endDate, emailTC, image, phoneTC, scale1, startDate, status, subject, tenGV, Math.abs(thanhTien), nameUser);
+
+                                    ReQuestGS reQuestGS = new ReQuestGS(endDate, emailTC, image, phoneTC, scale1, startDate, 0, subject, tenGV, Math.abs(thanhTien), nameUser);
                                     databaseReference.child(user + "-" + id).setValue(reQuestGS);
                                     alertDialog.dismiss();
                                     startActivity(new Intent(HoSoGiaSu.this, ManHinhUser.class));
