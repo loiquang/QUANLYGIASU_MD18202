@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 public class DangKy extends AppCompatActivity {
 
     ImageView imgBack;
-    TextInputLayout tilUsername, tilPassword, tilRePassword;
+    TextInputLayout tilUsername, tilPassword, tilRePassword, tilEmail, tilPhone;
     Button btnDangKy;
     TextView txtBack;
 
@@ -41,6 +41,8 @@ public class DangKy extends AppCompatActivity {
         imgBack = findViewById(R.id.imgBack);
         tilUsername = findViewById(R.id.tilUserName);
         tilPassword = findViewById(R.id.tilPassWord);
+        tilPhone = findViewById(R.id.tilPhone);
+        tilEmail = findViewById(R.id.tilEmail);
         tilRePassword = findViewById(R.id.tilRePassWord);
         btnDangKy = findViewById(R.id.btnDangKy);
         txtBack = findViewById(R.id.txtBack);
@@ -69,8 +71,10 @@ public class DangKy extends AppCompatActivity {
 
                 String userName = tilUsername.getEditText().getText().toString();
                 String passWord = tilPassword.getEditText().getText().toString();
+                String email =  tilEmail.getEditText().getText().toString();
+                String phone =  tilPhone.getEditText().getText().toString();
                 String rePassWord = tilRePassword.getEditText().getText().toString();
-                if (!validateUsername() | !validatePassword()) {
+                if (!validateUsername() | !validatePassword()| !checkEmail()) {
                     return;
                 }
                 if (!passWord.equals(rePassWord)) {
@@ -84,7 +88,7 @@ public class DangKy extends AppCompatActivity {
                             } else {
 
                                 tilUsername.setError(null);
-                                User user = new User(null, userName+"@gmail.com", 0, passWord, "0353883883");
+                                User user = new User(null, email, 0, passWord, phone);
                                 userRef.child(userName).setValue(user);
                                 SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -149,6 +153,40 @@ public class DangKy extends AppCompatActivity {
         } else {
             tilPassword.setError(null);
             tilRePassword.setError(null);
+            return true;
+        }
+    }
+    public boolean checkEmail(){
+        String val = tilEmail.getEditText().getText().toString();
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        if (val.isEmpty()) {
+            tilEmail.setError("Không được để trống email");
+            tilEmail.setErrorIconDrawable(null);
+            return false;
+        }else if(!val.equals(regex)){
+            tilEmail.setError("Sai định dạng email");
+            tilEmail.setErrorIconDrawable(null);
+            return false;
+        }else {
+            tilEmail.setError(null);
+            tilEmail.setError(null);
+            return true;
+        }
+    }
+    public boolean checkPhone(){
+        String val = tilPhone.getEditText().getText().toString();
+        String regex = "^[0-9]{10}$";
+        if (val.isEmpty()) {
+            tilPhone.setError("Không được để trống số điện thoại");
+            tilPhone.setErrorIconDrawable(null);
+            return false;
+        }else if(!val.equals(regex)){
+            tilPhone.setError("Sai định dạng");
+            tilPhone.setErrorIconDrawable(null);
+            return false;
+        }else {
+            tilPhone.setError(null);
+            tilPhone.setError(null);
             return true;
         }
     }
