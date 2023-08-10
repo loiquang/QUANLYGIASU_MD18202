@@ -128,7 +128,6 @@ public class DangNhap extends AppCompatActivity {
                     tilUsername.setError(null);
                     String passWordFromDB = snapshot.child(userName).child("password").getValue(String.class);
                     String name = snapshot.child(userName).child("cccd").child("name").getValue(String.class);
-                    String cccd = snapshot.child(userName).child("cccd").getValue(String.class);
                     long money = snapshot.child(userName).child("money").getValue(Long.class);
                     if (passWord.equals(passWordFromDB)) {
                         tilPassword.setError(null);
