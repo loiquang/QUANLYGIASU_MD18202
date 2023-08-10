@@ -95,7 +95,9 @@ public class DangKy extends AppCompatActivity {
                                 editor.putString("nameNew", userName);
                                 editor.apply();
                                 Toast.makeText(DangKy.this, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(DangKy.this, VerificationActivity.class));
+                                Intent intent =new Intent(DangKy.this, VerificationActivity.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
 
                             }
                         }
@@ -110,6 +112,7 @@ public class DangKy extends AppCompatActivity {
         });
 
     }
+
 
     public boolean validateUsername() {
         String val = tilUsername.getEditText().getText().toString();
