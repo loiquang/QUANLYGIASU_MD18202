@@ -128,6 +128,7 @@ public class DangNhap extends AppCompatActivity {
                     tilUsername.setError(null);
                     String passWordFromDB = snapshot.child(userName).child("password").getValue(String.class);
                     String name = snapshot.child(userName).child("cccd").child("name").getValue(String.class);
+                    String cccd = snapshot.child(userName).child("cccd").getValue(String.class);
                     long money = snapshot.child(userName).child("money").getValue(Long.class);
                     if (passWord.equals(passWordFromDB)) {
                         tilPassword.setError(null);
@@ -144,7 +145,7 @@ public class DangNhap extends AppCompatActivity {
 
                         if (userName.equals("admin")) {
                             startActivity(new Intent(DangNhap.this, AdminActivity.class));
-                        }else{
+                        } else{
                             Toast.makeText(DangNhap.this, "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(DangNhap.this, ManHinhUser.class));
                             finish();

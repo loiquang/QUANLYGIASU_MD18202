@@ -23,7 +23,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:src="@drawable/readbook" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="7"
+        android:layout_weight="8"
         android:orientation="vertical"
         android:padding="16dp"
         android:paddingTop="10dp">
@@ -127,6 +127,7 @@
                 android:layout_gravity="center"
                 android:hint="Số Điện Thoại"
                 android:textColorHint="#ffff"
+                android:inputType="number"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp" />
         </com.google.android.material.textfield.TextInputLayout>

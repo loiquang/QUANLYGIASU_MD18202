@@ -40,9 +40,6 @@
             android:exported="false"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".AdminActivity.AdminActivity.VerificationActivity1"
-            android:exported="false" />
-        <activity
             android:name=".AdminActivity.AdminActivity.VerificationActivity"
             android:exported="false"></activity>
         <activity

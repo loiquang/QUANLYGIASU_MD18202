@@ -176,4 +176,8 @@ public class ResultVerificationActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Chưa thực hiện xong thao tác", Toast.LENGTH_SHORT).show();
+    }
 }

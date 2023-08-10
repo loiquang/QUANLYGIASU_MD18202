@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -74,7 +77,7 @@ public class DangKy extends AppCompatActivity {
                 String email =  tilEmail.getEditText().getText().toString();
                 String phone =  tilPhone.getEditText().getText().toString();
                 String rePassWord = tilRePassword.getEditText().getText().toString();
-                if (!validateUsername() | !validatePassword()| !checkEmail()) {
+                if (!validateUsername() | !validatePassword()| !checkEmail()|!checkPhone()) {
                     return;
                 }
                 if (!passWord.equals(rePassWord)) {
@@ -160,12 +163,12 @@ public class DangKy extends AppCompatActivity {
     }
     public boolean checkEmail(){
         String val = tilEmail.getEditText().getText().toString();
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String regex = "[a-zA-Z0-9._%+-]+@gmail\\.com$";
         if (val.isEmpty()) {
             tilEmail.setError("Không được để trống email");
             tilEmail.setErrorIconDrawable(null);
             return false;
-        }else if(!val.equals(regex)){
+        }else if(!val.matches(regex)){
             tilEmail.setError("Sai định dạng email");
             tilEmail.setErrorIconDrawable(null);
             return false;
@@ -174,6 +177,7 @@ public class DangKy extends AppCompatActivity {
             tilEmail.setError(null);
             return true;
         }
+
     }
     public boolean checkPhone(){
         String val = tilPhone.getEditText().getText().toString();
@@ -182,7 +186,7 @@ public class DangKy extends AppCompatActivity {
             tilPhone.setError("Không được để trống số điện thoại");
             tilPhone.setErrorIconDrawable(null);
             return false;
-        }else if(!val.equals(regex)){
+        }else if(!val.matches(regex)){
             tilPhone.setError("Sai định dạng");
             tilPhone.setErrorIconDrawable(null);
             return false;

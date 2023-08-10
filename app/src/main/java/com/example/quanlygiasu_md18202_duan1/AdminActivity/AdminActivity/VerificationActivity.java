@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -87,13 +88,7 @@ public class VerificationActivity extends AppCompatActivity {
                 if (ivCMNDtruoc.getDrawable() == null || ivCMNDsau.getDrawable() == null) {
                     Toast.makeText(VerificationActivity.this, "Vui lòng cung cấp đầy đủ và chính xác CMND/CCCD cả hai mặt", Toast.LENGTH_SHORT).show();
                 } else {
-                    Bundle bundle = getIntent().getExtras();
-                    String userNew = bundle.getString("nameNew");
-                    Bundle bundle1 = new Bundle();
-                    bundle1.putString("userNew", userNew);
                     Intent intent = new Intent(VerificationActivity.this, ResultVerificationActivity.class);
-                    intent.putExtras(bundle1);
-                    intent.putExtra("cccd", cccd);
                     startActivity(intent);
                     ivCMNDtruoc.setImageURI(null);
                     ivCMNDsau.setImageURI(null);
@@ -222,5 +217,10 @@ public class VerificationActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Chưa thực hiện xong thao tác", Toast.LENGTH_SHORT).show();
     }
 }
