@@ -89,6 +89,7 @@ public class VerificationActivity extends AppCompatActivity {
                     Toast.makeText(VerificationActivity.this, "Vui lòng cung cấp đầy đủ và chính xác CMND/CCCD cả hai mặt", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(VerificationActivity.this, ResultVerificationActivity.class);
+                    intent.putExtra("cccd", cccd);
                     startActivity(intent);
                     ivCMNDtruoc.setImageURI(null);
                     ivCMNDsau.setImageURI(null);
