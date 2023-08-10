@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,10 +75,11 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
                         list1.add(teacher_md);
                     }
                 }
-
-
-                teacherAdapter = new Teacher_In(list1, context);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context.getApplicationContext());
+                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(holder.recyclerView.getContext(), linearLayoutManager.getOrientation());
+                holder.recyclerView.addItemDecoration(dividerItemDecoration);
+                teacherAdapter = new Teacher_In(list1, context);
+
                 holder.recyclerView.setLayoutManager(linearLayoutManager);
                 holder.recyclerView.setAdapter(teacherAdapter);
                 holder.txtMon.setText("Số Lượng: " + list1.size());

@@ -136,7 +136,7 @@ public class giasu_fragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
                     String a = snapshot.getValue(String.class);
-                    if(a.equals(""))
+                    if(!a.equals(""))
                         txtName.setText(a);
                 }catch (Exception e){
                         txtName.setText("Quản Lý Gia Sư");

@@ -2,31 +2,30 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginBottom="10dp"
-    app:cardCornerRadius="16dp">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgTeacher"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_weight="3"
             android:padding="10dp"
             android:src="@drawable/inta" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_gravity="center"
             android:layout_toRightOf="@+id/imgTeacher"
+            android:layout_weight="7"
             android:orientation="vertical">
 
             <TextView
@@ -34,8 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nguyễn Văn A"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtMon"
@@ -45,28 +43,25 @@
 
                 android:layout_toRightOf="@+id/imgTeacher"
                 android:text="Nguyễn Văn A"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
 
         </LinearLayout>
+
         <ImageView
             android:id="@+id/imgRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/right"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            />
+            android:layout_gravity="center"
+            android:src="@drawable/right" />
+
         <ImageView
             android:id="@+id/imgPencil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/pencil"
-            android:visibility="gone"
+            android:layout_gravity="center"
             android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            />
-    </RelativeLayout>
+            android:src="@drawable/pencil"
+            android:visibility="gone" />
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>
