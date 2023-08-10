@@ -53,10 +53,13 @@ public class TienTrinh_fragment extends Fragment {
 try {
     ArrayList<ReQuestGS> list2 = new ArrayList<>();
     SharedPreferences sharedPreferences = getContext().getSharedPreferences("isRememberData", MODE_PRIVATE);
-    String name = sharedPreferences.getString("name", "");
+    String name = sharedPreferences.getString("user", "");
     Toast.makeText(getContext(), ""+name, Toast.LENGTH_SHORT).show();
     for (ReQuestGS reQuestGS : list) {
-        if(reQuestGS.getReQuestGS().getUser().equals(name)){
+        String id = reQuestGS.getId();
+        String[] id1 = id.split("-");
+        String id2 = id1[0];
+        if(id2.equals(name)){
             list2.add(reQuestGS);
         }
     }

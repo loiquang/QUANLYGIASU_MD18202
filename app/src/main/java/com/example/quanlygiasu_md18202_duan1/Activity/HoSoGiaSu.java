@@ -117,9 +117,6 @@ public class HoSoGiaSu extends AppCompatActivity {
         btnDangKyGV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//
-
                 SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
                 String nameUser = sharedPreferences.getString("name", "");
                 String user = sharedPreferences.getString("user", "");

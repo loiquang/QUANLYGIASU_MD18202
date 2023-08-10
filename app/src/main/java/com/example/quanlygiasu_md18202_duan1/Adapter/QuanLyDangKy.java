@@ -82,35 +82,35 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
 
                 }
 
-                    holder.btnDuyet.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String key = list1.get(position).getId();
-                            String[] parts = key.split("-");
-                           String key1= parts[1];
-
-                            databaseReference.child(key).child("status").setValue(1);
-                            databaseReference1.child(key1).child("status").setValue("Đang Dạy");
-                    }});
-holder.btnHuy.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-        builder.setTitle("Cảnh Báo").setIcon(R.drawable.baseline_warning_amber_24).setMessage("Bạn chắc chắn muốn hủy không")
-                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                holder.btnDuyet.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
                         String key = list1.get(position).getId();
-                        databaseReference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(v.getContext(), "Đã hủy hợp đồng", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        String[] parts = key.split("-");
+                        String key1 = parts[1];
+                        databaseReference.child(key).child("status").setValue(1);
+                        databaseReference1.child(key1).child("status").setValue("Đang Dạy");
                     }
-                }).setPositiveButton("No",null).show();
-    }
-});
+                });
+                holder.btnHuy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setTitle("Cảnh Báo").setIcon(R.drawable.baseline_warning_amber_24).setMessage("Bạn chắc chắn muốn hủy không")
+                                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String key = list1.get(position).getId();
+                                        databaseReference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(v.getContext(), "Đã hủy hợp đồng", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                }).setPositiveButton("No", null).show();
+                    }
+                });
 
 
             }

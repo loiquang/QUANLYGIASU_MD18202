@@ -74,8 +74,8 @@ public class ResultVerificationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 userRef = firebaseDatabase.getReference().child("user");
-                Bundle bundle = getIntent().getExtras();
-                String user = bundle.getString("userNew");
+                SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
+                String user = sharedPreferences.getString("nameNew", "");
                 captureScreen(ivAvatarUser, user);
                 userRef.child(user).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
