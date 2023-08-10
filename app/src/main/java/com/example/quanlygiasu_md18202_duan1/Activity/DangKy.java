@@ -96,7 +96,6 @@ public class DangKy extends AppCompatActivity {
                                 editor.apply();
                                 Toast.makeText(DangKy.this, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
                                 Intent intent =new Intent(DangKy.this, VerificationActivity.class);
-                                intent.putExtras(bundle);
                                 startActivity(intent);
 
                             }
