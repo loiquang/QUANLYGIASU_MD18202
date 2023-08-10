@@ -18,6 +18,7 @@ import com.example.quanlygiasu_md18202_duan1.Activity.ManHinhUser;
 import com.example.quanlygiasu_md18202_duan1.MoMoController.MoMoConfig;
 import com.example.quanlygiasu_md18202_duan1.MoMoController.MoMoPayment;
 import com.example.quanlygiasu_md18202_duan1.Models.MoMo.ResponseConfirmPayment;
+import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +29,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -50,11 +54,14 @@ public class PaymentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
         initUI();
-        Bundle bundle = getIntent().getExtras();
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
         NumberFormat numberFormat = new DecimalFormat("#,###");
         SharedPreferences sharedPreferences = getSharedPreferences("isRememberData", MODE_PRIVATE);
-        long payment = bundle.getLong("paymentDone");
-        money = sharedPreferences.getLong("money1", -1);
+
+        ReQuestGS reQuestGS = (ReQuestGS) intent.getSerializableExtra("request");
+        long payment = reQuestGS.getTotalpayment();
+        String id = reQuestGS.getId();
         long moneyAdmin = sharedPreferences.getLong("moneyAdmin", -1);
         double discount = 0;
         if (payment > 400000) {
@@ -87,7 +94,7 @@ public class PaymentActivity extends AppCompatActivity {
 
             }
         });
-
+        money = sharedPreferences.getLong("money1", -1);
         btnWallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,8 +126,17 @@ public class PaymentActivity extends AppCompatActivity {
                                     DatabaseReference databaseReference2 = userRef.child("admin").child("money");
                                     double soDuAdmin = moneyAdmin + totalAmount;
                                     databaseReference2.setValue(soDuAdmin);
-                                    Done();
-                                    startActivity(new Intent(PaymentActivity.this, ManHinhUser.class));
+                                    Done(id);
+                                    Date currentDate = new Date();
+
+                                    // Định dạng ngày thành chuỗi
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                                    String formattedDate = dateFormat.format(currentDate);
+                                    Intent intent = new Intent(PaymentActivity.this, ContractActivity.class);
+                                    intent.putExtra("request", reQuestGS);
+                                   intent.putExtra("date", formattedDate);
+                                    intent.putExtra("how", 1);
+                                    startActivity(intent);
                                     finish();
                                 }
 
@@ -198,7 +214,10 @@ public class PaymentActivity extends AppCompatActivity {
 //                                DatabaseReference databaseReference2 = userRef.child("admin").child("money");
 //                                double soDuAdmin = moneyAdmin+totalAmount;
 //                                databaseReference2.setValue(soDuAdmin);
-                                Done();
+                                Intent intent = getIntent();
+                                ReQuestGS reQuestGS = (ReQuestGS) intent.getSerializableExtra("request");
+                                String id = reQuestGS.getId();
+                                Done(id);
                             }
 
                             @Override
@@ -233,9 +252,8 @@ public class PaymentActivity extends AppCompatActivity {
         }
     }
 
-    public void Done() {
-        Bundle bundle = getIntent().getExtras();
-        String id = bundle.getString("idPayment");
+    public void Done(String id) {
+
         Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference().child("request").child(id);

@@ -78,7 +78,6 @@ public class HoSoGiaSu extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String tenGV = bundle.getString("name");
         String id = bundle.getString("id");
-        Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
         String soHS = bundle.getString("scale");
         int tien = bundle.getInt("price");
         String image = bundle.getString("image");
@@ -151,6 +150,11 @@ public class HoSoGiaSu extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         int scale1 = Integer.parseInt(edtSoHS.getText().toString());
+                        String date = edtTextB.getText().toString();
+                        if(!tinhNgay(date)){
+                            Toast.makeText(HoSoGiaSu.this, "Sai định dạng ngày", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
                             Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
                             return;
@@ -170,32 +174,36 @@ public class HoSoGiaSu extends AppCompatActivity {
                 btnOke.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                                String startDate = edtTextB.getText().toString();
-                                String endDate = edtTextN.getText().toString();
-                                int scale1 = Integer.parseInt(edtSoHS.getText().toString());
-                                if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
-                                    Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                                if (endDate.isEmpty()) {
-                                    Toast.makeText(HoSoGiaSu.this, "Không để trống thông tin", Toast.LENGTH_SHORT).show();
-                                    return;
-                                } else {
-                                    if (Integer.parseInt(endDate) < 10) {
-                                        Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
-                                        return;
-                                    }
-                                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                                    DatabaseReference databaseReference = firebaseDatabase.getReference("request");
-                                    long thanhTien = (Long.parseLong(endDate) * tien) * Long.parseLong(edtSoHS.getText().toString());
-                                    ReQuestGS reQuestGS = new ReQuestGS(endDate, emailTC, image, phoneTC, scale1, startDate, 0, subject, tenGV, Math.abs(thanhTien), nameUser);
-                                    databaseReference.child(user + "-" + id).setValue(reQuestGS);
-                                    alertDialog.dismiss();
-                                    startActivity(new Intent(HoSoGiaSu.this, ManHinhUser.class));
-                                    finish();
-                                }
+                        String date = edtTextB.getText().toString();
+                        String startDate = edtTextB.getText().toString();
+                        String endDate = edtTextN.getText().toString();
+                        int scale1 = Integer.parseInt(edtSoHS.getText().toString());
+                        if(!tinhNgay(date)){
+                            Toast.makeText(HoSoGiaSu.this, "Sai định dạng ngày", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if (scale1 > Integer.parseInt(soHS) || scale1 == 0) {
+                            Toast.makeText(HoSoGiaSu.this, "Số Học Sinh Vượt Quá", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if (endDate.isEmpty()) {
+                            Toast.makeText(HoSoGiaSu.this, "Không để trống thông tin", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else {
+                            if (Integer.parseInt(endDate) < 10) {
+                                Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
+                                return;
                             }
+                            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                            DatabaseReference databaseReference = firebaseDatabase.getReference("request");
+                            long thanhTien = (Long.parseLong(endDate) * tien) * Long.parseLong(edtSoHS.getText().toString());
+                            ReQuestGS reQuestGS = new ReQuestGS(endDate, emailTC, image, phoneTC, scale1, startDate, 0, subject, tenGV, Math.abs(thanhTien), nameUser);
+                            databaseReference.child(user + "-" + id).setValue(reQuestGS);
+                            alertDialog.dismiss();
+                            startActivity(new Intent(HoSoGiaSu.this, ManHinhUser.class));
+                            finish();
+                        }
+                    }
                 });
                 btnHuy.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -205,98 +213,82 @@ public class HoSoGiaSu extends AppCompatActivity {
                 });
 
 
-            }});}
+            }
+        });
+    }
 
 
-            private void showDatePickerDialog(TextView editTextDate) {
-                // Lấy ngày hiện tại
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
+    private void showDatePickerDialog(TextView editTextDate) {
+        // Lấy ngày hiện tại
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                // Hiển thị DatePickerDialog
-                DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        // Xử lý ngày được chọn từ DatePickerDialog
-                        Calendar selectedCalendar = Calendar.getInstance();
-                        selectedCalendar.set(Calendar.YEAR, year);
-                        selectedCalendar.set(Calendar.MONTH, month);
-                        selectedCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        // Hiển thị DatePickerDialog
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                // Xử lý ngày được chọn từ DatePickerDialog
+                Calendar selectedCalendar = Calendar.getInstance();
+                selectedCalendar.set(Calendar.YEAR, year);
+                selectedCalendar.set(Calendar.MONTH, month);
+                selectedCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                        // Định dạng ngày và hiển thị trong EditText
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                        String formattedDate = sdf.format(selectedCalendar.getTime());
-                        editTextDate.setText(formattedDate);
-
-                    }
-                }, year, month, day);
-
-                datePickerDialog.show();
+                // Định dạng ngày và hiển thị trong EditText
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                String formattedDate = sdf.format(selectedCalendar.getTime());
+                editTextDate.setText(formattedDate);
 
             }
+        }, year, month, day);
+
+        datePickerDialog.show();
+
+    }
 
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, ManHinhUser.class));
         finish();
     }
-    //    public boolean checkDate(String stringDay1, String stringDay2) {
-//        int day1 = getDayFromDate(stringDay1);
-//        int day2 = getDayFromDate(stringDay2);
-//        int month1 = getMonthFromDate(stringDay1);
-//        int month2 = getMonthFromDate(stringDay2);
-//        int year1 = getYearFromDate(stringDay1);
-//        int year2 = getYearFromDate(stringDay2);
-//        LocalDate currentDate = LocalDate.now();
-//        int year = currentDate.getYear();
-//        int month = currentDate.getMonthValue();
-//        int day = currentDate.getDayOfMonth();
-//        if (month1 < month || month2 < month) {
-//            return false;
-//        } else if (year1 < year || year2 < year || year2 < year1) {
-//            return false;
-//        } else if (month2 < month1 && year2 < year1) {
-//            return false;
-//        } else if (day1 < day || day2 < day && month1 == month2) {
-//            return false;
-//        } else if (month1 > month2 && year1 == year2) {
-//            return false;
-//        }
-//        return true;
-//    }
 
-//    public long tinhNgay(String stringDay1, String stringDay2) {
-//        int day1 = getDayFromDate(stringDay1);
-//        int day2 = getDayFromDate(stringDay2);
-//        int month1 = getMonthFromDate(stringDay1);
-//        int month2 = getMonthFromDate(stringDay2);
-//        int year1 = getYearFromDate(stringDay1);
-//        int year2 = getYearFromDate(stringDay2);
-//        LocalDate startDate = LocalDate.of(year1, month1, day1);
-//        // Ngày kết thúc
-//        LocalDate endDate = LocalDate.of(year2, month2, day2);
-//        // Tính khoảng cách giữa hai ngày trong nhiều tháng
-//        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-//        return daysBetween;
-//    }
 
-//    public static int getDayFromDate(String dateString) {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        LocalDate localDate = LocalDate.parse(dateString, formatter);
-//        return localDate.getDayOfMonth();
-//    }
-//
-//    public static int getMonthFromDate(String dateString) {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        LocalDate localDate = LocalDate.parse(dateString, formatter);
-//        return localDate.getMonthValue();
-//    }
-//
-//    public static int getYearFromDate(String dateString) {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        LocalDate localDate = LocalDate.parse(dateString, formatter);
-//        return localDate.getYear();
-//    }
+    public boolean tinhNgay(String stringDay1) {
+        int day1 = getDayFromDate(stringDay1);
+        int month1 = getMonthFromDate(stringDay1);
+        int year1 = getYearFromDate(stringDay1);
+
+        Calendar currentDate = Calendar.getInstance();
+        int currentYear = currentDate.get(Calendar.YEAR);
+        int currentMonth = currentDate.get(Calendar.MONTH) + 1; // Tháng trong Calendar bắt đầu từ 0
+        int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
+        if (day1 < currentDay && month1 == currentMonth) {
+            return false;
+        } else if (day1>currentDay&&month1 < currentMonth||day1<currentDay&&month1<currentMonth) {
+            return false;
+        } else if (year1 < currentYear) {
+            return false;
         }
+        return true;
+    }
+
+    public static int getDayFromDate(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate.getDayOfMonth();
+    }
+
+    public static int getMonthFromDate(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate.getMonthValue();
+    }
+
+    public static int getYearFromDate(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate.getYear();
+    }
+
+}

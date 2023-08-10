@@ -167,4 +167,5 @@ public class giasu_fragment extends Fragment {
         });
     }
 
+
 }

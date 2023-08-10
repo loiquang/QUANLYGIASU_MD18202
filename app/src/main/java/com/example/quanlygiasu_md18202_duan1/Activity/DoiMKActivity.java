@@ -41,4 +41,10 @@ private TextInputLayout tilPass, tilRePass;
             return true;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

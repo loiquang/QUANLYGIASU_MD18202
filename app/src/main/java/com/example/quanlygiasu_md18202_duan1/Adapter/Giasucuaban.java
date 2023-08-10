@@ -130,9 +130,14 @@ public class Giasucuaban extends RecyclerView.Adapter<Giasucuaban.ViewHolder> {
                     public void onClick(View v) {
                         Intent intent = new Intent(v.getContext(), PaymentActivity.class);
                         Bundle bundle = new Bundle();
-                        bundle.putLong("paymentDone", list.get(position).getReQuestGS().getTotalpayment());
-                        bundle.putString("idPayment", list.get(position).getId());
-                        intent.putExtras(bundle);
+                        String userName =list.get(holder.getAdapterPosition()).getReQuestGS().getUser();
+                        String startDate = list.get(holder.getAdapterPosition()).getReQuestGS().getStartdate();
+                        String date = list.get(holder.getAdapterPosition()).getReQuestGS().getDate();
+                        long payment = list.get(holder.getAdapterPosition()).getReQuestGS().getTotalpayment();
+                        String teacher = list.get(holder.getAdapterPosition()).getReQuestGS().getTeacher();
+                        String id = list.get(holder.getAdapterPosition()).getId();
+                       ReQuestGS reQuestGS = new ReQuestGS(date,startDate,teacher,userName,id,payment);
+                        intent.putExtra("request", reQuestGS);
                         v.getContext().startActivity(intent);
 
                     }

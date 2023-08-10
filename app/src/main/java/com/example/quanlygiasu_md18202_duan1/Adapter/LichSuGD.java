@@ -37,7 +37,7 @@ public class LichSuGD extends RecyclerView.Adapter<LichSuGD.ViewHolder> {
         holder.txtIdRQ.setText(list.get(position).getId());
         holder.txtDate.setText(list.get(position).getReQuestGS().getStartdate());
         NumberFormat numberFormat = new DecimalFormat("#,###");
-        holder.txtAmount.setText("+ " + numberFormat.format(list.get(position).getReQuestGS().getTotalpayment()));
+        holder.txtAmount.setText(numberFormat.format(list.get(position).getReQuestGS().getTotalpayment()));
     }
 
     @Override

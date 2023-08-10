@@ -22,6 +22,15 @@ public class ReQuestGS implements Serializable {
         this.subject = subject;
     }
 
+    public ReQuestGS(String date, String startdate, String teacher, String user, String id, long totalpayment) {
+        this.date = date;
+        this.startdate = startdate;
+        this.teacher = teacher;
+        this.user = user;
+        this.id = id;
+        this.totalpayment = totalpayment;
+    }
+
     public String getPhoneTC() {
         return phoneTC;
     }
