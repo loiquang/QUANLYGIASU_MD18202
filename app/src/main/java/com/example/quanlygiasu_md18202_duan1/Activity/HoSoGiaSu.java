@@ -170,9 +170,7 @@ public class HoSoGiaSu extends AppCompatActivity {
                 btnOke.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        databaseReference.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                                 String startDate = edtTextB.getText().toString();
                                 String endDate = edtTextN.getText().toString();
                                 int scale1 = Integer.parseInt(edtSoHS.getText().toString());
@@ -199,13 +197,6 @@ public class HoSoGiaSu extends AppCompatActivity {
                                     finish();
                                 }
                             }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                    }
                 });
                 btnHuy.setOnClickListener(new View.OnClickListener() {
                     @Override
