@@ -24,8 +24,11 @@ import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.example.quanlygiasu_md18202_duan1.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -88,8 +91,19 @@ public class QuanLyDangKy extends RecyclerView.Adapter<QuanLyDangKy.ViewHolder> 
                         String key = list1.get(position).getId();
                         String[] parts = key.split("-");
                         String key1 = parts[1];
-                        databaseReference.child(key).child("status").setValue(1);
-                        databaseReference1.child(key1).child("status").setValue("Đang Dạy");
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                databaseReference.child(key).child("status").setValue(1);
+                                databaseReference1.child(key1).child("status").setValue("Đang Dạy");
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
                     }
                 });
                 holder.btnHuy.setOnClickListener(new View.OnClickListener() {
