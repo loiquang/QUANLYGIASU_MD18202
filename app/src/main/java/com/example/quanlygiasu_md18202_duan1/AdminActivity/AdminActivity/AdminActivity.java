@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.quanlygiasu_md18202_duan1.Activity.DangNhap;
 import com.example.quanlygiasu_md18202_duan1.FireBaseHelper.GetListFireBase;
 import com.example.quanlygiasu_md18202_duan1.InterFace.Interface_list;
+import com.example.quanlygiasu_md18202_duan1.Models.Request.HoaDon;
 import com.example.quanlygiasu_md18202_duan1.Models.Request.ReQuestGS;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
@@ -39,10 +41,29 @@ public class AdminActivity extends AppCompatActivity {
         ImageButton btnRecommendation = findViewById(R.id.btnRecommendation);
         ImageButton btnMap = findViewById(R.id.btnMap);
         TextView txtWarning = findViewById(R.id.txtWarning);
+        TextView txtSoDH = findViewById(R.id.txtSoHD);
         TextView txtTien = findViewById(R.id.txtTien);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("request");
+        DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("imageRequest");
         DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("user").child("admin");
+        databaseReference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<HoaDon> list = new ArrayList<>();
+                for (DataSnapshot item: snapshot.getChildren()) {
+                    HoaDon hoaDon = item.getValue(HoaDon.class);
+                    list.add(hoaDon);
+                }
+                txtSoDH.setText(""+list.size());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
       databaseReference1.addValueEventListener(new ValueEventListener() {
           @Override
           public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -131,5 +152,12 @@ public class AdminActivity extends AppCompatActivity {
         bundle.putInt("flag", flag);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, DangNhap.class);
+        startActivity(intent);
+        finish();
     }
 }

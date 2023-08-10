@@ -183,7 +183,7 @@ btnOke.setOnClickListener(new View.OnClickListener() {
             private void saveImageUrlToFirebaseDatabase(String imageUrl, String teacher) {
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference databaseReference = firebaseDatabase.getReference("imageRequest");
-                databaseReference.child(teacher).setValue(imageUrl);
+                databaseReference.child(teacher).child("image").setValue(imageUrl);
             }
         });
     }

@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 
 import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_admin_hopdong;
 import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_bando;
+import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_hoadon;
 import com.example.quanlygiasu_md18202_duan1.FragMent.fragment_timkiemgiasu;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.giasu_fragment;
 import com.example.quanlygiasu_md18202_duan1.Fragment2.quanlyUser_fragment;
@@ -43,7 +44,7 @@ public class AdminContainerActivity extends AppCompatActivity {
                 fragment = new fragment_admin_hopdong();
                 break;
             case 5:
-                fragment = new giasu_fragment();
+                fragment = new fragment_hoadon();
                 break;
             case 6:
                 fragment = new fragment_bando();
