@@ -74,10 +74,10 @@ public class DangKy extends AppCompatActivity {
 
                 String userName = tilUsername.getEditText().getText().toString();
                 String passWord = tilPassword.getEditText().getText().toString();
-                String email =  tilEmail.getEditText().getText().toString();
-                String phone =  tilPhone.getEditText().getText().toString();
+                String email = tilEmail.getEditText().getText().toString();
+                String phone = tilPhone.getEditText().getText().toString();
                 String rePassWord = tilRePassword.getEditText().getText().toString();
-                if (!validateUsername() | !validatePassword()| !checkEmail()|!checkPhone()) {
+                if (!validateUsername() | !validatePassword() | !checkEmail() | !checkPhone()) {
                     return;
                 }
                 if (!passWord.equals(rePassWord)) {
@@ -98,7 +98,7 @@ public class DangKy extends AppCompatActivity {
                                 editor.putString("nameNew", userName);
                                 editor.apply();
                                 Toast.makeText(DangKy.this, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
-                                Intent intent =new Intent(DangKy.this, VerificationActivity.class);
+                                Intent intent = new Intent(DangKy.this, VerificationActivity.class);
                                 startActivity(intent);
 
                             }
@@ -124,7 +124,7 @@ public class DangKy extends AppCompatActivity {
             tilUsername.setErrorIconDrawable(null);
             return false;
         } else if (!val.matches(noWhiteSpace)) {
-            tilUsername.setError("Tên tài khoản không được có khoảng trắng");
+            tilUsername.setError("Tên tài khoản phải có ít nhất 4 ký tự và không chứa khoảng trắng");
             tilUsername.setErrorIconDrawable(null);
             return false;
         } else {
@@ -135,7 +135,7 @@ public class DangKy extends AppCompatActivity {
     }
 
     public boolean validatePassword() {
-        String val1 =tilRePassword.getEditText().getText().toString();
+        String val1 = tilRePassword.getEditText().getText().toString();
         String val = tilPassword.getEditText().getText().toString();
         String passWordVal = "^"
                 + "(?=.*[0-9])"     // at least 1 digit
@@ -144,7 +144,7 @@ public class DangKy extends AppCompatActivity {
                 + "(?=\\S+$)"       // no white spaces
                 + ".{4,}"           // at least 4 characters
                 + "$";
-        if (val.isEmpty()||val1.isEmpty()) {
+        if (val.isEmpty() || val1.isEmpty()) {
             tilPassword.setError("Mật khẩu không được để trống");
             tilRePassword.setError("Mật khẩu không được để trống");
             tilPassword.setErrorIconDrawable(null);
@@ -153,7 +153,7 @@ public class DangKy extends AppCompatActivity {
         } else if (!val.matches(passWordVal)) {
             tilPassword.setError("Mật khẩu phải có một số, một ký tự đặc biệt và không chứa khoảng trắng");
             tilRePassword.setError("Mật khẩu phải có một số, một ký tự đặc biệt và không chứa khoảng trắng");
-        } else if (!val.matches(passWordVal)||!val1.matches(passWordVal)) {
+        } else if (!val.matches(passWordVal) || !val1.matches(passWordVal)) {
             tilPassword.setError("Mật khẩu quá yếu hoặc có chứa khoảng trắng");
             tilRePassword.setError("Mật khẩu quá yếu hoặc có chứa khoảng trắng");
             tilPassword.setErrorIconDrawable(null);
@@ -166,36 +166,38 @@ public class DangKy extends AppCompatActivity {
         }
         return true;
     }
-    public boolean checkEmail(){
+
+    public boolean checkEmail() {
         String val = tilEmail.getEditText().getText().toString();
         String regex = "[a-zA-Z0-9._%+-]+@gmail\\.com$";
         if (val.isEmpty()) {
             tilEmail.setError("Không được để trống email");
             tilEmail.setErrorIconDrawable(null);
             return false;
-        }else if(!val.matches(regex)){
+        } else if (!val.matches(regex)) {
             tilEmail.setError("Sai định dạng email");
             tilEmail.setErrorIconDrawable(null);
             return false;
-        }else {
+        } else {
             tilEmail.setError(null);
             tilEmail.setError(null);
             return true;
         }
 
     }
-    public boolean checkPhone(){
+
+    public boolean checkPhone() {
         String val = tilPhone.getEditText().getText().toString();
         String regex = "^[0-9]{10}$";
         if (val.isEmpty()) {
             tilPhone.setError("Không được để trống số điện thoại");
             tilPhone.setErrorIconDrawable(null);
             return false;
-        }else if(!val.matches(regex)){
+        } else if (!val.matches(regex)) {
             tilPhone.setError("Sai định dạng");
             tilPhone.setErrorIconDrawable(null);
             return false;
-        }else {
+        } else {
             tilPhone.setError(null);
             tilPhone.setError(null);
             return true;
@@ -205,6 +207,6 @@ public class DangKy extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-     finish();
+        finish();
     }
 }

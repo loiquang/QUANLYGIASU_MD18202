@@ -18,15 +18,15 @@ public interface eKYCAPIService {
     // https://api.fpt.ai/vision/idr/vnm
     public static final String BASE_URL = "https://api.fpt.ai/";
 
-    Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
+//    Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
 
     eKYCAPIService ekycApiService = new Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(eKYCAPIService.class);
 
-    @Headers({"api-key: Zt0bOgryS6pKROaWSdowkJ37Y1WuG92T"})
+    @Headers({"api-key: b0ZHdGH5618EcCSdRI0CttUS1ewCU5Ud"})
     @Multipart
     @POST("vision/idr/vnm")
     Call<Infor> getInforCCCD(@Part MultipartBody.Part image, @Part MultipartBody.Part face);
