@@ -65,6 +65,11 @@ public class TienTrinh extends RecyclerView.Adapter<TienTrinh.ViewHolder> {
                 holder.txtBuoc3.setTextColor(Color.GREEN);
                 holder.txtBuoc4.setTextColor(Color.RED);
                 break;
+            case 4:
+                holder.txtBuoc1.setVisibility(View.VISIBLE);
+                holder.txtBuoc1.setText("Đã hủy");
+                holder.txtBuoc1.setTextColor(Color.RED);
+                break;
         }
 
     }
