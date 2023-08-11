@@ -63,14 +63,16 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
                     builder.setView(view);
                     EditText edtTrangThai = view.findViewById(R.id.edtText);
                     Button btnOke = view.findViewById(R.id.btnOke);
+                    Button btnHuy = view.findViewById(R.id.btnHuy);
                     edtTrangThai.setText(list.get(position).getTeacher_md().getStatus());
                     AlertDialog alertDialog = builder.create();
+                    alertDialog.setCancelable(false);
                     alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.layout_dialog);
                     btnOke.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             String status = edtTrangThai.getText().toString();
-                            if(status.isEmpty()){
+                            if (status.isEmpty()) {
                                 Toast.makeText(context, "Không được để trống", Toast.LENGTH_SHORT).show();
                                 return;
                             }
@@ -80,7 +82,12 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
                             alertDialog.dismiss();
                         }
                     });
-
+                    btnHuy.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                        }
+                    });
                     alertDialog.show();
                 }
             });

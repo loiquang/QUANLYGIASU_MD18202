@@ -128,7 +128,6 @@ public class PaymentActivity extends AppCompatActivity {
                                     databaseReference2.setValue(soDuAdmin);
                                     Done(id);
                                     Date currentDate = new Date();
-
                                     // Định dạng ngày thành chuỗi
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                                     String formattedDate = dateFormat.format(currentDate);
@@ -216,8 +215,16 @@ public class PaymentActivity extends AppCompatActivity {
 //                                databaseReference2.setValue(soDuAdmin);
                                 Intent intent = getIntent();
                                 ReQuestGS reQuestGS = (ReQuestGS) intent.getSerializableExtra("request");
-                                String id = reQuestGS.getId();
-                                Done(id);
+                                Date currentDate = new Date();
+                                // Định dạng ngày thành chuỗi
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                                String formattedDate = dateFormat.format(currentDate);
+                                intent = new Intent(PaymentActivity.this, ContractActivity.class);
+                                intent.putExtra("request", reQuestGS);
+                                intent.putExtra("date", formattedDate);
+                                intent.putExtra("how", 1);
+                                startActivity(intent);
+                                finish();
                             }
 
                             @Override
