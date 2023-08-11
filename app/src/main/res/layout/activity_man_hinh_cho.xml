@@ -40,9 +40,9 @@
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:layout_weight="0.8"
-        android:background="@android:color/transparent"
         android:text="Tiếp Tục"
         android:textAllCaps="false"
+        android:background="@android:color/transparent"
         android:textColor="#FF5722"
         android:textSize="15dp"
         android:textStyle="italic" />

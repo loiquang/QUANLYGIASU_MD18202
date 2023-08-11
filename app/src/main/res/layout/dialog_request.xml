@@ -13,7 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tên GV"
-
             android:textSize="30sp"
             android:gravity="center"/>
         <TextView
@@ -92,6 +91,7 @@
             android:orientation="horizontal"
             android:layout_gravity="right"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
             >
             <Button
                 android:id="@+id/btnDK"

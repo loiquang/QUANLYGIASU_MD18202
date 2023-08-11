@@ -1,11 +1,14 @@
 package com.example.quanlygiasu_md18202_duan1.AdminActivity.AdminActivity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -43,6 +46,7 @@ public class AdminActivity extends AppCompatActivity {
         TextView txtWarning = findViewById(R.id.txtWarning);
         TextView txtSoDH = findViewById(R.id.txtSoHD);
         TextView txtTien = findViewById(R.id.txtTien);
+        Button btnLogout = findViewById(R.id.btnLogout);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("request");
         DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("imageRequest");
@@ -99,7 +103,19 @@ public class AdminActivity extends AppCompatActivity {
             }
 
         });
-
+btnLogout.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AdminActivity.this);
+        builder.setTitle("Thông báo").setMessage("Bạn có thực sự muốn thoát không").setNegativeButton("Oke", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(AdminActivity.this, DangNhap.class));
+                finish();
+            }
+        }).setPositiveButton("No", null).show();
+    }
+});
         btnTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

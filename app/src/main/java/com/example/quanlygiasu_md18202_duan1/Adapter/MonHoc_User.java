@@ -67,7 +67,9 @@ public class MonHoc_User extends RecyclerView.Adapter<MonHoc_User.ViewHolder> im
         getListFireBase.readDatabase(databaseReference1, new Interface_list() {
             @Override
             public void onListReceived(ArrayList<Teacher_MD> list) {
-
+                if (list1 != null) {
+                    list1.clear();
+                }
                 for (Teacher_MD teacher_md : list) {
                     if (teacher_md.getTeacher_md().getSubject().equals(holder.txtName.getText()) && teacher_md.getTeacher_md().getStatus().equals("Hoạt động"))
                         list1.add(teacher_md);

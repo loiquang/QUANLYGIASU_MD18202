@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -19,6 +22,8 @@ import com.example.quanlygiasu_md18202_duan1.Activity.HoSoGiaSu;
 import com.example.quanlygiasu_md18202_duan1.Models.Teacher_Models.Teacher_MD;
 import com.example.quanlygiasu_md18202_duan1.Models.users.User;
 import com.example.quanlygiasu_md18202_duan1.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -50,7 +55,35 @@ public class Teacher_In extends RecyclerView.Adapter<Teacher_In.ViewHolder> {
         if (user.equals("admin")) {
             holder.imgRight.setVisibility(View.GONE);
             holder.imgPencil.setVisibility(View.VISIBLE);
+            holder.imgPencil.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    View view = LayoutInflater.from(context).inflate(R.layout.dialog_trangthai, null);
+                    builder.setView(view);
+                    EditText edtTrangThai = view.findViewById(R.id.edtText);
+                    Button btnOke = view.findViewById(R.id.btnOke);
+                    edtTrangThai.setText(list.get(position).getTeacher_md().getStatus());
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.layout_dialog);
+                    btnOke.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String status = edtTrangThai.getText().toString();
+                            if(status.isEmpty()){
+                                Toast.makeText(context, "Không được để trống", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                            DatabaseReference databaseReference = firebaseDatabase.getReference().child("teacher").child(list.get(position).getId()).child("status");
+                            databaseReference.setValue(status);
+                            alertDialog.dismiss();
+                        }
+                    });
 
+                    alertDialog.show();
+                }
+            });
         }
         holder.imgRight.setOnClickListener(new View.OnClickListener() {
             @Override

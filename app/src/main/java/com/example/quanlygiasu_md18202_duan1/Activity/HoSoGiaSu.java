@@ -178,6 +178,7 @@ public class HoSoGiaSu extends AppCompatActivity {
                         String startDate = edtTextB.getText().toString();
                         String endDate = edtTextN.getText().toString();
                         int scale1 = Integer.parseInt(edtSoHS.getText().toString());
+
                         if(!tinhNgay(date)){
                             Toast.makeText(HoSoGiaSu.this, "Sai định dạng ngày", Toast.LENGTH_SHORT).show();
                             return;
@@ -192,6 +193,9 @@ public class HoSoGiaSu extends AppCompatActivity {
                         } else {
                             if (Integer.parseInt(endDate) < 10) {
                                 Toast.makeText(HoSoGiaSu.this, "Số buổi quá ít", Toast.LENGTH_SHORT).show();
+                                return;
+                            }else  if(Integer.parseInt(endDate)>60){
+                                Toast.makeText(HoSoGiaSu.this, "Tối đa 60 buổi", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -258,7 +262,6 @@ public class HoSoGiaSu extends AppCompatActivity {
         int day1 = getDayFromDate(stringDay1);
         int month1 = getMonthFromDate(stringDay1);
         int year1 = getYearFromDate(stringDay1);
-
         Calendar currentDate = Calendar.getInstance();
         int currentYear = currentDate.get(Calendar.YEAR);
         int currentMonth = currentDate.get(Calendar.MONTH) + 1; // Tháng trong Calendar bắt đầu từ 0
