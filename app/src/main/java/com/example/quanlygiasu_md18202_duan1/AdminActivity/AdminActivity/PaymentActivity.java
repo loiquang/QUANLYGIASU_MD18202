@@ -133,7 +133,7 @@ public class PaymentActivity extends AppCompatActivity {
                                     String formattedDate = dateFormat.format(currentDate);
                                     Intent intent = new Intent(PaymentActivity.this, ContractActivity.class);
                                     intent.putExtra("request", reQuestGS);
-                                   intent.putExtra("date", formattedDate);
+                                    intent.putExtra("date", formattedDate);
                                     intent.putExtra("how", 1);
                                     startActivity(intent);
                                     finish();
@@ -213,16 +213,16 @@ public class PaymentActivity extends AppCompatActivity {
 //                                DatabaseReference databaseReference2 = userRef.child("admin").child("money");
 //                                double soDuAdmin = moneyAdmin+totalAmount;
 //                                databaseReference2.setValue(soDuAdmin);
-                                Intent intent = getIntent();
-                                ReQuestGS reQuestGS = (ReQuestGS) intent.getSerializableExtra("request");
-                                Date currentDate = new Date();
-                                // Định dạng ngày thành chuỗi
-                                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-                                String formattedDate = dateFormat.format(currentDate);
-                                intent = new Intent(PaymentActivity.this, ContractActivity.class);
-                                intent.putExtra("request", reQuestGS);
-                                intent.putExtra("date", formattedDate);
-                                intent.putExtra("how", 1);
+//                                Intent intent = getIntent();
+//                                ReQuestGS reQuestGS = (ReQuestGS) intent.getSerializableExtra("request");
+//                                Date currentDate = new Date();
+//                                // Định dạng ngày thành chuỗi
+//                                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+//                                String formattedDate = dateFormat.format(currentDate);
+                                Intent intent = new Intent(PaymentActivity.this, ManHinhUser.class);
+//                                intent.putExtra("request", reQuestGS);
+//                                intent.putExtra("date", formattedDate);
+//                                intent.putExtra("how", 1);
                                 startActivity(intent);
                                 finish();
                             }
