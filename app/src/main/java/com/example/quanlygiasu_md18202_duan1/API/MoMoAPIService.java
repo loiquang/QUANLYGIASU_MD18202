@@ -28,7 +28,7 @@ public interface MoMoAPIService {
     @POST("pay/app")
     Call<ResponsePayment> getPayment(@Body RequestPayment requestPayment);
 
-    @POST("/pay/confirm")
+    @POST("pay/confirm")
     Call<ResponseConfirmPayment> getConfirmPayment(@Body RequestConfirmPayment requestConfirmPayment);
 
 //    @Headers("Content-Type: application/json; charset=UTF-8")
